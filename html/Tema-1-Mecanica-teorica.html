@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Tema 1. Mecánica teórica</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="tema-1.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#tema-1.-mecánica-teórica"
+id="toc-tema-1.-mecánica-teórica">Tema 1. Mecánica teórica</a>
+<ul>
+<li><a href="#mecánica-ondulatoria" id="toc-mecánica-ondulatoria">1.
+Mecánica ondulatoria</a>
+<ul>
+<li><a
+href="#el-oscilador-simple-masa-atada-a-un-elástico-o-muelle-en-el-techo"
+id="toc-el-oscilador-simple-masa-atada-a-un-elástico-o-muelle-en-el-techo">1.1.
+El oscilador simple: masa atada a un elástico (o muelle) en el
+techo</a></li>
+<li><a
+href="#movimiento-ondulatorio-cuerda-elástica-horizontal-entre-dos-puntos-fijos"
+id="toc-movimiento-ondulatorio-cuerda-elástica-horizontal-entre-dos-puntos-fijos">1.2.
+Movimiento ondulatorio: cuerda elástica horizontal entre dos puntos
+fijos</a></li>
+<li><a href="#generalización-representación-compleja"
+id="toc-generalización-representación-compleja">1.3. Generalización:
+representación compleja</a></li>
+<li><a href="#la-ecuación-de-ondas" id="toc-la-ecuación-de-ondas">1.4.
+La ecuación de ondas</a></li>
+</ul></li>
+<li><a
+href="#modos-normales-y-expansiones-de-fourier-en-tres-dimensiones"
+id="toc-modos-normales-y-expansiones-de-fourier-en-tres-dimensiones">2.
+Modos normales y expansiones de Fourier en tres dimensiones</a>
+<ul>
+<li><a href="#modos-normales-en-una-cavidad-rectangular"
+id="toc-modos-normales-en-una-cavidad-rectangular">2.1. Modos normales
+en una cavidad rectangular</a></li>
+<li><a href="#expansión-triple-de-fourier-y-condiciones-iniciales"
+id="toc-expansión-triple-de-fourier-y-condiciones-iniciales">2.2.
+Expansión triple de Fourier y condiciones iniciales</a></li>
+<li><a href="#geometría-y-elección-de-coordenadas"
+id="toc-geometría-y-elección-de-coordenadas">2.3. Geometría y elección
+de coordenadas</a></li>
+</ul></li>
+<li><a href="#funcionales-y-cálculo-de-variaciones"
+id="toc-funcionales-y-cálculo-de-variaciones">3. Funcionales y cálculo
+de variaciones</a>
+<ul>
+<li><a href="#funcionales-y-optimización-variacional"
+id="toc-funcionales-y-optimización-variacional">3.1. Funcionales y
+optimización variacional</a></li>
+<li><a href="#ejemplo-la-braquistócrona"
+id="toc-ejemplo-la-braquistócrona">3.2. Ejemplo: la
+braquistócrona</a></li>
+<li><a href="#variaciones-y-derivada-funcional"
+id="toc-variaciones-y-derivada-funcional">3.3. Variaciones y derivada
+funcional</a></li>
+</ul></li>
+<li><a href="#el-formalismo-lagrangiano"
+id="toc-el-formalismo-lagrangiano">4. El formalismo lagrangiano</a>
+<ul>
+<li><a href="#ecuaciones-de-euler-lagrange-para-campos-continuos"
+id="toc-ecuaciones-de-euler-lagrange-para-campos-continuos">4.1.
+Ecuaciones de Euler-Lagrange para campos continuos</a></li>
+<li><a href="#sistemas-discretos-de-partículas"
+id="toc-sistemas-discretos-de-partículas">4.2. Sistemas discretos de
+partículas</a></li>
+<li><a href="#por-qué-l-t---v-el-puente-desde-newton"
+id="toc-por-qué-l-t---v-el-puente-desde-newton">4.3. Por qué <span
+class="math inline">\(L = T - V\)</span>: el puente desde
+Newton</a></li>
+</ul></li>
+<li><a href="#introducción-a-la-transformada-de-legendre"
+id="toc-introducción-a-la-transformada-de-legendre">5. Introducción a la
+transformada de Legendre</a></li>
+<li><a href="#introducción-al-formalismo-hamiltoniano"
+id="toc-introducción-al-formalismo-hamiltoniano">6. Introducción al
+formalismo hamiltoniano</a>
+<ul>
+<li><a
+href="#construcción-del-hamiltoniano-mediante-la-transformada-de-legendre"
+id="toc-construcción-del-hamiltoniano-mediante-la-transformada-de-legendre">6.1.
+Construcción del Hamiltoniano mediante la transformada de
+Legendre</a></li>
+<li><a href="#deducción-de-las-ecuaciones-canónicas-de-hamilton"
+id="toc-deducción-de-las-ecuaciones-canónicas-de-hamilton">6.2.
+Deducción de las ecuaciones canónicas de Hamilton</a></li>
+</ul></li>
+<li><a href="#significado-físico-del-hamiltoniano"
+id="toc-significado-físico-del-hamiltoniano">7. Significado físico del
+Hamiltoniano</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="tema-1.-mecánica-teórica">Tema 1. Mecánica teórica</h1>
+<h2 id="mecánica-ondulatoria">1. Mecánica ondulatoria</h2>
+<p>La mecánica ondulatoria estudia cómo se propagan las perturbaciones a
+través de un medio (o el vacío) en forma de ondas. Para comprender
+matemáticamente esta propagación espacial y temporal, es útil comenzar
+analizando el comportamiento de un único oscilador y luego expandirlo a
+un sistema continuo.</p>
+<h3
+id="el-oscilador-simple-masa-atada-a-un-elástico-o-muelle-en-el-techo">1.1.
+El oscilador simple: masa atada a un elástico (o muelle) en el
+techo</h3>
+<p>Imaginemos un sistema básico: una masa <span
+class="math inline">\(m\)</span> suspendida del techo mediante un
+elástico o resorte ideal con una constante elástica <span
+class="math inline">\(k\)</span>. Si tiramos de la masa hacia abajo
+separándola de su punto de equilibrio y la soltamos, comenzará a oscilar
+verticalmente.</p>
+<p>Este sistema describe un Movimiento Armónico Simple (MAS). Aplicando
+la Segunda Ley de Newton y la Ley de Hooke, obtenemos la siguiente
+ecuación diferencial para el movimiento:</p>
+<p><span class="math display">\[
+\begin{aligned}
+m ⋅ \dfrac{d^2y}{dt^2} = -k ⋅ y
+\end{aligned}
+\]</span></p>
+<p>La solución a esta ecuación nos da la posición <span
+class="math inline">\(y\)</span> de la masa en función de una única
+variable, el tiempo (<span class="math inline">\(t\)</span>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(t) = A ⋅ \cos(\omega ⋅ t + \phi)
+\end{aligned}
+\]</span></p>
+<p>En esta función:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> es la amplitud (el
+desplazamiento máximo desde el equilibrio).</li>
+<li><span class="math inline">\(\omega\)</span> es la frecuencia
+angular, relacionada con las propiedades del sistema (<span
+class="math inline">\(\omega = \sqrt{\dfrac{k}{m}}\)</span>).</li>
+<li><span class="math inline">\(\phi\)</span> es la constante de fase
+inicial.</li>
+</ul>
+<p>Este ejemplo ilustra una oscilación local; la energía se transforma
+de potencial a cinética, pero no se propaga a través del espacio.</p>
+<h3
+id="movimiento-ondulatorio-cuerda-elástica-horizontal-entre-dos-puntos-fijos">1.2.
+Movimiento ondulatorio: cuerda elástica horizontal entre dos puntos
+fijos</h3>
+<p>Para pasar al movimiento ondulatorio, consideremos ahora una cuerda
+elástica tensada horizontalmente entre dos paredes (dos puntos fijos).
+Podemos imaginar esta cuerda como una cadena infinita de pequeñas masas
+conectadas por pequeños elásticos.</p>
+<p>Si perturbamos un punto de la cuerda, esa oscilación no se queda en
+un solo lugar (como la masa en el techo), sino que tira de los
+fragmentos vecinos de la cuerda, haciendo que la perturbación viaje a lo
+largo del eje <span class="math inline">\(x\)</span>.</p>
+<p>En este caso, el desplazamiento transversal (la altura de la cuerda),
+que llamaremos <span class="math inline">\(y\)</span>, ya no depende
+solo del momento en que lo miremos, sino también de en qué parte de la
+cuerda nos fijemos. Por tanto, la función es bivariable: <span
+class="math inline">\(y(x,t)\)</span>.</p>
+<p>Una perturbación viajera (onda armónica) moviéndose a lo largo de la
+cuerda se describe matemáticamente como:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(x,t) = A \sin(k ⋅ x \pm \omega ⋅ t)
+\end{aligned}
+\]</span></p>
+<p>Donde se introduce una nueva variable espacial:</p>
+<ul>
+<li><span class="math inline">\(k\)</span> es el número de onda (<span
+class="math inline">\(k = \dfrac{2 \cdot \pi}{\lambda}\)</span>), que
+describe la periodicidad en el espacio (<span
+class="math inline">\(\lambda\)</span> es la longitud de onda).</li>
+</ul>
+<h4 id="ondas-estacionarias">1.2.1. Ondas estacionarias</h4>
+<p>Dado que nos has indicado que la cuerda está entre dos puntos fijos
+(por ejemplo, en <span class="math inline">\(x=0\)</span> y <span
+class="math inline">\(x=L\)</span>), la onda viaja, rebota en un extremo
+y se superpone consigo misma. Esta interferencia crea una onda
+estacionaria. Matemáticamente, al aplicar las condiciones de contorno
+(los extremos no pueden moverse, <span
+class="math inline">\(y=0\)</span>), la función <span
+class="math inline">\(y(x,t)\)</span> toma esta forma específica:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(x,t) = 2 ⋅ A \cdot \sin(k ⋅ x) ⋅ \cos(\omega ⋅ t)
+\end{aligned}
+\]</span></p>
+<p>Esta hermosa ecuación separa la parte espacial de la temporal y nos
+dice que cada punto <span class="math inline">\(x\)</span> de la cuerda
+realiza un Movimiento Armónico Simple en el tiempo (<span
+class="math inline">\(\cos(\omega ⋅ t)\)</span>), pero la amplitud de
+esa oscilación depende de su posición espacial (<span
+class="math inline">\(2 ⋅ A \sin(k ⋅ x)\)</span>). Los puntos donde
+<span class="math inline">\(\sin(k ⋅ x) = 0\)</span> nunca se mueven; se
+llaman nodos.</p>
+<h3 id="generalización-representación-compleja">1.3. Generalización:
+representación compleja</h3>
+<p>En física, es extremadamente común y conveniente generalizar la
+función de onda utilizando notación compleja. Apoyándonos en la fórmula
+de Euler (<span class="math inline">\(e^{i ⋅ \theta} = \cos(\theta) +
+i\sin(\theta)\)</span>), una onda viajera puede expresarse en su forma
+compleja como:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(x,t) = A \cdot e^{i ⋅ (\omega ⋅ t - k ⋅ x)}
+\end{aligned}
+\]</span></p>
+<p>Dado que las magnitudes físicas observables en mecánica clásica (como
+el desplazamiento real de una cuerda) deben ser números reales, la onda
+física se entiende simplemente como la parte real (o imaginaria) de esta
+expresión compleja:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_{real}(x,t) = \Re\{A ⋅ e^{i ⋅ (\omega ⋅ t - k ⋅ x)}\} = A ⋅
+\cos(\omega ⋅ t - k ⋅ x)
+\end{aligned}
+\]</span></p>
+<p>¿Por qué usar una notación compleja?</p>
+<ol type="1">
+<li>Simplicidad matemática: Operar con funciones exponenciales es mucho
+más fácil que con senos y cosenos. Al derivar o integrar (por ejemplo,
+al introducir la función en la Ecuación de Ondas), la exponencial
+mantiene su forma y solo “escupirá” constantes hacia afuera (derivadas
+respecto al tiempo multiplican por <span class="math inline">\(i ⋅
+\omega\)</span>, y respecto a la posición por <span
+class="math inline">\(-i ⋅ k\)</span>). Además, sumar ondas (para
+calcular interferencias) se reduce a factorizar exponenciales.</li>
+<li>Fase inicial: Cualquier desfase inicial <span
+class="math inline">\(\phi\)</span> se puede absorber fácilmente
+definiendo una amplitud compleja <span class="math inline">\(\tilde{A} =
+A ⋅ e^{i ⋅ \phi}\)</span>.</li>
+<li>Puente a la mecánica cuántica: Mientras que en la mecánica clásica
+la parte imaginaria es solo una herramienta matemática y tomamos la
+parte real al final, en la mecánica ondulatoria cuántica, la función de
+onda de una partícula <span class="math inline">\(\Psi(x,t)\)</span> es
+intrínsecamente compleja.</li>
+</ol>
+<h3 id="la-ecuación-de-ondas">1.4. La ecuación de ondas</h3>
+<p>Cualquier perturbación física que se propague en forma de onda (ya
+sea el desplazamiento de nuestra cuerda elástica, la presión del aire en
+el sonido, o los campos eléctricos y magnéticos en la luz) debe obedecer
+a una ecuación diferencial específica: la ecuación de ondas.</p>
+<h4 id="la-ecuación-diferencial-en-una-dimensión">1.4.1. La ecuación
+diferencial en una dimensión</h4>
+<p>Para una perturbación <span class="math inline">\(y(x,t)\)</span> que
+viaja a lo largo de una sola dimensión (el eje <span
+class="math inline">\(x\)</span>), la ecuación clásica de ondas es una
+ecuación diferencial en derivadas parciales, lineal y de segundo orden,
+expresada como:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\partial^2 y}{\partial x^2} = \dfrac{1}{v^2} ⋅ \dfrac{\partial^2
+y}{\partial t^2}
+\end{aligned}
+\]</span></p>
+<p>Aquí, <span class="math inline">\(v\)</span> representa la velocidad
+de propagación (o velocidad de fase) de la onda en el medio. Esta
+ecuación nos dice, fundamentalmente, que la curvatura espacial de la
+onda en un punto (segunda derivada respecto a <span
+class="math inline">\(x\)</span>) es proporcional a la aceleración de
+ese punto (segunda derivada respecto a <span
+class="math inline">\(t\)</span>).</p>
+<h4 id="comprobación-con-la-representación-compleja">1.4.2. Comprobación
+con la representación compleja</h4>
+<p>Podemos demostrar fácilmente por qué la solución compleja que vimos
+en el apartado anterior, <span class="math inline">\(y(x,t) = A \cdot
+e^{i ⋅ (\omega ⋅ t - k ⋅ x)}\)</span>, es una solución válida. Gracias a
+las propiedades de la función exponencial, calcular las segundas
+derivadas parciales es un proceso directo:</p>
+<ol type="1">
+<li>Derivada temporal: Al derivar dos veces respecto al tiempo,
+multiplicamos por <span class="math inline">\(i ⋅ \omega\)</span> cada
+vez. <span class="math display">\[
+\begin{aligned}
+\dfrac{\partial^2 y}{\partial t^2} = (i ⋅ \omega)^2 ⋅ A ⋅ e^{i ⋅ (\omega
+⋅ t - k ⋅ x)} = -\omega^2 ⋅ y
+\end{aligned}
+\]</span></li>
+<li>Derivada espacial: Al derivar dos veces respecto a la posición,
+multiplicamos por <span class="math inline">\(-i ⋅ k\)</span> cada vez.
+<span class="math display">\[
+\begin{aligned}
+\dfrac{\partial^2 y}{\partial x^2} = (-i ⋅ k)^2 ⋅ A ⋅ e^{i ⋅ (\omega ⋅ t
+- k ⋅ x)} = -k^2 ⋅ y
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Si sustituimos estos resultados de nuevo en la ecuación de ondas
+general, obtenemos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+-k^2 ⋅ y = \dfrac{1}{v^2} ⋅ (-\omega^2 ⋅ y)
+\end{aligned}
+\]</span></p>
+<p>Simplificando (dividiendo entre <span
+class="math inline">\(-y\)</span>), llegamos a una relación fundamental
+entre los parámetros de la onda:</p>
+<p><span class="math display">\[
+\begin{aligned}
+k^2 = \dfrac{\omega^2}{v^2} \implies v = \dfrac{\omega}{k}
+\end{aligned}
+\]</span></p>
+<p>Antes de interpretar este resultado, conviene precisar dos conceptos.
+Una <strong>relación de dispersión</strong> es una ecuación que vincula
+la frecuencia angular <span class="math inline">\(\omega\)</span> de una
+onda con su número de onda <span class="math inline">\(k\)</span>, es
+decir, que indica cómo depende <span
+class="math inline">\(\omega\)</span> de <span
+class="math inline">\(k\)</span>. En este caso, la ecuación anterior
+puede escribirse como <span class="math inline">\(\omega = v k\)</span>:
+la relación es lineal y la velocidad de fase <span
+class="math inline">\(v = \omega/k\)</span> no depende de la frecuencia.
+Por ello, las distintas componentes de frecuencia de un pulso viajan
+todas a la misma velocidad y el pulso conserva su forma; a estas ondas
+se las llama <strong>no dispersivas</strong>. Si la velocidad dependiera
+de <span class="math inline">\(\omega\)</span> o de <span
+class="math inline">\(k\)</span>, cada componente avanzaría a una
+velocidad distinta y el pulso se deformaría al propagarse: habría
+dispersión.</p>
+<p>Esta es la relación de dispersión para ondas no dispersivas, que
+define la velocidad de la onda en función de su frecuencia angular
+(<span class="math inline">\(\omega\)</span>) y su número de onda (<span
+class="math inline">\(k\)</span>).</p>
+<!-- AI:T1-01
+Tarea: aclarar los conceptos de relación de dispersión y ondas no dispersivas.
+Estado: hecho.
+-->
+<h4 id="la-solución-de-dalembert-ondas-viajeras-arbitrarias">1.4.3. La
+solución de d’Alembert (ondas viajeras arbitrarias)</h4>
+<p>Aunque las soluciones armónicas (senos, cosenos o exponenciales
+complejas) son las más comunes, Jean le Rond d’Alembert demostró que la
+ecuación de ondas admite soluciones mucho más generales.</p>
+<p>Definamos los argumentos de las dos ondas viajeras como <span
+class="math inline">\(u_- = \omega ⋅ t - k ⋅ x\)</span> y <span
+class="math inline">\(u_+ = \omega ⋅ t + k ⋅ x\)</span>. Si <span
+class="math inline">\(f\)</span> y <span
+class="math inline">\(g\)</span> son funciones arbitrarias dos veces
+diferenciables, la solución general de d’Alembert es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(x,t) = f(u_-) + g(u_+) = f(\omega ⋅ t - k ⋅ x) + g(\omega ⋅ t + k ⋅ x)
+\end{aligned}
+\]</span></p>
+<!-- AI:T1-02
+Tarea: presentar la solución completa como suma de dos ondas viajeras independientes.
+Estado: hecho.
+-->
+<p>Comprobémoslo aplicando la regla de la cadena a ambas funciones:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\partial^2 y}{\partial t^2} &amp;= \omega^2 ⋅
+\left[f&#39;&#39;(u_-) + g&#39;&#39;(u_+)\right], \\
+\dfrac{\partial^2 y}{\partial x^2} &amp;= k^2 ⋅ \left[f&#39;&#39;(u_-) +
+g&#39;&#39;(u_+)\right].
+\end{aligned}
+\]</span></p>
+<p>Como la relación de dispersión obtenida antes es <span
+class="math inline">\(\omega = v k\)</span>, se cumple:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\partial^2 y}{\partial x^2}
+&amp;= \dfrac{\omega^2}{v^2} ⋅ \left[f&#39;&#39;(u_-) +
+g&#39;&#39;(u_+)\right] \\
+&amp;= \dfrac{1}{v^2} \dfrac{\partial^2 y}{\partial t^2}.
+\end{aligned}
+\]</span></p>
+<p>Por tanto, cualquier par de funciones suaves <span
+class="math inline">\(f\)</span> y <span
+class="math inline">\(g\)</span> produce una solución. La primera
+componente, <span class="math inline">\(f(\omega ⋅ t - k ⋅ x)\)</span>,
+viaja hacia la derecha, mientras que <span
+class="math inline">\(g(\omega ⋅ t + k ⋅ x)\)</span> viaja hacia la
+izquierda. Esto permite describir, por ejemplo, un pulso que se propaga
+y otro que regresa tras reflejarse en un extremo de la cuerda.</p>
+<h4 id="solución-general-por-separación-de-variables">1.4.4. Solución
+general por separación de variables</h4>
+<p>La forma más sistemática de resolver la ecuación de ondas
+(especialmente cuando hay condiciones de contorno fijas, como en nuestra
+cuerda) es el método de separación de variables. Asumimos como hipótesis
+que la solución <span class="math inline">\(y(x,t)\)</span> puede
+expresarse como el producto de dos funciones independientes, una que
+depende solo de la posición <span class="math inline">\(X(x)\)</span> y
+otra solo del tiempo <span class="math inline">\(T(t)\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(x,t) = X(x) ⋅ T(t)
+\end{aligned}
+\]</span></p>
+<p>Si calculamos las segundas derivadas y las sustituimos en la ecuación
+de ondas original, obtenemos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+X&#39;&#39;(x) ⋅ T(t) = \dfrac{1}{v^2} \cdot X(x) ⋅ T&#39;&#39;(t)
+\end{aligned}
+\]</span></p>
+<p>Dividiendo toda la ecuación por <span class="math inline">\(X(x) ⋅
+T(t)\)</span>, separamos las variables a cada lado de la igualdad:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{X&#39;&#39;(x)}{X(x)} = \dfrac{1}{v^2} ⋅
+\dfrac{T&#39;&#39;(t)}{T(t)}
+\end{aligned}
+\]</span></p>
+<p>Dado que el lado izquierdo depende exclusivamente de <span
+class="math inline">\(x\)</span> y el lado derecho exclusivamente de
+<span class="math inline">\(t\)</span>, la única forma de que esta
+igualdad se cumpla para cualquier valor de <span
+class="math inline">\(x\)</span> y <span
+class="math inline">\(t\)</span> es que ambos lados sean iguales a una
+misma constante. Para obtener soluciones oscilatorias (y no
+exponenciales que divergen), esta constante de separación debe ser
+negativa, y la llamaremos <span class="math inline">\(-k^2\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{X&#39;&#39;(x)}{X(x)} = -k^2 \quad \text{y} \quad \dfrac{1}{v^2}
+⋅ \dfrac{T&#39;&#39;(t)}{T(t)} = -k^2
+\end{aligned}
+\]</span></p>
+<p>Esto descompone la ecuación en derivadas parciales en dos Ecuaciones
+Diferenciales Ordinarias (EDOs) simples:</p>
+<ol type="1">
+<li>Ecuación espacial: <span class="math inline">\(X&#39;&#39;(x) + k^2
+⋅ X(x) = 0\)</span></li>
+<li>Ecuación temporal: <span class="math inline">\(T&#39;&#39;(t) +
+\omega^2 ⋅ T(t) = 0 \quad\)</span> (donde hemos definido <span
+class="math inline">\(\omega = k ⋅ v\)</span>)</li>
+</ol>
+<p>La solución general para estas ecuaciones son combinaciones lineales
+de senos y cosenos (o exponenciales complejas):</p>
+<p><span class="math display">\[
+\begin{aligned}
+X(x) = A_1 ⋅ \cos(k ⋅ x) + B_1 ⋅ \sin(k ⋅ x)
+\end{aligned}
+\]</span> <span class="math display">\[
+\begin{aligned}
+T(t) = A_2 ⋅ \cos(\omega ⋅ t) + B_2 ⋅ \sin(\omega ⋅ t)
+\end{aligned}
+\]</span></p>
+<p>Por lo tanto, la solución general para un modo normal de vibración es
+el producto de ambas:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(x,t) = \left( A_1 ⋅ \cos(k ⋅ x) + B_1 ⋅ \sin(k ⋅ x) \right) ⋅ \left(
+A_2 ⋅ \cos(\omega ⋅ t) + B_2 ⋅ \sin(\omega ⋅ t) \right)
+\end{aligned}
+\]</span></p>
+<p>Aplicando las condiciones de contorno (como <span
+class="math inline">\(y(0,t)=0\)</span> en la cuerda), muchas de estas
+constantes se anulan, llegándose a las ecuaciones de ondas estacionarias
+que vimos en el apartado 1.2.1.</p>
+<h4
+id="generalización-a-dos-dimensiones-membranas-y-series-de-fourier">1.4.5.
+Generalización a dos dimensiones: membranas y series de Fourier</h4>
+<p>Para una superficie, como una membrana tensa, el desplazamiento
+transversal <span class="math inline">\(y(x,z,t)\)</span> depende de dos
+coordenadas espaciales. La ecuación de ondas bidimensional es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\partial^2 y}{\partial t^2}
+= v^2 \left( \dfrac{\partial^2 y}{\partial x^2} + \dfrac{\partial^2
+y}{\partial z^2} \right).
+\end{aligned}
+\]</span></p>
+<p>En este caso, la fórmula de d’Alembert no proporciona la solución
+general: una perturbación puede propagarse en infinitas direcciones
+sobre la superficie. Para una membrana rectangular con lados <span
+class="math inline">\(L_x\)</span> y <span
+class="math inline">\(L_z\)</span> fijados, <span
+class="math inline">\(y(0,z,t)=y(L_x,z,t)=y(x,0,t)=y(x,L_z,t)=0\)</span>,
+sí se puede construir la solución general mediante una <strong>serie
+doble de Fourier</strong>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(x,z,t)
+= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty}
+\left[A_{mn}\cos(\omega_{mn}t) + B_{mn}\sin(\omega_{mn}t)\right]
+\sin\left(\dfrac{m\pi x}{L_x}\right)
+\sin\left(\dfrac{n\pi z}{L_z}\right).
+\end{aligned}
+\]</span></p>
+<p>Cada par de enteros positivos <span
+class="math inline">\((m,n)\)</span> identifica un modo normal de
+vibración. Las frecuencias angulares permitidas son:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\omega_{mn} = v\pi\sqrt{\left(\dfrac{m}{L_x}\right)^2 +
+\left(\dfrac{n}{L_z}\right)^2}.
+\end{aligned}
+\]</span></p>
+<p>Para determinar los coeficientes, fijamos el desplazamiento inicial
+<span class="math inline">\(y_0(x,z)=y(x,z,0)\)</span> y la velocidad
+inicial <span class="math inline">\(u_0(x,z)=\left.\dfrac{\partial
+y}{\partial t}\right|_{t=0}\)</span>. La ortogonalidad de las funciones
+seno en el rectángulo da directamente:</p>
+<p><span class="math display">\[
+\begin{aligned}
+A_{mn}
+= \dfrac{4}{L_xL_z}
+\int_0^{L_x}\int_0^{L_z}
+y_0(x,z)
+\sin\left(\dfrac{m\pi x}{L_x}\right)
+\sin\left(\dfrac{n\pi z}{L_z}\right)
+\, dz\, dx,
+\\
+B_{mn}
+= \dfrac{4}{L_xL_z\omega_{mn}}
+\int_0^{L_x}\int_0^{L_z}
+u_0(x,z)
+\sin\left(\dfrac{m\pi x}{L_x}\right)
+\sin\left(\dfrac{n\pi z}{L_z}\right)
+\, dz\, dx.
+\end{aligned}
+\]</span></p>
+<p>La primera fórmula es la proyección del desplazamiento inicial sobre
+el modo <span class="math inline">\((m,n)\)</span>. Para la segunda, se
+deriva la expansión respecto del tiempo, se evalúa en <span
+class="math inline">\(t=0\)</span> y se proyecta la velocidad inicial;
+de ahí el factor adicional <span
+class="math inline">\(1/\omega_{mn}\)</span>. Por tanto, las series de
+Fourier no son un recurso adicional opcional en este problema: son el
+mecanismo que combina todos los modos normales para reproducir una forma
+inicial arbitraria compatible con los bordes.</p>
+<h4 id="generalización-a-tres-dimensiones">1.4.6. Generalización a tres
+dimensiones</h4>
+<p>Si la perturbación se propaga en el espacio tridimensional (como el
+sonido en una habitación o la luz de una estrella), la función dependerá
+de tres coordenadas espaciales y el tiempo: <span
+class="math inline">\(\Psi(x,y,z,t)\)</span>. En este caso, la derivada
+espacial de la ecuación unidimensional se sustituye por el operador
+Laplaciano (<span class="math inline">\(\nabla^2\)</span> o <span
+class="math inline">\(\Delta\)</span>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+\nabla^2 \Psi = \dfrac{1}{v^2} \cdot \dfrac{\partial^2 \Psi}{\partial
+t^2}
+\end{aligned}
+\]</span></p>
+<p>Donde el operador Laplaciano en coordenadas cartesianas se define
+como la suma de las segundas derivadas parciales espaciales: <span
+class="math inline">\(\nabla^2 = \dfrac{\partial^2}{\partial x^2} +
+\dfrac{\partial^2}{\partial y^2} + \dfrac{\partial^2}{\partial
+z^2}\)</span>.</p>
+<h2 id="modos-normales-y-expansiones-de-fourier-en-tres-dimensiones">2.
+Modos normales y expansiones de Fourier en tres dimensiones</h2>
+<h3 id="modos-normales-en-una-cavidad-rectangular">2.1. Modos normales
+en una cavidad rectangular</h3>
+<p>En una región tridimensional acotada, las condiciones de contorno
+seleccionan un conjunto discreto de modos normales. Consideremos una
+cavidad rectangular de lados <span class="math inline">\(L_x\)</span>,
+<span class="math inline">\(L_y\)</span> y <span
+class="math inline">\(L_z\)</span>, con el campo <span
+class="math inline">\(\Psi\)</span> anulado en todas sus paredes. Cada
+modo espacial permitido tiene la forma:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Phi_{mnp}(x,y,z)
+= \sin\left(\dfrac{m\pi x}{L_x}\right)
+\sin\left(\dfrac{n\pi y}{L_y}\right)
+\sin\left(\dfrac{p\pi z}{L_z}\right),
+\end{aligned}
+\]</span></p>
+<p>donde <span class="math inline">\(m\)</span>, <span
+class="math inline">\(n\)</span> y <span
+class="math inline">\(p\)</span> son enteros positivos. Al combinar esta
+parte espacial con una oscilación temporal, la frecuencia angular de
+cada modo es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\omega_{mnp}
+= v\pi\sqrt{
+\left(\dfrac{m}{L_x}\right)^2
++ \left(\dfrac{n}{L_y}\right)^2
++ \left(\dfrac{p}{L_z}\right)^2}.
+\end{aligned}
+\]</span></p>
+<p>Cada terna <span class="math inline">\((m,n,p)\)</span> representa un
+patrón de vibración independiente, con nodos determinados por las
+paredes y por los ceros de las funciones seno. Estos modos son los
+análogos tridimensionales de los armónicos de una cuerda fija.</p>
+<h3 id="expansión-triple-de-fourier-y-condiciones-iniciales">2.2.
+Expansión triple de Fourier y condiciones iniciales</h3>
+<p>La solución general se obtiene superponiendo todos los modos
+normales:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Psi(x,y,z,t)
+= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \sum_{p=1}^{\infty}
+\left[A_{mnp}\cos(\omega_{mnp}t)
++ B_{mnp}\sin(\omega_{mnp}t)\right]
+\Phi_{mnp}(x,y,z).
+\end{aligned}
+\]</span></p>
+<p>Para expresarlos de forma explícita, definimos el campo inicial <span
+class="math inline">\(\Psi_0(x,y,z)=\Psi(x,y,z,0)\)</span> y la
+velocidad inicial <span
+class="math inline">\(V_0(x,y,z)=\left.\dfrac{\partial\Psi}{\partial
+t}\right|_{t=0}\)</span>. La ortogonalidad de los modos seno sobre la
+cavidad da:</p>
+<p><span class="math display">\[
+\begin{aligned}
+A_{mnp} &amp;= \dfrac{8}{L_xL_yL_z}
+\int_0^{L_x}\int_0^{L_y}\int_0^{L_z}
+\Psi_0(x,y,z) \\
+&amp;\quad \cdot \sin\left(\dfrac{m\pi x}{L_x}\right)
+\sin\left(\dfrac{n\pi y}{L_y}\right) \\
+&amp;\quad \cdot
+\sin\left(\dfrac{p\pi z}{L_z}\right)
+\, dz\, dy\, dx,
+\\
+B_{mnp} &amp;= \dfrac{8}{L_xL_yL_z\omega_{mnp}}
+\int_0^{L_x}\int_0^{L_y}\int_0^{L_z}
+V_0(x,y,z) \\
+&amp;\quad \cdot \sin\left(\dfrac{m\pi x}{L_x}\right)
+\sin\left(\dfrac{n\pi y}{L_y}\right) \\
+&amp;\quad \cdot
+\sin\left(\dfrac{p\pi z}{L_z}\right)
+\, dz\, dy\, dx.
+\end{aligned}
+\]</span></p>
+<p>La primera integral proyecta el campo inicial sobre el modo <span
+class="math inline">\((m,n,p)\)</span>. La segunda se obtiene derivando
+la expansión temporal, evaluándola en <span
+class="math inline">\(t=0\)</span> y proyectando la velocidad inicial;
+por eso incorpora el factor <span
+class="math inline">\(1/\omega_{mnp}\)</span>. Cada coeficiente queda
+así determinado de manera independiente.</p>
+<p>Por tanto, las expansiones de Fourier convierten el problema de una
+ecuación diferencial parcial en una familia infinita de osciladores
+armónicos independientes, uno por cada modo normal. En dominios con otra
+geometría se usan las funciones propias del Laplaciano adecuadas:
+funciones de Bessel en cavidades cilíndricas o esféricas, por
+ejemplo.</p>
+<h3 id="geometría-y-elección-de-coordenadas">2.3. Geometría y elección
+de coordenadas</h3>
+<p>Las coordenadas naturales no se eligen por la dimensión del problema,
+sino por la geometría del dominio y de sus condiciones de contorno. Para
+una membrana rectangular o una cavidad paralelepipédica, las coordenadas
+cartesianas y las series de senos son las más adecuadas. En cambio, una
+frontera circular o cilíndrica sugiere coordenadas polares o
+cilíndricas; una frontera esférica sugiere coordenadas esféricas. En
+cada caso, las funciones propias del Laplaciano se adaptan a los bordes
+y forman la base de la expansión modal.</p>
+<h4
+id="membrana-circular-coordenadas-polares-y-series-de-fourier-bessel">2.3.1.
+Membrana circular: coordenadas polares y series de Fourier-Bessel</h4>
+<p>Para una membrana circular, con coordenadas polares <span
+class="math inline">\((r,\theta)\)</span>, el Laplaciano es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\nabla^2 y
+= \dfrac{\partial^2 y}{\partial r^2}
++ \dfrac{1}{r}\dfrac{\partial y}{\partial r}
++ \dfrac{1}{r^2}\dfrac{\partial^2 y}{\partial \theta^2}.
+\end{aligned}
+\]</span></p>
+<p>La ecuación de ondas sigue siendo <span
+class="math inline">\(\dfrac{\partial^2 y}{\partial
+t^2}=v^2\nabla^2y\)</span>, pero la separación de variables ya no genera
+senos en la coordenada radial, sino funciones de Bessel. Si el borde
+circular de radio <span class="math inline">\(R\)</span> está fijo, los
+modos espaciales tienen la forma:</p>
+<p><span class="math display">\[
+\begin{aligned}
+J_m\left(\dfrac{\alpha_{mn}r}{R}\right)
+\left[C_{mn}\cos(m\theta) + D_{mn}\sin(m\theta)\right],
+\end{aligned}
+\]</span></p>
+<p>donde <span class="math inline">\(J_m\)</span> es la función de
+Bessel de primera especie y <span
+class="math inline">\(\alpha_{mn}\)</span> es el enésimo cero positivo
+de <span class="math inline">\(J_m\)</span>. La condición <span
+class="math inline">\(y(R,\theta,t)=0\)</span> exige precisamente <span
+class="math inline">\(J_m(\alpha_{mn})=0\)</span>. La frecuencia de cada
+modo es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\omega_{mn} = \dfrac{v\alpha_{mn}}{R}.
+\end{aligned}
+\]</span></p>
+<p>Una superposición de estos modos, con coeficientes temporales de seno
+y coseno, constituye una expansión de Fourier-Bessel. Es el análogo
+circular de la serie doble de Fourier usada para una membrana
+rectangular.</p>
+<h4 id="cavidad-esférica-armónicos-esféricos-y-bessel-esféricas">2.3.2.
+Cavidad esférica: armónicos esféricos y Bessel esféricas</h4>
+<p>Para una cavidad esférica se usan coordenadas <span
+class="math inline">\((r,\theta,\varphi)\)</span>. El Laplaciano adopta
+la forma:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\nabla^2 \Psi
+= \dfrac{1}{r^2}\dfrac{\partial}{\partial r}
+\left(r^2\dfrac{\partial \Psi}{\partial r}\right)
++ \dfrac{1}{r^2\sin\theta}\dfrac{\partial}{\partial\theta}
+\left(\sin\theta\dfrac{\partial\Psi}{\partial\theta}\right)
++ \dfrac{1}{r^2\sin^2\theta}\dfrac{\partial^2\Psi}{\partial\varphi^2}.
+\end{aligned}
+\]</span></p>
+<p>La parte angular de los modos separados está descrita por los
+armónicos esféricos <span
+class="math inline">\(Y_\ell^m(\theta,\varphi)\)</span>, mientras que la
+parte radial regular en el origen está descrita por las funciones de
+Bessel esféricas <span class="math inline">\(j_\ell(kr)\)</span>. Para
+una esfera de radio <span class="math inline">\(R\)</span> con frontera
+fija, una base modal es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+j_\ell\left(\dfrac{\beta_{\ell n}r}{R}\right)
+Y_\ell^m(\theta,\varphi),
+\end{aligned}
+\]</span></p>
+<p>donde <span class="math inline">\(\beta_{\ell n}\)</span> es el
+enésimo cero positivo de <span class="math inline">\(j_\ell\)</span>.
+Las frecuencias permitidas son <span class="math inline">\(\omega_{\ell
+n}=v\beta_{\ell n}/R\)</span>. La solución se obtiene sumando estos
+modos con amplitudes determinadas por el campo y la velocidad
+iniciales.</p>
+<h4 id="espacio-ilimitado-ondas-planas-y-transformada-de-fourier">2.3.3.
+Espacio ilimitado: ondas planas y transformada de Fourier</h4>
+<p>Cuando no hay fronteras que impongan modos discretos, las ondas
+planas son la base más simple. Una componente plana en cualquier
+dimensión tiene la forma:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Psi(\mathbf{r},t)
+= A\,e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)},
+\qquad \omega = v|\mathbf{k}|.
+\end{aligned}
+\]</span></p>
+<p>La solución general se expresa entonces mediante una transformada de
+Fourier, es decir, una superposición continua de vectores de onda <span
+class="math inline">\(\mathbf{k}\)</span> en lugar de una suma discreta
+de modos. Así, las series de Fourier son apropiadas para dominios
+acotados, mientras que la transformada de Fourier es la formulación
+natural en espacio ilimitado.</p>
+<h2 id="funcionales-y-cálculo-de-variaciones">3. Funcionales y cálculo
+de variaciones</h2>
+<h3 id="funcionales-y-optimización-variacional">3.1. Funcionales y
+optimización variacional</h3>
+<p>El cálculo de variaciones estudia problemas en los que no se busca el
+mejor número, sino la mejor función. Para ello se usa un
+<strong>funcional</strong>: una regla que recibe una función completa
+como entrada y devuelve un número real. Por ejemplo, una expresión de la
+forma</p>
+<p><span class="math display">\[
+\begin{aligned}
+J[y] = \int_a^b F(x, y(x), y&#39;(x)) \, dx
+\end{aligned}
+\]</span></p>
+<p>asigna un número <span class="math inline">\(J[y]\)</span> a cada
+curva admisible <span class="math inline">\(y(x)\)</span>. Las
+condiciones de contorno, como fijar <span
+class="math inline">\(y(a)\)</span> e <span
+class="math inline">\(y(b)\)</span>, delimitan qué funciones pueden
+considerarse.</p>
+<p>El problema de optimización variacional consiste en encontrar la
+función admisible para la cual el funcional alcanza un valor mínimo,
+máximo o, más generalmente, estacionario. El último caso es el análogo
+funcional de imponer que una derivada ordinaria sea cero.</p>
+<h4
+id="el-problema-de-optimización-variacional-funcionales-frente-a-funciones">3.1.1.
+El problema de optimización variacional: funcionales frente a
+funciones</h4>
+<p>Antes de aplicar estas ideas a la mecánica, conviene distinguir con
+precisión entre funciones y funcionales. A menudo se dice coloquialmente
+que “minimizamos la función <span class="math inline">\(f\)</span> con
+respecto a <span class="math inline">\(\mathcal{L}\)</span>”, pero esto
+es una imprecisión.</p>
+<p>En el cálculo diferencial ordinario, optimizamos una función (ej.
+<span class="math inline">\(y(x)\)</span>): buscamos un número <span
+class="math inline">\(x\)</span> que nos devuelva el valor mínimo de
+<span class="math inline">\(y\)</span>, haciendo <span
+class="math inline">\(\dfrac{dy}{dx} = 0\)</span>.</p>
+<p>En el cálculo de variaciones, sin embargo, optimizamos un funcional
+(en este caso, la Acción <span class="math inline">\(S\)</span>). Un
+funcional toma como argumento una función entera y devuelve un número
+real. El espacio de búsqueda no es la recta de los números reales, sino
+un espacio de dimensión infinita que contiene todas las posibles formas
+que podría adoptar el campo <span class="math inline">\(f(x,t)\)</span>
+entre las fronteras fijadas.</p>
+<p>No minimizamos la función <span class="math inline">\(f\)</span>
+punto a punto; buscamos cuál es el “camino” o “superficie” completa que
+hace estacionario el número global producido por el funcional. En
+mecánica, ese funcional recibirá el nombre de acción y se aplicará el
+Principio de Hamilton: <span class="math inline">\(\delta S =
+0\)</span>.</p>
+<h4
+id="primera-variación-de-un-funcional-y-ecuación-de-euler-lagrange">3.1.2.
+Primera variación de un funcional y ecuación de Euler-Lagrange</h4>
+<p>Veamos de dónde surge la condición que debe satisfacer una curva
+estacionaria para el funcional general:</p>
+<p><span class="math display">\[
+\begin{aligned}
+J[y] = \int_a^b F(x,y(x),y&#39;(x))\,dx.
+\end{aligned}
+\]</span></p>
+<p>Partimos de una curva candidata <span
+class="math inline">\(y(x)\)</span> cuyos extremos están fijados. Para
+compararla con curvas próximas, elegimos una función suave arbitraria
+<span class="math inline">\(\eta(x)\)</span> que se anula en los
+extremos, <span class="math inline">\(\eta(a)=\eta(b)=0\)</span>, e
+introducimos una familia de variaciones:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_\epsilon(x) = y(x) + \epsilon\eta(x),
+\qquad
+y_\epsilon&#39;(x) = y&#39;(x) + \epsilon\eta&#39;(x),
+\end{aligned}
+\]</span></p>
+<p>donde <span class="math inline">\(\epsilon\)</span> es un número real
+pequeño. Ahora el funcional deja de depender directamente de una función
+y pasa a ser una función ordinaria del parámetro <span
+class="math inline">\(\epsilon\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Phi(\epsilon)
+= J[y_\epsilon]
+= \int_a^b
+F\left(x,y(x)+\epsilon\eta(x),y&#39;(x)+\epsilon\eta&#39;(x)\right)\,dx.
+\end{aligned}
+\]</span></p>
+<p>Si <span class="math inline">\(y\)</span> hace estacionario el
+funcional, entonces <span class="math inline">\(\Phi\)</span> debe ser
+estacionaria en <span class="math inline">\(\epsilon=0\)</span>. La
+primera variación se define como <span class="math inline">\(\delta
+J=\Phi&#39;(0)\)</span>; por tanto, la condición de estacionariedad es
+<span class="math inline">\(\delta J=0\)</span>. Derivando bajo el signo
+integral y aplicando la regla de la cadena se obtiene:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\delta J
+= \left.\dfrac{d\Phi}{d\epsilon}\right|_{\epsilon=0} \\
+&amp;= \int_a^b
+\left[
+\dfrac{\partial F}{\partial y}\eta
++ \dfrac{\partial F}{\partial y&#39;}\eta&#39;
+\right]dx.
+\end{aligned}
+\]</span></p>
+<p>El segundo término contiene la derivada de la variación. Lo
+reescribimos mediante integración por partes:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int_a^b \dfrac{\partial F}{\partial y&#39;}\eta&#39;\,dx
+= \left[\dfrac{\partial F}{\partial y&#39;}\eta\right]_a^b
+- \int_a^b \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial
+y&#39;}\right)\eta\,dx.
+\end{aligned}
+\]</span></p>
+<p>El término de borde es nulo porque <span
+class="math inline">\(\eta(a)=\eta(b)=0\)</span>. Al sustituirlo en la
+primera variación queda:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\delta J
+= \int_a^b
+\left[
+\dfrac{\partial F}{\partial y}
+- \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial y&#39;}\right)
+\right]\eta(x)\,dx.
+\end{aligned}
+\]</span></p>
+<p>La función <span class="math inline">\(\eta(x)\)</span> puede
+escogerse arbitrariamente en el interior del intervalo. Por el lema
+fundamental del cálculo de variaciones, la única forma de que esta
+integral sea cero para toda variación admisible es que el corchete se
+anule punto a punto:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\partial F}{\partial y}
+- \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial y&#39;}\right) = 0.
+\end{aligned}
+\]</span></p>
+<p>Esta es la ecuación de Euler-Lagrange unidimensional. Es la expresión
+general de la condición <span class="math inline">\(\delta J=0\)</span>
+y será la ecuación que aplicaremos al funcional de tiempo de la
+braquistócrona.</p>
+<h3 id="ejemplo-la-braquistócrona">3.2. Ejemplo: la braquistócrona</h3>
+<p>Para comprender la optimización de funcionales fuera del contexto
+abstracto de la mecánica analítica, consideremos uno de los problemas
+históricos que dio origen al cálculo de variaciones en 1696: el problema
+de la braquistócrona.</p>
+<p>Imagina dos puntos <span class="math inline">\(A\)</span> (origen
+<span class="math inline">\(0,0\)</span>) y <span
+class="math inline">\(B\)</span> (donde <span
+class="math inline">\(B\)</span> está más abajo y desplazado
+horizontalmente). Buscamos la forma exacta de un alambre, definido por
+una curva <span class="math inline">\(y(x)\)</span>, por el cual una
+cuenta resbalará sin fricción bajo el efecto de la gravedad en el menor
+tiempo posible. Para simplificar los signos, diremos que la gravedad
+actúa en el eje <span class="math inline">\(+y\)</span> (hacia
+abajo).</p>
+<p>Buscamos una función <span class="math inline">\(y(x)\)</span> que
+minimice el funcional del Tiempo total (<span
+class="math inline">\(T\)</span>). Sabemos que el tiempo es la integral
+de la distancia sobre la velocidad (<span class="math inline">\(dt = ds
+/ v\)</span>). Usando el teorema de Pitágoras para el elemento de arco
+infinitesimal (<span class="math inline">\(ds = \sqrt{dx^2 + dy^2} =
+\sqrt{1 + (y&#39;)^2} dx\)</span>, donde <span
+class="math inline">\(y&#39; = \dfrac{dy}{dx}\)</span>) y la
+conservación de energía para aislar la velocidad (<span
+class="math inline">\(E_{cinetica} = E_{potencial} \implies
+\dfrac{1}{2}mv^2 = mgy \implies v = \sqrt{2gy}\)</span>), el funcional
+del tiempo queda como:</p>
+<p><span class="math display">\[
+\begin{aligned}
+T[y(x)] = \int_{0}^{x_B} \dfrac{\sqrt{1 + (y&#39;)^2}}{\sqrt{2gy}} dx
+\end{aligned}
+\]</span></p>
+<p>En este problema estrictamente matemático y geométrico, el integrando
+es nuestra función objetivo, comportándose analíticamente igual que una
+densidad Lagrangiana:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{L}(y, y&#39;, x) = \dfrac{\sqrt{1 + (y&#39;)^2}}{\sqrt{2gy}}
+\end{aligned}
+\]</span></p>
+<p>Resolución paso a paso: La Identidad de Beltrami</p>
+<p>Para encontrar la curva <span class="math inline">\(y(x)\)</span> que
+minimiza este funcional, debemos aplicar la Ecuación de Euler-Lagrange
+unidimensional:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{d}{dx}\left( \dfrac{\partial \mathcal{L}}{\partial y&#39;}
+\right) - \dfrac{\partial \mathcal{L}}{\partial y} = 0
+\end{aligned}
+\]</span></p>
+<p>Sin embargo, calcular estas derivadas completas directamente conduce
+a un álgebra extremadamente tediosa. Afortunadamente, notamos una
+propiedad crucial en nuestra <span
+class="math inline">\(\mathcal{L}\)</span>: no depende explícitamente de
+la coordenada <span class="math inline">\(x\)</span> (la <span
+class="math inline">\(x\)</span> no aparece en la fórmula, solo <span
+class="math inline">\(y\)</span> y <span
+class="math inline">\(y&#39;\)</span>).</p>
+<p>Cuando esto ocurre en el cálculo de variaciones, la Ecuación de
+Euler-Lagrange se simplifica en una constante de movimiento (una primera
+integral) conocida como la Identidad de Beltrami:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{L} - y&#39; \dfrac{\partial \mathcal{L}}{\partial y&#39;} = C
+\end{aligned}
+\]</span></p>
+<p>Vamos a aplicar esto paso a paso. Primero, calculemos la derivada
+parcial de <span class="math inline">\(\mathcal{L}\)</span> respecto a
+<span class="math inline">\(y&#39;\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\partial \mathcal{L}}{\partial y&#39;} = \dfrac{1}{\sqrt{2gy}}
+\cdot \dfrac{1}{2\sqrt{1 + (y&#39;)^2}} \cdot 2y&#39; =
+\dfrac{y&#39;}{\sqrt{2gy}\sqrt{1 + (y&#39;)^2}}
+\end{aligned}
+\]</span></p>
+<p>Ahora introducimos <span class="math inline">\(\mathcal{L}\)</span> y
+esta derivada en la Identidad de Beltrami:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\sqrt{1 + (y&#39;)^2}}{\sqrt{2gy}} - y&#39; \left(
+\dfrac{y&#39;}{\sqrt{2gy}\sqrt{1 + (y&#39;)^2}} \right) = C
+\end{aligned}
+\]</span></p>
+<p>Podemos agrupar la constante de gravedad <span
+class="math inline">\(\dfrac{1}{\sqrt{2g}}\)</span> junto con la
+constante arbitraria <span class="math inline">\(C\)</span> del lado
+derecho (creando una nueva constante <span
+class="math inline">\(C_1\)</span>), dejándonos con:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\sqrt{1 + (y&#39;)^2}}{\sqrt{y}} -
+\dfrac{(y&#39;)^2}{\sqrt{y}\sqrt{1 + (y&#39;)^2}} = C_1
+\end{aligned}
+\]</span></p>
+<p>Para restar estas fracciones, multiplicamos el primer término arriba
+y abajo por <span class="math inline">\(\sqrt{1 + (y&#39;)^2}\)</span>
+para buscar un denominador común:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{1 + (y&#39;)^2 - (y&#39;)^2}{\sqrt{y}\sqrt{1 + (y&#39;)^2}} = C_1
+\implies \dfrac{1}{\sqrt{y(1 + (y&#39;)^2)}} = C_1
+\end{aligned}
+\]</span></p>
+<p>Si elevamos al cuadrado ambos lados e invertimos la fracción, la
+constante al cuadrado e invertida seguirá siendo una constante, que por
+conveniencia geométrica llamaremos <span
+class="math inline">\(2r\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y(1 + (y&#39;)^2) = \dfrac{1}{C_1^2} = 2r
+\end{aligned}
+\]</span></p>
+<p>¡Hemos llegado a la ecuación diferencial de la curva óptima!
+Despejando la pendiente <span class="math inline">\(y&#39;\)</span> (que
+es <span class="math inline">\(\dfrac{dy}{dx}\)</span>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+(y&#39;)^2 = \dfrac{2r - y}{y} \implies \dfrac{dy}{dx} = \sqrt{\dfrac{2r
+- y}{y}}
+\end{aligned}
+\]</span></p>
+<p>Esta no es la ecuación de una línea recta, ni de una parábola. Esta
+es la clásica ecuación diferencial de una cicloide invertida. La
+solución paramétrica que satisface esta ecuación es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+x(\theta) = r(\theta - \sin \theta)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+y(\theta) = r(1 - \cos \theta)
+\end{aligned}
+\]</span></p>
+<p>Físicamente, una cicloide es la curva trazada por un punto en el
+borde de una rueda de radio <span class="math inline">\(r\)</span> a
+medida que rueda sin deslizar. Resulta que la naturaleza “sabe” calcular
+variaciones: el camino más rápido para caer bajo la gravedad no es la
+distancia más corta (línea recta), sino dejarse caer de forma más
+pronunciada al principio para ganar velocidad rápidamente, siguiendo una
+cicloide.</p>
+<p>(Nota: De forma análoga, el problema isoperimétrico busca la curva
+cerrada <span class="math inline">\(y(x)\)</span> que maximice el
+funcional del Área contenida, dado un perímetro constante, cuya solución
+variacional resulta ser un círculo).</p>
+<h3 id="variaciones-y-derivada-funcional">3.3. Variaciones y derivada
+funcional</h3>
+<p>Para estudiar si un funcional es estacionario, se compara una función
+candidata <span class="math inline">\(f_0\)</span> con funciones
+próximas de la forma <span class="math inline">\(f_\epsilon = f_0 +
+\epsilon \eta\)</span>, donde <span
+class="math inline">\(\epsilon\)</span> es un parámetro real pequeño y
+<span class="math inline">\(\eta\)</span> es una perturbación suave que
+respeta las condiciones de contorno. La <strong>primera
+variación</strong> es el cambio lineal del funcional al variar <span
+class="math inline">\(\epsilon\)</span> alrededor de cero.</p>
+<p>La derivada funcional <span class="math inline">\(\dfrac{\delta
+J}{\delta f}\)</span> desempeña para un funcional <span
+class="math inline">\(J[f]\)</span> el papel que la derivada ordinaria
+desempeña para una función de una variable. La condición <span
+class="math inline">\(\delta J = 0\)</span> expresa que ninguna
+perturbación admisible cambia el valor de <span
+class="math inline">\(J\)</span> en primer orden. En el caso de la
+acción mecánica, esta condición conduce a las ecuaciones de
+Euler-Lagrange.</p>
+<h2 id="el-formalismo-lagrangiano">4. El formalismo lagrangiano</h2>
+<p>El formalismo lagrangiano es una reformulación de la mecánica clásica
+que, en lugar de basarse en fuerzas vectoriales, se fundamenta en
+principios energéticos y variacionales. Resulta especialmente potente al
+extenderse a medios continuos y campos, como en la propagación de
+ondas.</p>
+<p>Para un sistema continuo, por ejemplo el desplazamiento transversal
+de una cuerda, el estado está descrito por un campo <span
+class="math inline">\(f(x,t)\)</span>. La densidad lagrangiana <span
+class="math inline">\(\mathcal{L}\)</span> asigna una expresión local a
+cada punto del espacio-tiempo a partir del campo y de sus derivadas:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{L} = \mathcal{L}\left( f, \dfrac{\partial f}{\partial t},
+\dfrac{\partial f}{\partial x} \right).
+\end{aligned}
+\]</span></p>
+<p>La acción <span class="math inline">\(S\)</span> es el funcional que
+se obtiene al integrar esa densidad sobre la región de espacio-tiempo
+considerada:</p>
+<p><span class="math display">\[
+\begin{aligned}
+S[f] = \int_{t_1}^{t_2} \int_{x_1}^{x_2} \mathcal{L}\left( f,
+\dfrac{\partial f}{\partial t}, \dfrac{\partial f}{\partial x} \right)
+dx \, dt.
+\end{aligned}
+\]</span></p>
+<p>El Principio de Hamilton establece que el campo físico es aquel para
+el que esta acción es estacionaria: <span class="math inline">\(\delta S
+= 0\)</span>.</p>
+<h3 id="ecuaciones-de-euler-lagrange-para-campos-continuos">4.1.
+Ecuaciones de Euler-Lagrange para campos continuos</h3>
+<p>Volviendo a nuestro sistema físico continuo, para encontrar esa
+función <span class="math inline">\(f\)</span> óptima, sometemos el
+campo a una variación infinitesimal <span class="math inline">\(f
+\rightarrow f + \delta f\)</span>. Asumimos que esta variación se anula
+en los bordes de integración espaciales y temporales (es decir, el
+sistema empieza y acaba en estados fijos conocidos, por lo que <span
+class="math inline">\(\delta f = 0\)</span> en <span
+class="math inline">\(x_1, x_2, t_1, t_2\)</span>).</p>
+<p>La variación total de la Acción <span
+class="math inline">\(S\)</span> ante este pequeño cambio arbitrario de
+la función viene dada por la regla de la cadena para múltiples
+variables, aplicada al integrando <span
+class="math inline">\(\mathcal{L}\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\delta S = \int \int \left[ \dfrac{\partial \mathcal{L}}{\partial
+f}\delta f + \dfrac{\partial \mathcal{L}}{\partial \left(
+\dfrac{\partial f}{\partial t} \right)}\delta \left( \dfrac{\partial
+f}{\partial t} \right) + \dfrac{\partial \mathcal{L}}{\partial \left(
+\dfrac{\partial f}{\partial x} \right)}\delta \left( \dfrac{\partial
+f}{\partial x} \right) \right] dx \, dt = 0
+\end{aligned}
+\]</span></p>
+<p>Justificación matemática: Conmutación de <span
+class="math inline">\(\delta\)</span> y <span
+class="math inline">\(\partial\)</span></p>
+<p>Para continuar operando matemáticamente, necesitamos poder
+intercambiar el operador variación (<span
+class="math inline">\(\delta\)</span>) con la derivada espacial o
+temporal (por ejemplo, asumiendo que <span
+class="math inline">\(\delta(\partial_t f) = \partial_t (\delta
+f)\)</span>).</p>
+<p>Para justificar esto de forma rigurosa, definamos qué es exactamente
+una “variación” <span class="math inline">\(\delta f\)</span>.
+Imaginemos la función del campo real (la solución física) <span
+class="math inline">\(f_0(x,t)\)</span> y perturbémosla sumándole una
+función suave y totalmente arbitraria <span
+class="math inline">\(\eta(x,t)\)</span> (que se anula en las
+fronteras), ponderada por un parámetro escalar minúsculo <span
+class="math inline">\(\epsilon\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(x,t,\epsilon) = f_0(x,t) + \epsilon \cdot \eta(x,t)
+\end{aligned}
+\]</span></p>
+<p>El operador variación <span class="math inline">\(\delta\)</span>
+representa matemáticamente la diferencial respecto a este nuevo
+parámetro <span class="math inline">\(\epsilon\)</span>, evaluada en
+cero:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\delta f = \left. \dfrac{\partial f}{\partial \epsilon}
+\right\vert{}_{\epsilon=0} d\epsilon = \eta(x,t) \, d\epsilon
+\end{aligned}
+\]</span></p>
+<p>Dado que las coordenadas del espacio (<span
+class="math inline">\(x\)</span>), el tiempo (<span
+class="math inline">\(t\)</span>) y el parámetro de variación abstracta
+(<span class="math inline">\(\epsilon\)</span>) son variables
+completamente independientes, sus derivadas parciales mixtas conmutan
+según el Teorema de Clairaut-Schwarz (siempre que las funciones sean
+suficientemente continuas). Por lo tanto:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\delta \left( \dfrac{\partial f}{\partial t} \right) =
+\dfrac{\partial}{\partial \epsilon} \left( \dfrac{\partial f}{\partial
+t} \right) d\epsilon = \dfrac{\partial}{\partial t} \left(
+\dfrac{\partial f}{\partial \epsilon} \right) d\epsilon =
+\dfrac{\partial}{\partial t} (\delta f)
+\end{aligned}
+\]</span></p>
+<p>Esta independencia lineal entre el espacio-tiempo y el “espacio de
+las variaciones” es lo que nos garantiza el derecho a sacar la derivada
+fuera de la variación.</p>
+<p>Integración por partes y la Derivada Funcional</p>
+<p>Volviendo a la ecuación original <span class="math inline">\(\delta
+S=0\)</span> y sabiendo que podemos conmutar operadores, reescribimos el
+segundo y tercer término, para luego aplicar integración por partes (la
+regla del producto de derivadas a la inversa).</p>
+<p>Al integrar por partes, aparecen términos evaluados en las fronteras
+de integración. Sin embargo, como hemos establecido como restricción
+fundamental que la variación es nula en los bordes (<span
+class="math inline">\(\delta f = 0\)</span>), esos términos evaluados en
+la frontera matemática desaparecen. Solo nos quedan los nuevos
+integrandos con un signo menos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\delta S = \int \int \left[ \dfrac{\partial \mathcal{L}}{\partial f} -
+\dfrac{\partial}{\partial t}\left( \dfrac{\partial \mathcal{L}}{\partial
+\left(\dfrac{\partial f}{\partial t}\right)} \right) -
+\dfrac{\partial}{\partial x}\left( \dfrac{\partial \mathcal{L}}{\partial
+\left(\dfrac{\partial f}{\partial x}\right)} \right) \right] \delta f \,
+dx \, dt = 0
+\end{aligned}
+\]</span></p>
+<p>Al corchete de esta integral se le conoce matemáticamente como la
+derivada funcional de la Acción <span class="math inline">\(S\)</span>
+respecto al campo <span class="math inline">\(f(x,t)\)</span> (denotada
+comúnmente como <span class="math inline">\(\dfrac{\delta S}{\delta
+f}\)</span>).</p>
+<p>Para que esta integral doble sea idénticamente igual a cero,
+independientemente de la forma caprichosa que tenga la variación
+arbitraria <span class="math inline">\(\delta f\)</span> que hayamos
+elegido, el corchete entero (la derivada funcional) debe ser
+forzosamente nulo en todo punto del espacio-tiempo. Este es el Lema
+Fundamental del Cálculo de Variaciones.</p>
+<p>Esto nos conduce a la magistral Ecuación de Euler-Lagrange para
+campos continuos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\partial}{\partial t}\left( \dfrac{\partial \mathcal{L}}{\partial
+\left(\dfrac{\partial f}{\partial t}\right)} \right) +
+\dfrac{\partial}{\partial x}\left( \dfrac{\partial \mathcal{L}}{\partial
+\left(\dfrac{\partial f}{\partial x}\right)} \right) - \dfrac{\partial
+\mathcal{L}}{\partial f} = 0
+\end{aligned}
+\]</span></p>
+<p>Cualquier sistema físico continuo descrito por una densidad
+lagrangiana <span class="math inline">\(\mathcal{L}\)</span> obedecerá
+esta ecuación diferencial, asegurando así que la Acción del sistema se
+mantenga minimizada/estacionaria.</p>
+<h3 id="sistemas-discretos-de-partículas">4.2. Sistemas discretos de
+partículas</h3>
+<p>Hasta ahora hemos tratado medios continuos mediante una densidad
+lagrangiana (<span class="math inline">\(\mathcal{L}\)</span>) integrada
+sobre el volumen. Sin embargo, en mecánica clásica es muy habitual
+tratar con sistemas discretos compuestos por <span
+class="math inline">\(N\)</span> puntos materiales (partículas
+puntuales) con masa.</p>
+<p>Para este tipo de sistemas, ya no integramos sobre el espacio, sino
+que definimos la posición del sistema mediante un conjunto de
+coordenadas generalizadas <span class="math inline">\(q_i\)</span>. Si
+tenemos <span class="math inline">\(N\)</span> partículas moviéndose en
+3 dimensiones, necesitaremos <span class="math inline">\(3N\)</span>
+coordenadas (por ejemplo, <span class="math inline">\(q_1 = x_1, q_2 =
+y_1, q_3 = z_1, q_4 = x_2...\)</span> hasta <span
+class="math inline">\(q_{3N}\)</span>).</p>
+<p>Las derivadas temporales de estas coordenadas se denominan
+velocidades generalizadas, expresadas mediante la notación de punto de
+Newton:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dot{q}_i = \dfrac{dq_i}{dt}
+\end{aligned}
+\]</span></p>
+<p>En este contexto discreto, el operador que define al sistema se
+convierte en una función escalar llamada el Lagrangiano (<span
+class="math inline">\(L\)</span>), que depende explícitamente de las
+coordenadas generalizadas, las velocidades generalizadas y,
+opcionalmente, del tiempo:</p>
+<p><span class="math display">\[
+\begin{aligned}
+L = L(q_1, q_2, ..., q_{3N}, \dot{q}_1, \dot{q}_2, ..., \dot{q}_{3N}, t)
+\equiv L(q_i, \dot{q}_i, t)
+\end{aligned}
+\]</span></p>
+<p>La Acción se define ahora como una única integral en el tiempo del
+Lagrangiano a lo largo de la trayectoria del sistema entre un estado
+inicial <span class="math inline">\(t_1\)</span> y uno final <span
+class="math inline">\(t_2\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+S = \int_{t_1}^{t_2} L(q_i, \dot{q}_i, t) dt
+\end{aligned}
+\]</span></p>
+<p>Aplicando el Principio de Hamilton (<span
+class="math inline">\(\delta S = 0\)</span>) y la misma maquinaria de
+cálculo de variaciones (integración por partes en una sola variable, el
+tiempo), obtenemos un conjunto de <span
+class="math inline">\(3N\)</span> ecuaciones diferenciales ordinarias
+acopladas:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{d}{dt}\left( \dfrac{\partial L}{\partial \dot{q}_i} \right) -
+\dfrac{\partial L}{\partial q_i} = 0
+\end{aligned}
+\]</span></p>
+<p>Estas son las Ecuaciones de Euler-Lagrange para sistemas discretos.
+Cada término tiene un significado físico directo:</p>
+<ol type="1">
+<li>El término <span class="math inline">\(\dfrac{\partial L}{\partial
+\dot{q}_i}\)</span> se define como el momento generalizado (o momento
+conjugado) <span class="math inline">\(p_i\)</span>. (Si <span
+class="math inline">\(L = \dfrac{1}{2}m\dot{x}^2 - V(x)\)</span>,
+entonces <span class="math inline">\(\dfrac{\partial L}{\partial
+\dot{x}} = m\dot{x} = p_x\)</span>).</li>
+<li>El término <span class="math inline">\(\dfrac{\partial L}{\partial
+q_i}\)</span> se define como la fuerza generalizada <span
+class="math inline">\(F_i\)</span>. (Si <span
+class="math inline">\(V\)</span> solo depende de <span
+class="math inline">\(x\)</span>, entonces <span
+class="math inline">\(\dfrac{\partial L}{\partial x} = -\dfrac{\partial
+V}{\partial x} = F_x\)</span>).</li>
+</ol>
+<p>Sustituyendo estas definiciones, la ecuación se lee como <span
+class="math inline">\(\dfrac{d p_i}{dt} = F_i\)</span>, lo que demuestra
+que el formalismo lagrangiano recupera maravillosamente la Segunda Ley
+de Newton, pero con la enorme ventaja de que las ecuaciones de
+Euler-Lagrange mantienen exactamente la misma forma matemática
+independientemente del sistema de coordenadas elegido (cartesianas,
+polares, cilíndricas o variables abstractas).</p>
+<h3 id="por-qué-l-t---v-el-puente-desde-newton">4.3. Por qué <span
+class="math inline">\(L = T - V\)</span>: el puente desde Newton</h3>
+<p>Es común ver definido el Lagrangiano como la diferencia entre la
+Energía Cinética Total (<span class="math inline">\(T\)</span>) y la
+Energía Potencial (<span class="math inline">\(V\)</span>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+L = T - V
+\end{aligned}
+\]</span></p>
+<p>Pero, ¿de dónde sale esta estructura exacta? No es un capricho; es la
+consecuencia matemática de obligar a las ecuaciones de Euler-Lagrange a
+ser idénticas a la Segunda Ley de Newton en presencia de fuerzas
+conservativas.</p>
+<p>Veámoslo para una única partícula en una dimensión (coordenada <span
+class="math inline">\(x\)</span>). La Segunda Ley de Newton nos
+dice:</p>
+<p><span class="math display">\[
+\begin{aligned}
+m \ddot{x} = F_x
+\end{aligned}
+\]</span></p>
+<p>Si la fuerza es conservativa, deriva de un potencial <span
+class="math inline">\(V(x)\)</span>, de modo que <span
+class="math inline">\(F_x = -\dfrac{\partial V}{\partial x}\)</span>.
+Sustituyendo:</p>
+<p><span class="math display">\[
+\begin{aligned}
+m \ddot{x} = -\dfrac{\partial V}{\partial x}
+\end{aligned}
+\]</span></p>
+<p>Por otro lado, la energía cinética de la partícula es <span
+class="math inline">\(T = \dfrac{1}{2}m\dot{x}^2\)</span>. Notemos dos
+propiedades matemáticas de <span class="math inline">\(T\)</span>:</p>
+<ol type="1">
+<li>Si derivamos <span class="math inline">\(T\)</span> respecto a la
+velocidad <span class="math inline">\(\dot{x}\)</span>, obtenemos el
+momento: <span class="math inline">\(\dfrac{\partial T}{\partial
+\dot{x}} = m\dot{x}\)</span>. Si a esto le aplicamos la derivada
+temporal, recuperamos la fuerza inercial (masa por aceleración): <span
+class="math inline">\(\dfrac{d}{dt}\left( \dfrac{\partial T}{\partial
+\dot{x}} \right) = m\ddot{x}\)</span>.</li>
+<li>Si derivamos <span class="math inline">\(T\)</span> respecto a la
+posición <span class="math inline">\(x\)</span>, el resultado es cero
+(en coordenadas cartesianas, la energía cinética no depende de dónde
+estés, solo de lo rápido que vayas): <span
+class="math inline">\(\dfrac{\partial T}{\partial x} = 0\)</span>.</li>
+</ol>
+<p>Con esto en mente, podemos reescribir el término <span
+class="math inline">\(m\ddot{x}\)</span> de la ley de Newton usando
+exclusivamente derivadas de la energía cinética:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{d}{dt}\left( \dfrac{\partial T}{\partial \dot{x}} \right) =
+-\dfrac{\partial V}{\partial x}
+\end{aligned}
+\]</span></p>
+<p>Reagrupemos todos los términos en el lado izquierdo:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{d}{dt}\left( \dfrac{\partial T}{\partial \dot{x}} \right) +
+\dfrac{\partial V}{\partial x} = 0
+\end{aligned}
+\]</span></p>
+<p>Aquí viene el truco final. Dado que la energía potencial <span
+class="math inline">\(V(x)\)</span> depende únicamente de la posición y
+no de la velocidad, su derivada parcial respecto a la velocidad es cero
+(<span class="math inline">\(\dfrac{\partial V}{\partial \dot{x}} =
+0\)</span>). Y, como ya vimos, <span
+class="math inline">\(\dfrac{\partial T}{\partial x} = 0\)</span>. Esto
+nos permite “engañar” a la ecuación agrupando ambas energías bajo las
+mismas derivadas sin alterar el resultado matemático:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{d}{dt}\left( \dfrac{\partial (T - V)}{\partial \dot{x}} \right) -
+\dfrac{\partial (T - V)}{\partial x} = 0
+\end{aligned}
+\]</span></p>
+<p>¡Esta es exactamente la ecuación de Euler-Lagrange! Si comparamos
+esta expresión con la forma general <span
+class="math inline">\(\dfrac{d}{dt}\left( \dfrac{\partial L}{\partial
+\dot{x}} \right) - \dfrac{\partial L}{\partial x} = 0\)</span>, la
+conclusión es inevitable: el operador <span
+class="math inline">\(L\)</span> que hace que el principio variacional
+reproduzca la dinámica newtoniana conservativa debe ser, por definición,
+<span class="math inline">\(L = T - V\)</span>.</p>
+<p>(Nota: En sistemas mecánicos complejos con vínculos y coordenadas
+generalizadas abstractas <span class="math inline">\(q_i\)</span>, se
+utiliza el Principio de d’Alembert (o de los Trabajos Virtuales) para
+demostrar de forma más rigurosa que esta misma estructura <span
+class="math inline">\(L = T - V\)</span> se mantiene inviolable).</p>
+<h2 id="introducción-a-la-transformada-de-legendre">5. Introducción a la
+transformada de Legendre</h2>
+<p>La transformada de Legendre permite sustituir una variable por la
+derivada de una función respecto de esa variable. Para una función
+diferenciable <span class="math inline">\(F(v)\)</span>, se introduce la
+variable conjugada <span class="math inline">\(p =
+\dfrac{dF}{dv}\)</span> y se define una nueva función:</p>
+<p><span class="math display">\[
+\begin{aligned}
+G(p) = p v - F(v),
+\end{aligned}
+\]</span></p>
+<p>entendiendo que <span class="math inline">\(v\)</span> se expresa en
+función de <span class="math inline">\(p\)</span> cuando la relación
+puede invertirse. Esta transformación conserva la información de <span
+class="math inline">\(F\)</span>, pero la describe mediante la variable
+conjugada <span class="math inline">\(p\)</span>.</p>
+<h2 id="introducción-al-formalismo-hamiltoniano">6. Introducción al
+formalismo hamiltoniano</h2>
+<p>El formalismo lagrangiano <span class="math inline">\(L(q_i,
+\dot{q}_i, t)\)</span> formula la dinámica en el espacio de
+configuración, definido por las coordenadas generalizadas <span
+class="math inline">\(q_i\)</span>. La mecánica hamiltoniana aplica la
+transformada de Legendre a las velocidades <span
+class="math inline">\(\dot{q}_i\)</span> para usar, en su lugar, los
+momentos conjugados <span class="math inline">\(p_i\)</span>. Así se
+obtiene una descripción en el espacio de fases, cuyas coordenadas son
+los pares <span class="math inline">\((q_i,p_i)\)</span>.</p>
+<h3
+id="construcción-del-hamiltoniano-mediante-la-transformada-de-legendre">6.1.
+Construcción del Hamiltoniano mediante la transformada de Legendre</h3>
+<p>Como vimos en la sección anterior, el momento generalizado o momento
+conjugado se define a partir del Lagrangiano como:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_i = \dfrac{\partial L}{\partial \dot{q}_i}
+\end{aligned}
+\]</span></p>
+<p>Nuestro objetivo ahora es crear una nueva función, el Hamiltoniano
+(<span class="math inline">\(H\)</span>), que dependa exclusivamente de
+posiciones, momentos y del tiempo: <span class="math inline">\(H(q_i,
+p_i, t)\)</span>. Para lograr este cambio de variables, las matemáticas
+nos ofrecen una herramienta específica: la Transformada de Legendre.</p>
+<p>La transformada de Legendre nos permite pasar de una función que
+depende de una variable (en este caso, <span
+class="math inline">\(\dot{q}_i\)</span>) a otra función que dependa de
+la derivada de esa variable respecto a la función original (es decir,
+<span class="math inline">\(p_i\)</span>). La definición general del
+Hamiltoniano se construye así:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H(q_i, p_i, t) = \sum_{i} p_i \dot{q}_i - L(q_i, \dot{q}_i, t)
+\end{aligned}
+\]</span></p>
+<h3 id="deducción-de-las-ecuaciones-canónicas-de-hamilton">6.2.
+Deducción de las ecuaciones canónicas de Hamilton</h3>
+<p>Para descubrir qué forma toman las ecuaciones de movimiento en este
+nuevo marco, vamos a calcular la diferencial total (el cambio
+infinitesimal) del Hamiltoniano de dos maneras distintas y
+compararlas.</p>
+<h4
+id="primer-método-usando-la-definición-de-la-transformada-de-legendre">Primer
+método: usando la definición de la transformada de Legendre</h4>
+<p>Si diferenciamos la ecuación <span class="math inline">\(H = \sum p_i
+\dot{q}_i - L\)</span>, aplicando la regla del producto y la regla de la
+cadena para la diferencial de <span class="math inline">\(L(q_i,
+\dot{q}_i, t)\)</span>, obtenemos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+dH = \sum_{i} (\dot{q}_i dp_i + p_i d\dot{q}_i) - \left[ \sum_{i} \left(
+\dfrac{\partial L}{\partial q_i} dq_i + \dfrac{\partial L}{\partial
+\dot{q}_i} d\dot{q}_i \right) + \dfrac{\partial L}{\partial t} dt
+\right]
+\end{aligned}
+\]</span></p>
+<p>Ahora usamos nuestras dos definiciones clave provenientes del
+formalismo lagrangiano:</p>
+<ol type="1">
+<li><span class="math inline">\(p_i = \dfrac{\partial L}{\partial
+\dot{q}_i}\)</span> (definición de momento).</li>
+<li><span class="math inline">\(\dot{p}_i = \dfrac{\partial L}{\partial
+q_i}\)</span> (es la propia Ecuación de Euler-Lagrange, <span
+class="math inline">\(\dfrac{d p_i}{dt} = \dfrac{\partial L}{\partial
+q_i}\)</span>).</li>
+</ol>
+<p>Sustituyendo esto en el corchete:</p>
+<p><span class="math display">\[
+\begin{aligned}
+dH = \sum_{i} (\dot{q}_i dp_i + p_i d\dot{q}_i) - \sum_{i} (\dot{p}_i
+dq_i + p_i d\dot{q}_i) - \dfrac{\partial L}{\partial t} dt
+\end{aligned}
+\]</span></p>
+<p>Notamos que el término <span class="math inline">\(p_i
+d\dot{q}_i\)</span> aparece sumando y restando, por lo que se cancela de
+forma espectacular. Esto es el núcleo de la transformada de Legendre:
+elimina la dependencia de los diferenciales de velocidad (<span
+class="math inline">\(d\dot{q}_i\)</span>). Nos queda:</p>
+<p><span class="math display">\[
+\begin{aligned}
+dH = \sum_{i} (\dot{q}_i dp_i - \dot{p}_i dq_i) - \dfrac{\partial
+L}{\partial t} dt
+\end{aligned}
+\]</span></p>
+<h4
+id="segundo-método-diferenciando-el-hamiltoniano-como-función-de-sus-propias-variables">Segundo
+método: diferenciando el Hamiltoniano como función de sus propias
+variables</h4>
+<p>Sabemos por definición que <span class="math inline">\(H\)</span> es
+una función de <span class="math inline">\(q_i\)</span>, <span
+class="math inline">\(p_i\)</span> y <span
+class="math inline">\(t\)</span>. Su diferencial total formal en cálculo
+multivariable es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+dH = \sum_{i} \left( \dfrac{\partial H}{\partial q_i} dq_i +
+\dfrac{\partial H}{\partial p_i} dp_i \right) + \dfrac{\partial
+H}{\partial t} dt
+\end{aligned}
+\]</span></p>
+<p>Igualando coeficientes:</p>
+<p>Como ambos métodos deben darnos el mismo diferencial <span
+class="math inline">\(dH\)</span>, podemos igualar término a término los
+coeficientes que acompañan a <span class="math inline">\(dq_i\)</span>,
+<span class="math inline">\(dp_i\)</span> y <span
+class="math inline">\(dt\)</span>. Esto nos proporciona el sistema de
+ecuaciones fundamentales de la mecánica hamiltoniana, conocidas como
+Ecuaciones Canónicas de Hamilton:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dot{q}_i = \dfrac{\partial H}{\partial p_i}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\dot{p}_i = -\dfrac{\partial H}{\partial q_i}
+\end{aligned}
+\]</span></p>
+<p>Y adicionalmente: <span class="math inline">\(\dfrac{\partial
+H}{\partial t} = -\dfrac{\partial L}{\partial t}\)</span>.</p>
+<p>A diferencia del formalismo lagrangiano, que nos daba <span
+class="math inline">\(N\)</span> ecuaciones diferenciales de segundo
+orden, el formalismo hamiltoniano nos proporciona <span
+class="math inline">\(2N\)</span> ecuaciones diferenciales acopladas de
+primer orden. Estas ecuaciones dictan cómo fluye el sistema trazando una
+única e inequívoca trayectoria a través del espacio de las fases de
+<span class="math inline">\(2N\)</span> dimensiones.</p>
+<h2 id="significado-físico-del-hamiltoniano">7. Significado físico del
+Hamiltoniano</h2>
+<p>En la inmensa mayoría de los sistemas mecánicos convencionales
+(específicamente aquellos donde las fuerzas son conservativas, la
+energía potencial <span class="math inline">\(V\)</span> no depende de
+las velocidades, y las ecuaciones de transformación entre las
+coordenadas espaciales y las generalizadas no dependen explícitamente
+del tiempo), el Hamiltoniano resulta ser idéntico a la Energía Mecánica
+Total del sistema.</p>
+<p>Veamos por qué. Si la energía cinética <span
+class="math inline">\(T\)</span> es una función cuadrática de las
+velocidades (como es habitual, ej. <span class="math inline">\(T =
+\dfrac{1}{2}m\dot{x}^2\)</span>), se cumple una propiedad matemática del
+Teorema de Euler para funciones homogéneas que establece que:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i} \dot{q}_i \dfrac{\partial T}{\partial \dot{q}_i} = 2T
+\end{aligned}
+\]</span></p>
+<p>Como el momento es <span class="math inline">\(p_i = \dfrac{\partial
+L}{\partial \dot{q}_i}\)</span> y <span class="math inline">\(L = T -
+V\)</span> (donde <span class="math inline">\(V\)</span> no depende de
+las velocidades), entonces <span class="math inline">\(\dfrac{\partial
+L}{\partial \dot{q}_i} = \dfrac{\partial T}{\partial
+\dot{q}_i}\)</span>. Por tanto:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i} p_i \dot{q}_i = \sum_{i} \dot{q}_i \dfrac{\partial T}{\partial
+\dot{q}_i} = 2T
+\end{aligned}
+\]</span></p>
+<p>Sustituyendo esto en nuestra definición original del Hamiltoniano
+(<span class="math inline">\(H = \sum p_i \dot{q}_i - L\)</span>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+H = 2T - (T - V) = T + V = E_{total}
+\end{aligned}
+\]</span></p>
+<p>Esta es la razón por la que en mecánica cuántica (que toma la
+mecánica hamiltoniana como punto de partida clásico), el “Operador
+Hamiltoniano” <span class="math inline">\(\hat{H}\)</span> es
+precisamente el operador asociado a la energía total del sistema.</p>
+<p> </p>
+</body>
+</html>

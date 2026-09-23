@@ -486,6 +486,84 @@ En el cálculo de variaciones, sin embargo, optimizamos un funcional (en este ca
 
 No minimizamos la función $f$ punto a punto; buscamos cuál es el "camino" o "superficie" completa que hace estacionario el número global producido por el funcional. En mecánica, ese funcional recibirá el nombre de acción y se aplicará el Principio de Hamilton: $\delta S = 0$.
 
+#### 3.1.2. Primera variación de un funcional y ecuación de Euler-Lagrange
+
+Veamos de dónde surge la condición que debe satisfacer una curva estacionaria para el funcional general:
+
+$$
+\begin{aligned}
+J[y] = \int_a^b F(x,y(x),y'(x))\,dx.
+\end{aligned}
+$$
+
+Partimos de una curva candidata $y(x)$ cuyos extremos están fijados. Para compararla con curvas próximas, elegimos una función suave arbitraria $\eta(x)$ que se anula en los extremos, $\eta(a)=\eta(b)=0$, e introducimos una familia de variaciones:
+
+$$
+\begin{aligned}
+y_\epsilon(x) = y(x) + \epsilon\eta(x),
+\qquad
+y_\epsilon'(x) = y'(x) + \epsilon\eta'(x),
+\end{aligned}
+$$
+
+donde $\epsilon$ es un número real pequeño. Ahora el funcional deja de depender directamente de una función y pasa a ser una función ordinaria del parámetro $\epsilon$:
+
+$$
+\begin{aligned}
+\Phi(\epsilon)
+= J[y_\epsilon]
+= \int_a^b F\left(x,y(x)+\epsilon\eta(x),y'(x)+\epsilon\eta'(x)\right)\,dx.
+\end{aligned}
+$$
+
+Si $y$ hace estacionario el funcional, entonces $\Phi$ debe ser estacionaria en $\epsilon=0$. La primera variación se define como $\delta J=\Phi'(0)$; por tanto, la condición de estacionariedad es $\delta J=0$. Derivando bajo el signo integral y aplicando la regla de la cadena se obtiene:
+
+$$
+\begin{aligned}
+\delta J
+= \left.\dfrac{d\Phi}{d\epsilon}\right|_{\epsilon=0} \\
+&= \int_a^b
+\left[
+\dfrac{\partial F}{\partial y}\eta
++ \dfrac{\partial F}{\partial y'}\eta'
+\right]dx.
+\end{aligned}
+$$
+
+El segundo término contiene la derivada de la variación. Lo reescribimos mediante integración por partes:
+
+$$
+\begin{aligned}
+\int_a^b \dfrac{\partial F}{\partial y'}\eta'\,dx
+= \left[\dfrac{\partial F}{\partial y'}\eta\right]_a^b
+- \int_a^b \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial y'}\right)\eta\,dx.
+\end{aligned}
+$$
+
+El término de borde es nulo porque $\eta(a)=\eta(b)=0$. Al sustituirlo en la primera variación queda:
+
+$$
+\begin{aligned}
+\delta J
+= \int_a^b
+\left[
+\dfrac{\partial F}{\partial y}
+- \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial y'}\right)
+\right]\eta(x)\,dx.
+\end{aligned}
+$$
+
+La función $\eta(x)$ puede escogerse arbitrariamente en el interior del intervalo. Por el lema fundamental del cálculo de variaciones, la única forma de que esta integral sea cero para toda variación admisible es que el corchete se anule punto a punto:
+
+$$
+\begin{aligned}
+\dfrac{\partial F}{\partial y}
+- \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial y'}\right) = 0.
+\end{aligned}
+$$
+
+Esta es la ecuación de Euler-Lagrange unidimensional. Es la expresión general de la condición $\delta J=0$ y será la ecuación que aplicaremos al funcional de tiempo de la braquistócrona.
+
 ### 3.2. Ejemplo: la braquistócrona
 
 Para comprender la optimización de funcionales fuera del contexto abstracto de la mecánica analítica, consideremos uno de los problemas históricos que dio origen al cálculo de variaciones en 1696: el problema de la braquistócrona.
