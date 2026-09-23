@@ -592,12 +592,38 @@ La solución general se obtiene superponiendo todos los modos normales:
 \end{aligned}
 \]
 
-Los coeficientes \(A_{mnp}\) se calculan expandiendo el desplazamiento
-inicial \(\Psi(x,y,z,0)\) en una serie triple de Fourier. Del mismo
-modo, los coeficientes \(B_{mnp}\) se fijan a partir de la velocidad
-inicial \(\dfrac{\partial \Psi}{\partial t}(x,y,z,0)\). La ortogonalidad
-de los modos permite determinar cada coeficiente por separado mediante
-integrales sobre el volumen de la cavidad.
+Para expresarlos de forma explícita, definimos el campo inicial
+\(\Psi_0(x,y,z)=\Psi(x,y,z,0)\) y la velocidad inicial
+\(V_0(x,y,z)=\left.\dfrac{\partial\Psi}{\partial t}\right|_{t=0}\). La
+ortogonalidad de los modos seno sobre la cavidad da:
+
+\[
+\begin{aligned}
+A_{mnp} &= \dfrac{8}{L_xL_yL_z}
+\int_0^{L_x}\int_0^{L_y}\int_0^{L_z}
+\Psi_0(x,y,z) \\
+&\quad \cdot \sin\left(\dfrac{m\pi x}{L_x}\right)
+\sin\left(\dfrac{n\pi y}{L_y}\right) \\
+&\quad \cdot
+\sin\left(\dfrac{p\pi z}{L_z}\right)
+\, dz\, dy\, dx,
+\\
+B_{mnp} &= \dfrac{8}{L_xL_yL_z\omega_{mnp}}
+\int_0^{L_x}\int_0^{L_y}\int_0^{L_z}
+V_0(x,y,z) \\
+&\quad \cdot \sin\left(\dfrac{m\pi x}{L_x}\right)
+\sin\left(\dfrac{n\pi y}{L_y}\right) \\
+&\quad \cdot
+\sin\left(\dfrac{p\pi z}{L_z}\right)
+\, dz\, dy\, dx.
+\end{aligned}
+\]
+
+La primera integral proyecta el campo inicial sobre el modo \((m,n,p)\).
+La segunda se obtiene derivando la expansión temporal, evaluándola en
+\(t=0\) y proyectando la velocidad inicial; por eso incorpora el factor
+\(1/\omega_{mnp}\). Cada coeficiente queda así determinado de manera
+independiente.
 
 Por tanto, las expansiones de Fourier convierten el problema de una
 ecuación diferencial parcial en una familia infinita de osciladores
