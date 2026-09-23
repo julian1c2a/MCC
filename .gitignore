@@ -1,0 +1,34 @@
+# LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.pdf.bak
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (por si se añade JS más adelante)
+node_modules/
+
+# Python (por si se añade Python más adelante)
+__pycache__/
+*.pyc
+.venv/
