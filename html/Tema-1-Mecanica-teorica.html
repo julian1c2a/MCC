@@ -99,7 +99,15 @@ Newton</a></li>
 </ul></li>
 <li><a href="#introducción-a-la-transformada-de-legendre"
 id="toc-introducción-a-la-transformada-de-legendre">5. Introducción a la
-transformada de Legendre</a></li>
+transformada de Legendre</a>
+<ul>
+<li><a href="#motivación-geométrica-y-definición"
+id="toc-motivación-geométrica-y-definición">5.1. Motivación geométrica y
+definición</a></li>
+<li><a href="#ejemplo-cuadrático-y-doble-transformada"
+id="toc-ejemplo-cuadrático-y-doble-transformada">5.2. Ejemplo cuadrático
+y doble transformada</a></li>
+</ul></li>
 <li><a href="#introducción-al-formalismo-hamiltoniano"
 id="toc-introducción-al-formalismo-hamiltoniano">6. Introducción al
 formalismo hamiltoniano</a>
@@ -1562,21 +1570,115 @@ demostrar de forma más rigurosa que esta misma estructura <span
 class="math inline">\(L = T - V\)</span> se mantiene inviolable).</p>
 <h2 id="introducción-a-la-transformada-de-legendre">5. Introducción a la
 transformada de Legendre</h2>
-<p>La transformada de Legendre permite sustituir una variable por la
-derivada de una función respecto de esa variable. Para una función
-diferenciable <span class="math inline">\(F(v)\)</span>, se introduce la
-variable conjugada <span class="math inline">\(p =
-\dfrac{dF}{dv}\)</span> y se define una nueva función:</p>
+<p>La transformada de Legendre permite describir una misma función
+mediante su pendiente, en lugar de mediante su variable original. No es
+un simple cambio de letras: sustituye la variable <span
+class="math inline">\(v\)</span> por la cantidad conjugada <span
+class="math inline">\(p\)</span>, definida como la pendiente de la
+gráfica de <span class="math inline">\(F\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p = \dfrac{dF}{dv}.
+\end{aligned}
+\]</span></p>
+<h3 id="motivación-geométrica-y-definición">5.1. Motivación geométrica y
+definición</h3>
+<p>Supongamos que <span class="math inline">\(F(v)\)</span> es
+diferenciable y convexa. En cada valor de <span
+class="math inline">\(v\)</span>, la recta tangente a su gráfica tiene
+pendiente <span class="math inline">\(p=F&#39;(v)\)</span> y
+ecuación:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell(u) = F(v) + p(u-v).
+\end{aligned}
+\]</span></p>
+<p>Si evaluamos esta recta en <span class="math inline">\(u=0\)</span>,
+obtenemos su ordenada en el origen, <span
+class="math inline">\(\ell(0)=F(v)-pv\)</span>. La cantidad opuesta,
+<span class="math inline">\(pv-F(v)\)</span>, depende de la pendiente
+<span class="math inline">\(p\)</span> y permite codificar la misma
+familia de rectas tangentes. Por definición, la transformada de Legendre
+de <span class="math inline">\(F\)</span> es:</p>
 <p><span class="math display">\[
 \begin{aligned}
 G(p) = p v - F(v),
 \end{aligned}
 \]</span></p>
-<p>entendiendo que <span class="math inline">\(v\)</span> se expresa en
-función de <span class="math inline">\(p\)</span> cuando la relación
-puede invertirse. Esta transformación conserva la información de <span
-class="math inline">\(F\)</span>, pero la describe mediante la variable
-conjugada <span class="math inline">\(p\)</span>.</p>
+<p>donde <span class="math inline">\(v\)</span> debe expresarse como
+función de <span class="math inline">\(p\)</span> mediante <span
+class="math inline">\(p=F&#39;(v)\)</span>. La convexidad asegura
+localmente que esta relación puede invertirse y que cada pendiente
+corresponde a un único punto de contacto. Por ello, la transformación
+conserva la información de <span class="math inline">\(F\)</span>, pero
+la describe mediante su variable conjugada <span
+class="math inline">\(p\)</span>.</p>
+<p>Al derivar <span class="math inline">\(G(p)=pv(p)-F(v(p))\)</span>
+respecto de <span class="math inline">\(p\)</span>, se ve el intercambio
+de variables de manera algebraica:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{dG}{dp}
+&amp;= v + p\dfrac{dv}{dp} - \dfrac{dF}{dv}\dfrac{dv}{dp} \\
+&amp;= v + \left(p-\dfrac{dF}{dv}\right)\dfrac{dv}{dp} \\
+&amp;= v.
+\end{aligned}
+\]</span></p>
+<p>La última igualdad usa precisamente <span
+class="math inline">\(p=\dfrac{dF}{dv}\)</span>. La transformada
+intercambia así los papeles de variable y pendiente: de <span
+class="math inline">\(p=F&#39;(v)\)</span> se pasa a <span
+class="math inline">\(v=G&#39;(p)\)</span>.</p>
+<h3 id="ejemplo-cuadrático-y-doble-transformada">5.2. Ejemplo cuadrático
+y doble transformada</h3>
+<p>Consideremos la función convexa:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F(v)=v^2.
+\end{aligned}
+\]</span></p>
+<p>Su variable conjugada es la pendiente:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p = \dfrac{dF}{dv} = 2v,
+\qquad
+v = \dfrac{p}{2}.
+\end{aligned}
+\]</span></p>
+<p>Sustituimos esta expresión de <span class="math inline">\(v\)</span>
+en la definición de la transformada:</p>
+<p><span class="math display">\[
+\begin{aligned}
+G(p)
+&amp;= pv - F(v) \\
+&amp;= p\left(\dfrac{p}{2}\right) - \left(\dfrac{p}{2}\right)^2 \\
+&amp;= \dfrac{p^2}{4}.
+\end{aligned}
+\]</span></p>
+<p>Podemos recuperar la función original aplicando de nuevo la
+transformada de Legendre a <span class="math inline">\(G\)</span>. Ahora
+la variable conjugada de <span class="math inline">\(p\)</span> es:</p>
+<p><span class="math display">\[
+\begin{aligned}
+v = \dfrac{dG}{dp} = \dfrac{p}{2},
+\qquad
+p=2v.
+\end{aligned}
+\]</span></p>
+<p>La doble transformada vale entonces:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F^{**}(v)
+&amp;= vp-G(p) \\
+&amp;= v(2v)-\dfrac{(2v)^2}{4} \\
+&amp;= v^2 = F(v).
+\end{aligned}
+\]</span></p>
+<p>Para funciones diferenciables, convexas y adecuadamente regulares, la
+doble transformada devuelve la función original: <span
+class="math inline">\(F^{**}=F\)</span>. Esta propiedad explica por qué
+la transformación de Legendre no pierde información y por qué resulta
+adecuada para pasar del formalismo lagrangiano al hamiltoniano.</p>
 <h2 id="introducción-al-formalismo-hamiltoniano">6. Introducción al
 formalismo hamiltoniano</h2>
 <p>El formalismo lagrangiano <span class="math inline">\(L(q_i,

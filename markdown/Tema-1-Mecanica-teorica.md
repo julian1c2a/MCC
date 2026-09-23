@@ -1015,7 +1015,25 @@ $$
 
 ## 5. Introducción a la transformada de Legendre
 
-La transformada de Legendre permite sustituir una variable por la derivada de una función respecto de esa variable. Para una función diferenciable $F(v)$, se introduce la variable conjugada $p = \dfrac{dF}{dv}$ y se define una nueva función:
+La transformada de Legendre permite describir una misma función mediante su pendiente, en lugar de mediante su variable original. No es un simple cambio de letras: sustituye la variable $v$ por la cantidad conjugada $p$, definida como la pendiente de la gráfica de $F$:
+
+$$
+\begin{aligned}
+p = \dfrac{dF}{dv}.
+\end{aligned}
+$$
+
+### 5.1. Motivación geométrica y definición
+
+Supongamos que $F(v)$ es diferenciable y convexa. En cada valor de $v$, la recta tangente a su gráfica tiene pendiente $p=F'(v)$ y ecuación:
+
+$$
+\begin{aligned}
+\ell(u) = F(v) + p(u-v).
+\end{aligned}
+$$
+
+Si evaluamos esta recta en $u=0$, obtenemos su ordenada en el origen, $\ell(0)=F(v)-pv$. La cantidad opuesta, $pv-F(v)$, depende de la pendiente $p$ y permite codificar la misma familia de rectas tangentes. Por definición, la transformada de Legendre de $F$ es:
 
 $$
 \begin{aligned}
@@ -1023,7 +1041,74 @@ G(p) = p v - F(v),
 \end{aligned}
 $$
 
-entendiendo que $v$ se expresa en función de $p$ cuando la relación puede invertirse. Esta transformación conserva la información de $F$, pero la describe mediante la variable conjugada $p$.
+donde $v$ debe expresarse como función de $p$ mediante $p=F'(v)$. La convexidad asegura localmente que esta relación puede invertirse y que cada pendiente corresponde a un único punto de contacto. Por ello, la transformación conserva la información de $F$, pero la describe mediante su variable conjugada $p$.
+
+Al derivar $G(p)=pv(p)-F(v(p))$ respecto de $p$, se ve el intercambio de variables de manera algebraica:
+
+$$
+\begin{aligned}
+\dfrac{dG}{dp}
+&= v + p\dfrac{dv}{dp} - \dfrac{dF}{dv}\dfrac{dv}{dp} \\
+&= v + \left(p-\dfrac{dF}{dv}\right)\dfrac{dv}{dp} \\
+&= v.
+\end{aligned}
+$$
+
+La última igualdad usa precisamente $p=\dfrac{dF}{dv}$. La transformada intercambia así los papeles de variable y pendiente: de $p=F'(v)$ se pasa a $v=G'(p)$.
+
+### 5.2. Ejemplo cuadrático y doble transformada
+
+Consideremos la función convexa:
+
+$$
+\begin{aligned}
+F(v)=v^2.
+\end{aligned}
+$$
+
+Su variable conjugada es la pendiente:
+
+$$
+\begin{aligned}
+p = \dfrac{dF}{dv} = 2v,
+\qquad
+v = \dfrac{p}{2}.
+\end{aligned}
+$$
+
+Sustituimos esta expresión de $v$ en la definición de la transformada:
+
+$$
+\begin{aligned}
+G(p)
+&= pv - F(v) \\
+&= p\left(\dfrac{p}{2}\right) - \left(\dfrac{p}{2}\right)^2 \\
+&= \dfrac{p^2}{4}.
+\end{aligned}
+$$
+
+Podemos recuperar la función original aplicando de nuevo la transformada de Legendre a $G$. Ahora la variable conjugada de $p$ es:
+
+$$
+\begin{aligned}
+v = \dfrac{dG}{dp} = \dfrac{p}{2},
+\qquad
+p=2v.
+\end{aligned}
+$$
+
+La doble transformada vale entonces:
+
+$$
+\begin{aligned}
+F^{**}(v)
+&= vp-G(p) \\
+&= v(2v)-\dfrac{(2v)^2}{4} \\
+&= v^2 = F(v).
+\end{aligned}
+$$
+
+Para funciones diferenciables, convexas y adecuadamente regulares, la doble transformada devuelve la función original: $F^{**}=F$. Esta propiedad explica por qué la transformación de Legendre no pierde información y por qué resulta adecuada para pasar del formalismo lagrangiano al hamiltoniano.
 
 ## 6. Introducción al formalismo hamiltoniano
 
