@@ -892,6 +892,155 @@ Esta es la ecuación de Euler-Lagrange unidimensional. Es la expresión
 general de la condición \(\delta J=0\) y será la ecuación que
 aplicaremos al funcional de tiempo de la braquistócrona.
 
+\paragraph{3.1.3. Extensión a campos: funcionales de
+\(f(x,t)\)}\label{extensiuxf3n-a-campos-funcionales-de-fxt}
+
+En los problemas de ondas no buscamos una curva \(y(x)\), sino un campo
+\(f(x,t)\) que asigna un valor a cada punto del espacio-tiempo. El
+análogo bidimensional del funcional anterior integra sobre una región
+\(\Omega\) del plano \((x,t)\):
+
+\[
+\begin{aligned}
+S[f]
+= \int_{t_1}^{t_2}\int_{x_1}^{x_2}
+\mathcal{L}\left(
+f,
+\dfrac{\partial f}{\partial t},
+\dfrac{\partial f}{\partial x},
+x,t
+\right)\,dx\,dt.
+\end{aligned}
+\]
+
+Este funcional se llama \textbf{acción} cuando \(\mathcal{L}\) es una
+densidad lagrangiana. Para variar el campo, elegimos una perturbación
+suave \(\eta(x,t)\) que se anula en el borde de la región \(\Omega\), y
+definimos:
+
+\[
+\begin{aligned}
+f_\epsilon(x,t) = f(x,t) + \epsilon\eta(x,t).
+\end{aligned}
+\]
+
+Sus derivadas varían de forma coherente:
+
+\[
+\begin{aligned}
+\dfrac{\partial f_\epsilon}{\partial t}
+= \dfrac{\partial f}{\partial t}
++ \epsilon\dfrac{\partial\eta}{\partial t},
+\\
+\dfrac{\partial f_\epsilon}{\partial x}
+= \dfrac{\partial f}{\partial x}
++ \epsilon\dfrac{\partial\eta}{\partial x}.
+\end{aligned}
+\]
+
+Como antes, introducimos \(\Phi(\epsilon)=S[f_\epsilon]\) y exigimos
+que \(\Phi'(0)=\delta S=0\). La regla de la cadena aplicada al
+integrando proporciona:
+
+\[
+\begin{aligned}
+\delta S
+= \int_{t_1}^{t_2}\int_{x_1}^{x_2}
+\Bigg[
+\dfrac{\partial\mathcal{L}}{\partial f}\eta
++ \dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial t}\right)}
+\dfrac{\partial\eta}{\partial t}
++ \dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial x}\right)}
+\dfrac{\partial\eta}{\partial x}
+\Bigg]dx\,dt.
+\end{aligned}
+\]
+
+Integramos por partes los dos términos que contienen derivadas de
+\(\eta\). Los términos de borde se anulan porque la variación es nula en
+el contorno. Por tanto:
+
+\[
+\begin{aligned}
+\delta S
+= \int_{t_1}^{t_2}\int_{x_1}^{x_2}
+\Bigg[
+\dfrac{\partial\mathcal{L}}{\partial f}
+- \dfrac{\partial}{\partial t}
+\left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial t}\right)}\right)
+- \dfrac{\partial}{\partial x}
+\left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial x}\right)}\right)
+\Bigg]\eta(x,t)\,dx\,dt.
+\end{aligned}
+\]
+
+Puesto que \(\eta(x,t)\) es arbitraria en el interior de \(\Omega\),
+el lema fundamental conduce a la ecuación de Euler-Lagrange para un
+campo en una dimensión espacial:
+
+\[
+\begin{aligned}
+\dfrac{\partial\mathcal{L}}{\partial f}
+- \dfrac{\partial}{\partial t}
+\left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial t}\right)}\right)
+- \dfrac{\partial}{\partial x}
+\left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial x}\right)}\right)
+= 0.
+\end{aligned}
+\]
+
+La expresión unidimensional anterior se recupera si el campo depende
+sólo de \(x\). En más dimensiones espaciales aparecen un término
+análogo por cada derivada espacial del campo.
+
+\paragraph{3.1.4. Ecuación de Euler-Lagrange en tres dimensiones
+espaciales}\label{ecuaciuxf3n-de-euler-lagrange-en-tres-dimensiones-espaciales}
+
+Si el campo depende de las tres coordenadas espaciales y del tiempo,
+\(f=f(x,y,z,t)\), la acción se integra sobre un volumen espacial y un
+intervalo temporal:
+
+\[
+\begin{aligned}
+S[f]
+= \int_{t_1}^{t_2}\int_V
+\mathcal{L}\left(
+f,
+\dfrac{\partial f}{\partial t},
+\dfrac{\partial f}{\partial x},
+\dfrac{\partial f}{\partial y},
+\dfrac{\partial f}{\partial z},
+x,y,z,t
+\right)\,dV\,dt.
+\end{aligned}
+\]
+
+A la vista del resultado para \(x\) y \(t\), no hace falta repetir
+toda la deducción: se integra por partes una vez por cada derivada de
+la variación. Si \(\eta\) se anula en la frontera espacial y en los
+instantes extremos, los cuatro términos de borde desaparecen. La
+ecuación resultante es:
+
+\[
+\begin{aligned}
+\dfrac{\partial\mathcal{L}}{\partial f}
+&- \dfrac{\partial}{\partial t}
+\left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial t}\right)}\right)
+- \dfrac{\partial}{\partial x}
+\left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial x}\right)}\right) \\
+&- \dfrac{\partial}{\partial y}
+\left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial y}\right)}\right)
+- \dfrac{\partial}{\partial z}
+\left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial z}\right)}\right)
+= 0.
+\end{aligned}
+\]
+
+La pauta es transparente: además del término temporal ya conocido,
+aparece un término de Euler-Lagrange por cada dirección espacial. Para
+varios campos \(f_a\), se obtiene una ecuación de esta forma para cada
+índice \(a\).
+
 \subsubsection{3.2. Ejemplo: la
 braquistócrona}\label{ejemplo-la-braquistuxf3crona}
 
@@ -1071,20 +1220,43 @@ extenderse a medios continuos y campos, como en la propagación de ondas.
 Para un sistema continuo, por ejemplo el desplazamiento transversal de
 una cuerda, el estado está descrito por un campo \(f(x,t)\). La densidad
 lagrangiana \(\mathcal{L}\) asigna una expresión local a cada punto del
-espacio-tiempo a partir del campo y de sus derivadas:
+espacio-tiempo a partir del campo, de sus derivadas y, en el caso
+general, de la posición y del tiempo de forma explícita:
 
 \[
 \begin{aligned}
-\mathcal{L} = \mathcal{L}\left( f, \dfrac{\partial f}{\partial t}, \dfrac{\partial f}{\partial x} \right).
+\mathcal{L}
+= \mathcal{L}\left(
+f,
+\dfrac{\partial f}{\partial t},
+\dfrac{\partial f}{\partial x},
+x,t
+\right).
 \end{aligned}
 \]
+
+La dependencia explícita de \(x\) o \(t\) no debe confundirse con la
+dependencia implícita que ya aparece a través de \(f(x,t)\). Si
+\(\mathcal{L}\) no depende explícitamente de \(x\), el sistema es
+homogéneo en el espacio; si no depende explícitamente de \(t\), es
+homogéneo en el tiempo. Esta última simetría está asociada, por el
+teorema de Noether, a la conservación de la energía. Una cuerda cuyo
+tensado cambia externamente con el tiempo es un ejemplo de sistema con
+dependencia explícita de \(t\).
 
 La acción \(S\) es el funcional que se obtiene al integrar esa densidad
 sobre la región de espacio-tiempo considerada:
 
 \[
 \begin{aligned}
-S[f] = \int_{t_1}^{t_2} \int_{x_1}^{x_2} \mathcal{L}\left( f, \dfrac{\partial f}{\partial t}, \dfrac{\partial f}{\partial x} \right) dx \, dt.
+S[f]
+= \int_{t_1}^{t_2} \int_{x_1}^{x_2}
+\mathcal{L}\left(
+f,
+\dfrac{\partial f}{\partial t},
+\dfrac{\partial f}{\partial x},
+x,t
+\right)dx \, dt.
 \end{aligned}
 \]
 
