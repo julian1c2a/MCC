@@ -72,14 +72,14 @@
   pdfcreator={LaTeX via pandoc}}
 
 \ifXeTeX
-\special{pdf:trailerid [ <be905f98a33d3bcb7eff369dd94ce521> <be905f98a33d3bcb7eff369dd94ce521> ]}
+\special{pdf:trailerid [ <b757066b316d6340143999b6560edc93> <b757066b316d6340143999b6560edc93> ]}
 \fi
 \ifPDFTeX
 \pdftrailerid{}
-\pdftrailer{/ID [ <be905f98a33d3bcb7eff369dd94ce521> <be905f98a33d3bcb7eff369dd94ce521> ]}
+\pdftrailer{/ID [ <b757066b316d6340143999b6560edc93> <b757066b316d6340143999b6560edc93> ]}
 \fi
 \ifLuaTeX
-\pdfvariable trailerid {[ <be905f98a33d3bcb7eff369dd94ce521> <be905f98a33d3bcb7eff369dd94ce521> ]}
+\pdfvariable trailerid {[ <b757066b316d6340143999b6560edc93> <b757066b316d6340143999b6560edc93> ]}
 \fi
 
 \author{Julián Calderón Almendros}
@@ -1989,6 +1989,13 @@ doble transformada devuelve la función original: \(F^{**}=F\). Esta
 propiedad explica por qué la transformación de Legendre no pierde
 información y por qué resulta adecuada para pasar del formalismo
 lagrangiano al hamiltoniano.
+
+\textbf{Ejemplo computacional:}
+\href{https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/legendre.py}{cuadernos/tema1/legendre.py}.
+Comprueba con SymPy este ejemplo y estudia
+\(f(x,t) = \cos(k \cdot x) \cdot e^{\omega \cdot t}\): transformada
+respecto de \(x\) (ramas, variable pasiva, doble transformada) y
+respecto de \(x\) y \(t\) a la vez.
 
 \subsection{6. Introducción al formalismo
 hamiltoniano}\label{introducciuxf3n-al-formalismo-hamiltoniano}

@@ -1238,6 +1238,8 @@ $$
 
 Para funciones diferenciables, convexas y adecuadamente regulares, la doble transformada devuelve la función original: $F^{**}=F$. Esta propiedad explica por qué la transformación de Legendre no pierde información y por qué resulta adecuada para pasar del formalismo lagrangiano al hamiltoniano.
 
+**Ejemplo computacional:** [cuadernos/tema1/legendre.py](https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/legendre.py). Comprueba con SymPy este ejemplo y estudia $f(x,t) = \cos(k \cdot x) \cdot e^{\omega \cdot t}$: transformada respecto de $x$ (ramas, variable pasiva, doble transformada) y respecto de $x$ y $t$ a la vez.
+
 ## 6. Introducción al formalismo hamiltoniano
 
 El formalismo lagrangiano $L(q_i, \dot{q}_i, t)$ formula la dinámica en el espacio de configuración, definido por las coordenadas generalizadas $q_i$. La mecánica hamiltoniana aplica la transformada de Legendre a las velocidades $\dot{q}_i$ para usar, en su lugar, los momentos conjugados $p_i$. Así se obtiene una descripción en el espacio de fases, cuyas coordenadas son los pares $(q_i,p_i)$.

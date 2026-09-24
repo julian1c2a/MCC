@@ -12,6 +12,7 @@ Apuntes de autoestudio para el Máster en Computación Cuántica, empezando por 
 - `html/` — páginas web generadas desde el Markdown, y su hoja de estilo.
 - `doc_out/` — PDFs finales (`latex/` compilado desde el `.tex`, `markdown/` desde el `.md`).
 - `figuras/` — figuras y diagramas (TikZ, draw.io/diagrams.net, imágenes exportadas).
+- `cuadernos/` — cuadernos de Python con SymPy (`.py` con celdas `# %%`).
 - `scripts/` — sincronización, validación y publicación.
 - `build/` — compilaciones intermedias (ignorado por git).
 
@@ -33,6 +34,7 @@ Las reglas de trabajo, la guía de estilo y los comandos están en [REGLAS.md](R
 | `FICHA_RESUMEN` | Genera la ficha de repaso de un tema. |
 | `EJERCICIOS` | Añade ejercicios con solución completa a un tema. |
 | `PUBLICA_WEB` | Publica la web en GitHub Pages (<https://julian1c2a.github.io/MCC/>). |
+| `EJEMPLO_SYMPY` | Ejemplo simbólico con SymPy en `cuadernos/`: aplica la maquinaria general a funciones concretas. |
 
 Uso directo de los scripts:
 
@@ -46,6 +48,8 @@ pwsh scripts/notas.ps1 [-Todas]
 pwsh scripts/nuevo-tema.ps1 -Numero <n> -Titulo "<título>" [-Asignatura "<asignatura>"]
 pwsh scripts/publica-web.ps1 -Mensaje "<mensaje>"
 node scripts/busca-implicitos.mjs markdown/<tema>.md
+pwsh scripts/prepara-python.ps1
+pwsh scripts/comprueba-cuadernos.ps1 [-Cuaderno <ruta>]
 ```
 
 ## Entorno LaTeX

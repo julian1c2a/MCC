@@ -26,6 +26,7 @@ BORRADOR.md
 # Editor
 .vscode/*
 !.vscode/settings.json
+!.vscode/extensions.json
 *.code-workspace
 
 # OS

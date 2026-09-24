@@ -11,6 +11,7 @@
     - en otro caso: SINCRONIZA_desde_MD.
   Si hay copias pendientes en build/sync/ (fase Preparar ya hecha y cambios ya
   portados), ejecuta la fase Verificar de SINCRONIZA_desde_TEX.
+  Al final ejecuta todos los cuadernos de Python (scripts/comprueba-cuadernos.ps1).
 
 .PARAMETER TeX
   TeXLive (por defecto), MiKTeX o Both.
@@ -51,6 +52,10 @@ foreach ($n in $desdeTex) {
     Invoke-Paso 'sincroniza-desde-tex.ps1' @('-Fase', 'Preparar', '-Name', $n)
     if ($codigo -eq 0) { $codigo = 2 }
 }
+
+Write-Host '== Cuadernos de Python (scripts/comprueba-cuadernos.ps1)' -ForegroundColor Cyan
+& pwsh -NoProfile -File "$PSScriptRoot/comprueba-cuadernos.ps1"
+if ($LASTEXITCODE -ne 0) { $codigo = 1 }
 
 if ($codigo -eq 2) {
     Write-Host "`nFalta portar al Markdown los cambios del .tex mostrados arriba y volver a ejecutar SINCRONIZA." -ForegroundColor Yellow

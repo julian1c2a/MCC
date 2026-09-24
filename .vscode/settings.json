@@ -1,5 +1,13 @@
 {
     "editor.linkedEditing": true,
     "claudeCode.useCtrlEnterToSend": true,
-    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/latex/workshop"
+    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/latex/workshop",
+
+    // Python de los cuadernos (cuadernos/): entorno .venv del proyecto (scripts/prepara-python.ps1).
+    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.extraPaths": ["cuadernos"],
+    // La ventana interactiva arranca en cuadernos/, así "from mcc_sym import *" funciona desde cualquier cuaderno.
+    "jupyter.notebookFileRoot": "${workspaceFolder}/cuadernos",
+    "jupyter.interactiveWindow.creationMode": "perFile"
 }

@@ -23,6 +23,8 @@ Es un documento vivo: cada nueva regla que se acuerde se añade aquí, en la sec
 | `BORRADOR.md` | Borrador libre para REPASA_BORRADOR. Ignorado por git. | Sí |
 | `.claude/commands/`, `.github/prompts/` | Los comandos de la sección 6 para Claude Code y GitHub Copilot. | Sí |
 | `.github/workflows/pages.yml` | Publicación de `html/` y `doc_out/` en GitHub Pages. | Sí |
+| `cuadernos/` | Cuadernos de Python con SymPy (sección 7): `mcc_sym.py` (herramientas) y un subdirectorio por tema. | Sí |
+| `requirements.txt`, `.venv/` | Dependencias de Python y su entorno (`.venv` ignorado por git). | `requirements.txt`: sí |
 
 ## 2. Sincronización y compilación
 
@@ -60,6 +62,7 @@ Los PDF son reproducibles: la fecha interna es la de modificación del Markdown 
 | Pandoc 3.9 | `C:\msys64\usr\bin\pandoc.exe` | Conversión `.md` → `.tex` / PDF / `.html`. |
 | Git for Windows | `C:\Program Files\Git\cmd\git.exe` | `git push` (su Git Credential Manager guarda las credenciales de GitHub; el `git` de MSYS2 no las tiene). |
 | GitHub CLI | `C:\Program Files\GitHub CLI\gh.exe` | PUBLICA_WEB: activar GitHub Pages y lanzar el workflow. |
+| Python 3.14 + uv | `.venv\Scripts\python.exe` (creado con `~\.local\bin\uv.exe`) | Cuadernos de SymPy. Se crea o actualiza con `pwsh scripts/prepara-python.ps1`. |
 | Node.js 24 | `C:\msys64\ucrt64\bin\node.exe` | `scripts/check-md.mjs`, `scripts/busca-implicitos.mjs`. |
 | KaTeX | Extensión de VS Code `goessner.mdmath` (o `KATEX_PATH`) | Validación de fórmulas. |
 
@@ -325,3 +328,46 @@ Publica la web en GitHub Pages: <https://julian1c2a.github.io/MCC/>.
    - ejecuta GUARDA_y_SUBE y, si falla, no publica;
    - lanza el workflow `.github/workflows/pages.yml`, espera a que termine y muestra la URL.
 3. Una vez activado Pages, cada GUARDA_y_SUBE que cambie `html/` o `doc_out/` publica la web automáticamente; PUBLICA_WEB sirve para forzar la publicación y comprobarla.
+
+### 6.13. EJEMPLO_SYMPY "descripción"
+
+Ejemplo simbólico con SymPy de un resultado general de los apuntes. Por ejemplo: «Legendre de $\cos(k \cdot x) \cdot e^{\omega \cdot t}$ respecto de $x$».
+
+1. Localizar el cuaderno del tema y asunto (`cuadernos/tema<n>/<asunto>.py`). Si no existe, crearlo con la cabecera de la sección 7.2.
+2. Añadir las celdas del ejemplo con las herramientas de `mcc_sym.py`. Si falta una herramienta general, se añade a `mcc_sym.py`.
+3. Añadir `comprobar(...)` para cada propiedad que el ejemplo debe cumplir.
+4. Ejecutar `pwsh scripts/comprueba-cuadernos.ps1 -Cuaderno <ruta>` y mostrar al usuario los resultados, en LaTeX con el estilo del proyecto.
+5. Solo si el usuario lo pide, llevar el ejemplo resuelto al Markdown y aplicar SINCRONIZA.
+
+## 7. Cuadernos de Python (SymPy)
+
+Los cuadernos permiten ver qué produce la maquinaria general de los apuntes con funciones concretas.
+
+### 7.1. Entorno y VS Code
+
+- Entorno: `.venv` en la raíz, creado con uv a partir de `requirements.txt` (`pwsh scripts/prepara-python.ps1`). No se usa el Python de MSYS2.
+- `.vscode/settings.json` fija `.venv` como intérprete y la carpeta `cuadernos/` como directorio de trabajo de la ventana interactiva. Así, `from mcc_sym import *` funciona desde cualquier cuaderno.
+- Si VS Code muestra otro intérprete: `Ctrl+Mayús+P` → «Python: Select Interpreter» → `.venv`. En la ventana interactiva, el selector de kernel (arriba a la derecha) → «Python Environments» → `.venv`.
+- Ejecución: en un cuaderno, `Mayús+Intro` ejecuta la celda actual en la ventana interactiva; «Run All Cells» ejecuta todas.
+
+### 7.2. Formato
+
+- Archivos `.py` con celdas `# %%`, y celdas de texto `# %% [markdown]` para las explicaciones. Las salidas no se guardan en git.
+- Un subdirectorio por tema (`cuadernos/tema1/`) y un archivo por asunto (`legendre.py`, `ondas.py`...).
+- Cabecera: una celda `[markdown]` con el título «Tema n, sección x.y: asunto» y la lista de ejemplos.
+- La redacción de las celdas de texto sigue la sección 3, y sus fórmulas la sección 4.3.
+- Cada cuaderno se enlaza desde la sección correspondiente del Markdown con una línea «**Ejemplo computacional:** [cuadernos/...](https://github.com/julian1c2a/MCC/blob/main/cuadernos/...)» y una frase que diga qué contiene.
+
+### 7.3. Herramientas comunes (`cuadernos/mcc_sym.py`)
+
+- `mostrar(nombre, expr)`: muestra el resultado renderizado en la ventana interactiva y como LaTeX de texto al ejecutarse sin ella.
+- `latex_mcc(expr)`: LaTeX con el estilo del proyecto (`\cdot`, `\dfrac`, `\arcsin`), para copiarlo al Markdown sin retoques.
+- `comprobar(condición, mensaje)`: una expresión que debe ser 0, o una condición; si falla, el cuaderno se detiene.
+- `legendre`, `legendre_multi`, `hessiana`, `euler_lagrange`, `hamiltoniano`: la maquinaria de los apuntes.
+- Lo que sirva para más de un cuaderno se añade aquí, no se copia.
+
+### 7.4. Comprobación
+
+- Todo cuaderno termina con `comprobar(...)` de las propiedades que ilustra: por ejemplo, $\partial g/\partial p = x$ o que la doble transformada devuelve la función.
+- `pwsh scripts/comprueba-cuadernos.ps1` los ejecuta todos de principio a fin con `-W error`. Falla si alguno lanza una excepción, incumple una comprobación o emite una advertencia de Python.
+- SINCRONIZA (y, por tanto, GUARDA_y_SUBE) lo ejecuta siempre: un cuaderno roto impide que `main` avance.
