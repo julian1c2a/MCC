@@ -1,5 +1,5 @@
 ---
-description: Integra BORRADOR.md en los apuntes con el estilo del proyecto, sincroniza todo y muestra el resultado
+description: "Integra BORRADOR.md en los apuntes con el estilo del proyecto, sincroniza todo y muestra el resultado"
 agent: agent
 ---
 

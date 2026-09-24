@@ -1,5 +1,5 @@
 ---
-description: Sincroniza cada documento desde el último archivo modificado (Markdown o .tex) y lo valida todo
+description: "Sincroniza cada documento desde el último archivo modificado (Markdown o .tex) y lo valida todo"
 agent: agent
 ---
 

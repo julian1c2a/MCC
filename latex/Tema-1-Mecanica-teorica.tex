@@ -60,6 +60,8 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \DeclareUnicodeCharacter{22C5}{\ensuremath{\cdot}}
+% PDF reproducible: sin /ID aleatorio (la fecha la fija SOURCE_DATE_EPOCH, ver scripts/comun.ps1).
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -68,6 +70,17 @@
   pdflang={es},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
+
+\ifXeTeX
+\special{pdf:trailerid [ <be905f98a33d3bcb7eff369dd94ce521> <be905f98a33d3bcb7eff369dd94ce521> ]}
+\fi
+\ifPDFTeX
+\pdftrailerid{}
+\pdftrailer{/ID [ <be905f98a33d3bcb7eff369dd94ce521> <be905f98a33d3bcb7eff369dd94ce521> ]}
+\fi
+\ifLuaTeX
+\pdfvariable trailerid {[ <be905f98a33d3bcb7eff369dd94ce521> <be905f98a33d3bcb7eff369dd94ce521> ]}
+\fi
 
 \author{Julián Calderón Almendros}
 \date{}

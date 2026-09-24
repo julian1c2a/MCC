@@ -1,0 +1,44 @@
+# Publica en GitHub Pages las páginas HTML (html/) y los PDF (doc_out/).
+# Se ejecuta en cada push a main que cambie esos directorios (GUARDA_y_SUBE) y a mano
+# con PUBLICA_WEB (gh workflow run pages.yml). Web: https://julian1c2a.github.io/MCC/
+name: Publicar web
+
+on:
+  push:
+    branches: [main]
+    paths: ["html/**", "doc_out/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar el sitio
+        run: |
+          mkdir -p _site
+          cp -r html doc_out _site/
+          cat > _site/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="es"><head><meta charset="utf-8"><title>MCC</title>
+          <meta http-equiv="refresh" content="0; url=html/index.html"></head>
+          <body><a href="html/index.html">MCC: apuntes del Máster en Computación Cuántica</a></body></html>
+          EOF
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4

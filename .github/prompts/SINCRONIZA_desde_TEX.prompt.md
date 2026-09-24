@@ -1,5 +1,5 @@
 ---
-description: Porta al Markdown los cambios hechos a mano en un .tex y regenera y valida todo
+description: "Porta al Markdown los cambios hechos a mano en un .tex y regenera y valida todo"
 agent: agent
 ---
 

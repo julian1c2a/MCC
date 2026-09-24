@@ -1,5 +1,5 @@
 ---
-description: Regenera tex, html y PDFs desde el Markdown y lo valida hasta que no haya errores ni advertencias
+description: "Regenera tex, html y PDFs desde el Markdown y lo valida hasta que no haya errores ni advertencias"
 agent: agent
 ---
 

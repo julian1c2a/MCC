@@ -77,6 +77,8 @@ foreach ($n in (Get-DocNames $Name)) {
         }
     }
 
+    Set-SourceDate $mdFile
+
     # 3. KaTeX y estilo.
     Write-Host '-- KaTeX y reglas de estilo'
     $out = Invoke-Tool 'check-md' $NodeExe @('scripts/check-md.mjs', $mdFile)
@@ -113,5 +115,8 @@ foreach ($n in (Get-DocNames $Name)) {
         if (Test-Path $derived) { (Get-Item $derived).LastWriteTime = $mdLocalTime }
     }
 }
+
+# 9. Portada de la web (html/index.html) con todos los documentos.
+Update-IndiceWeb
 
 Exit-WithSummary

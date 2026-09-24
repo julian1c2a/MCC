@@ -26,6 +26,13 @@ Las reglas de trabajo, la guía de estilo y los comandos están en [REGLAS.md](R
 | `SINCRONIZA_desde_MD` | Markdown → LaTeX, HTML y PDFs, sin errores ni advertencias. |
 | `SINCRONIZA_desde_TEX` | Lleva al Markdown los cambios hechos a mano en un `.tex` y regenera todo. |
 | `REPASA_BORRADOR` | Integra `BORRADOR.md` en los apuntes, sincroniza y muestra el resultado. |
+| `ESTADO` | Resumen: git, sincronización de cada documento, notas para la IA pendientes y borrador. |
+| `ATIENDE_NOTAS` | Resuelve las notas `<!-- AI:... -->` pendientes y sincroniza. |
+| `REVISA_RIGOR` | Revisión crítica (signos, dimensiones, pasos, hipótesis); informa antes de cambiar. |
+| `NUEVO_TEMA` | Crea un tema nuevo con su bloque de autoría y lo sincroniza. |
+| `FICHA_RESUMEN` | Genera la ficha de repaso de un tema. |
+| `EJERCICIOS` | Añade ejercicios con solución completa a un tema. |
+| `PUBLICA_WEB` | Publica la web en GitHub Pages (<https://julian1c2a.github.io/MCC/>). |
 
 Uso directo de los scripts:
 
@@ -34,6 +41,11 @@ pwsh scripts/sincroniza.ps1 [-TeX TeXLive|MiKTeX|Both]
 pwsh scripts/sincroniza-desde-md.ps1 [-Name <tema>] [-TeX TeXLive|MiKTeX|Both]
 pwsh scripts/sincroniza-desde-tex.ps1 [-Fase Preparar|Verificar]
 pwsh scripts/guarda-y-sube.ps1 -Mensaje "<mensaje>"
+pwsh scripts/estado.ps1 [-Fetch]
+pwsh scripts/notas.ps1 [-Todas]
+pwsh scripts/nuevo-tema.ps1 -Numero <n> -Titulo "<título>" [-Asignatura "<asignatura>"]
+pwsh scripts/publica-web.ps1 -Mensaje "<mensaje>"
+node scripts/busca-implicitos.mjs markdown/<tema>.md
 ```
 
 ## Entorno LaTeX

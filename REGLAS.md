@@ -13,6 +13,8 @@ Es un documento vivo: cada nueva regla que se acuerde se añade aquí, en la sec
 | `latex/pandoc-pdf-header.tex` | Cabecera que Pandoc inserta en el preámbulo LaTeX. | Sí |
 | `html/<nombre>.html` | Página web generada desde el Markdown con Pandoc. | No |
 | `html/tema-1.css` | Hoja de estilo de las páginas HTML. | Sí |
+| `html/index.html` | Portada de la web con todos los documentos (se regenera en cada SINCRONIZA_desde_MD). | No |
+| `markdown/<tema>-ficha.md`, `markdown/<tema>-ejercicios.md` | Ficha resumen y ejercicios de un tema (FICHA_RESUMEN, EJERCICIOS). Se sincronizan como cualquier documento. | Sí |
 | `doc_out/latex/<nombre>.pdf` | PDF compilado desde el `.tex`. | No |
 | `doc_out/markdown/<nombre>.pdf` | PDF compilado directamente desde el `.md`. | No |
 | `build/` | Compilaciones intermedias (auxiliares, logs). Ignorado por git. | No |
@@ -20,6 +22,7 @@ Es un documento vivo: cada nueva regla que se acuerde se añade aquí, en la sec
 | `figuras/` | Figuras y diagramas (TikZ, draw.io, imágenes exportadas). | Sí |
 | `BORRADOR.md` | Borrador libre para REPASA_BORRADOR. Ignorado por git. | Sí |
 | `.claude/commands/`, `.github/prompts/` | Los comandos de la sección 6 para Claude Code y GitHub Copilot. | Sí |
+| `.github/workflows/pages.yml` | Publicación de `html/` y `doc_out/` en GitHub Pages. | Sí |
 
 ## 2. Sincronización y compilación
 
@@ -46,6 +49,8 @@ Los `.tex` se generan desde el Markdown, por lo que una edición directa se perd
 
 Además de la comprobación automática, cuando se añaden o alargan fórmulas se revisa el PDF para confirmar que ninguna invade el margen.
 
+Los PDF son reproducibles: la fecha interna es la de modificación del Markdown (`SOURCE_DATE_EPOCH`) y no llevan identificador aleatorio (`\pdftrailerid{}` en `latex/pandoc-pdf-header.tex`). Si el contenido no cambia, el PDF sale idéntico y git no lo ve modificado.
+
 ### 2.5. Entornos instalados
 
 | Herramienta | Ruta | Uso |
@@ -54,7 +59,8 @@ Además de la comprobación automática, cuando se añaden o alargan fórmulas s
 | MiKTeX 26.5 | `D:\miktex\miktex\bin\x64` (`/d/miktex/`) | Alternativa: `-TeX MiKTeX`, o `-TeX Both` para compilar con ambas. |
 | Pandoc 3.9 | `C:\msys64\usr\bin\pandoc.exe` | Conversión `.md` → `.tex` / PDF / `.html`. |
 | Git for Windows | `C:\Program Files\Git\cmd\git.exe` | `git push` (su Git Credential Manager guarda las credenciales de GitHub; el `git` de MSYS2 no las tiene). |
-| Node.js 24 | `C:\msys64\ucrt64\bin\node.exe` | `scripts/check-md.mjs`. |
+| GitHub CLI | `C:\Program Files\GitHub CLI\gh.exe` | PUBLICA_WEB: activar GitHub Pages y lanzar el workflow. |
+| Node.js 24 | `C:\msys64\ucrt64\bin\node.exe` | `scripts/check-md.mjs`, `scripts/busca-implicitos.mjs`. |
 | KaTeX | Extensión de VS Code `goessner.mdmath` (o `KATEX_PATH`) | Validación de fórmulas. |
 
 Notas:
@@ -238,3 +244,84 @@ Sincroniza cada documento en la dirección que corresponde según qué archivo h
    - si hay una fase Preparar anterior pendiente (copia en `build/sync/`), aplica la fase Verificar.
 2. Con código 2, la IA porta al Markdown los cambios mostrados y vuelve a ejecutar `scripts/sincroniza.ps1`, que ahora hará la fase Verificar.
 3. Se repite hasta que termine sin problemas.
+
+### 6.6. ESTADO
+
+Resumen del proyecto, sin modificar nada.
+
+1. Ejecutar `pwsh scripts/estado.ps1` (con `-Fetch` para consultar antes GitHub). Muestra:
+   - la rama y su posición respecto a `origin`;
+   - los cambios sin guardar;
+   - si existe `edicion-actual`;
+   - el estado de sincronización de cada documento;
+   - las notas para la IA pendientes;
+   - si `BORRADOR.md` tiene contenido.
+2. La IA lo resume y propone el siguiente comando útil (por ejemplo, SINCRONIZA si hay documentos sin sincronizar, o GUARDA_y_SUBE si hay cambios correctos sin subir).
+
+### 6.7. ATIENDE_NOTAS [identificadores]
+
+Resuelve las notas para la IA pendientes (sección 5): todas o solo las indicadas.
+
+1. Listarlas con `pwsh scripts/notas.ps1`.
+2. Resolverlas por orden de identificador, siguiendo su Tarea, Contexto y Criterio de terminación, y con todas las reglas de redacción y formato.
+3. Marcar cada una con `Estado: hecho.` y conservar el comentario.
+4. Aplicar SINCRONIZA hasta que todo sea correcto.
+5. Resumir qué se ha hecho en cada nota. Una nota ambigua no se resuelve a ciegas: se pregunta.
+
+### 6.8. REVISA_RIGOR [documento] [sección]
+
+Revisión crítica del contenido. Primero se informa y solo después se cambia lo que el usuario apruebe.
+
+1. Ejecutar `node scripts/busca-implicitos.mjs markdown/<documento>.md` para localizar posibles multiplicaciones implícitas. Es una heurística: cada candidato se revisa a mano. La forma `r(1-\cos\theta)` (símbolo seguido de paréntesis) no se puede distinguir automáticamente de una función aplicada y se revisa leyendo.
+2. Leer la parte indicada (por defecto, el documento entero) y comprobar:
+   - signos, factores numéricos e índices;
+   - coherencia dimensional de cada igualdad;
+   - pasos omitidos o no justificados;
+   - hipótesis no declaradas (regularidad, condiciones de contorno, convergencia);
+   - símbolos usados antes de definirse o con dos significados;
+   - referencias cruzadas a secciones que no existen;
+   - afirmaciones físicas inexactas o demasiado generales;
+   - casos límite que permiten comprobar un resultado.
+3. Escribir el informe en `build/revisiones/<documento>-<fecha>.md` y resumirlo en el chat. Cada hallazgo va numerado, con su gravedad (error, imprecisión, falta de detalle, estilo), su ubicación y la corrección propuesta.
+4. No cambiar nada hasta que el usuario indique qué aplicar («aplica 1, 3 y 5», «aplica todo»). Después, aplicar SINCRONIZA.
+
+### 6.9. NUEVO_TEMA n "título" [asignatura]
+
+1. Ejecutar `pwsh scripts/nuevo-tema.ps1 -Numero <n> -Titulo "<título>"` (y `-Asignatura "<asignatura>"` si no es Complementos de Mecánica Cuántica). Crea `markdown/Tema-<n>-<Titulo-Sin-Tildes>.md` con el bloque YAML, el título y el bloque de autoría, y lo sincroniza.
+2. Si el usuario da un índice o un temario, la IA crea las secciones numeradas correspondientes y vuelve a aplicar SINCRONIZA.
+
+### 6.10. FICHA_RESUMEN [tema]
+
+Hoja de repaso de un tema, en `markdown/<tema>-ficha.md`.
+
+1. Leer el tema completo.
+2. Escribir la ficha con el título `# Tema n. <título>: ficha resumen` y el bloque de autoría del tema. Contenido, en este orden:
+   - notación (tabla de símbolos y su significado);
+   - definiciones clave;
+   - resultados y ecuaciones principales, cada una con la referencia a su apartado del tema («véase 3.1.2»);
+   - hipótesis de validez de cada resultado;
+   - errores frecuentes y distinciones importantes.
+3. Debe ser breve (orientativamente, no más de 4 o 5 páginas de PDF) y no introducir nada que no esté en el tema.
+4. La ficha se regenera entera cada vez a partir del tema; lo que se quiera conservar debe estar en el tema.
+5. Aplicar SINCRONIZA y mostrar el resultado (página HTML).
+
+### 6.11. EJERCICIOS [tema] [cantidad] [nivel]
+
+Ejercicios con solución completa, en `markdown/<tema>-ejercicios.md`.
+
+1. Si el archivo no existe, se crea con el título `# Tema n. <título>: ejercicios` y el bloque de autoría. Si existe, los ejercicios nuevos se añaden a continuación sin modificar los anteriores, siguiendo la numeración.
+2. Cada ejercicio indica su nivel (básico, intermedio o avanzado) y el apartado del tema en que se basa. Por defecto se crean 5, de niveles variados.
+3. Los enunciados van en la sección `## Enunciados` y las soluciones en `## Soluciones`, para poder intentarlos antes de ver la respuesta.
+4. Cada solución desarrolla todos los pasos con las reglas del proyecto y termina con una comprobación: dimensiones, un caso límite o una sustitución en la ecuación de partida.
+5. Aplicar SINCRONIZA y mostrar el resultado.
+
+### 6.12. PUBLICA_WEB [mensaje]
+
+Publica la web en GitHub Pages: <https://julian1c2a.github.io/MCC/>.
+
+1. La IA redacta el mensaje de commit, como en GUARDA_y_SUBE.
+2. Ejecutar `pwsh scripts/publica-web.ps1 -Mensaje "<mensaje>"`, que:
+   - activa GitHub Pages la primera vez;
+   - ejecuta GUARDA_y_SUBE y, si falla, no publica;
+   - lanza el workflow `.github/workflows/pages.yml`, espera a que termine y muestra la URL.
+3. Una vez activado Pages, cada GUARDA_y_SUBE que cambie `html/` o `doc_out/` publica la web automáticamente; PUBLICA_WEB sirve para forzar la publicación y comprobarla.

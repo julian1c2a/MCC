@@ -1,5 +1,8 @@
 # Configuración y funciones compartidas por los scripts del proyecto MCC.
 # Se carga con: . "$PSScriptRoot/comun.ps1"
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '',
+    Justification = 'Las variables las usan los scripts que cargan este archivo.')]
+param()
 
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path -Parent $PSScriptRoot
@@ -64,6 +67,15 @@ function Use-TeX([string]$Distro) {
     $env:PATH = if ($Distro) { "$($TexBins[$Distro]);$MsysBin;$BasePath" } else { "$MsysBin;$BasePath" }
 }
 
+function Set-SourceDate([string]$MdFile) {
+    # PDFs reproducibles: pdfTeX usa SOURCE_DATE_EPOCH como fecha de creación del PDF (y con
+    # FORCE_SOURCE_DATE=1 también para \today). Se toma la fecha de modificación del Markdown,
+    # de modo que sin cambios en el contenido el PDF sale idéntico byte a byte (el /ID del
+    # PDF se suprime con \pdftrailerid{} en latex/pandoc-pdf-header.tex).
+    $env:SOURCE_DATE_EPOCH = [string][DateTimeOffset]::new((Get-Item $MdFile).LastWriteTimeUtc).ToUnixTimeSeconds()
+    $env:FORCE_SOURCE_DATE = '1'
+}
+
 function Invoke-LatexCompile([string]$TexFile, [string]$Distro, [string]$OutDir) {
     # Compila un .tex con latexmk + pdflatex en $OutDir y revisa su log. Devuelve la ruta del PDF.
     $n = [IO.Path]::GetFileNameWithoutExtension($TexFile)
@@ -73,6 +85,38 @@ function Invoke-LatexCompile([string]$TexFile, [string]$Distro, [string]$OutDir)
     $null = Invoke-Tool "latexmk ($Distro)" 'latexmk' @('-pdf', '-interaction=nonstopmode', '-halt-on-error', '-file-line-error', "-outdir=$OutDir", $TexFile)
     Test-LatexLog "LaTeX ($Distro)" "$OutDir/$n.log"
     return "$OutDir/$n.pdf"
+}
+
+function Update-IndiceWeb {
+    # Genera html/index.html: portada de la web con todos los documentos, agrupados por
+    # asignatura, con enlaces a su HTML y a su PDF (doc_out/latex/).
+    $docs = foreach ($md in Get-ChildItem markdown -Filter *.md) {
+        $text = [IO.File]::ReadAllText($md.FullName)
+        [pscustomobject]@{
+            Nombre     = $md.BaseName
+            Titulo     = if ($text -match '(?m)^# (.+)$') { $Matches[1].Trim() } else { $md.BaseName }
+            Asignatura = if ($text -match '(?m)^\* \*\*Asignatura:\*\* ([^(\r\n]+)') { $Matches[1].Trim() } else { 'Otros documentos' }
+            Fecha      = if ($text -match '(?m)^\* \*\*Última edición:\*\* (\S+)') { $Matches[1] } else { '' }
+        }
+    }
+    $lineas = @(
+        '---', 'author: "Julián Calderón Almendros"', '---', '',
+        '# MCC: apuntes del Máster en Computación Cuántica', '',
+        'Apuntes de autoestudio de Julián Calderón Almendros ([\@julian1c2a](https://github.com/julian1c2a)). Fuentes en <https://github.com/julian1c2a/MCC>. Licencia [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es).', ''
+    )
+    foreach ($grupo in ($docs | Sort-Object Asignatura, Nombre | Group-Object Asignatura)) {
+        $lineas += "## $($grupo.Name)", ''
+        foreach ($d in $grupo.Group) {
+            $lineas += "* **$($d.Titulo)** ([web]($($d.Nombre).html), [PDF](../doc_out/latex/$($d.Nombre).pdf))$(if ($d.Fecha) { ". Última edición: $($d.Fecha)." })"
+        }
+        $lineas += ''
+    }
+    New-Item -ItemType Directory -Force 'build/web' | Out-Null
+    [IO.File]::WriteAllText((Join-Path $Root 'build/web/index.md'), ($lineas -join "`n"), [Text.UTF8Encoding]::new($false))
+    Use-TeX
+    Write-Host '-- Pandoc: portada web -> html/index.html'
+    $out = Invoke-Tool 'pandoc (índice web)' 'pandoc' ($PandocCommon + @('--to=html5', '--metadata=pagetitle:MCC', "--css=$Css", '--output=html/index.html', 'build/web/index.md'))
+    Test-PandocWarnings 'pandoc (índice web)' $out
 }
 
 function Get-DocNames([string[]]$Name) {

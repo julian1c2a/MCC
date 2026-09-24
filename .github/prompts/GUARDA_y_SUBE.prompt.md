@@ -1,5 +1,5 @@
 ---
-description: Valida todo; si es correcto hace commit y push en main, si no guarda en la rama edicion-actual
+description: "Valida todo; si es correcto hace commit y push en main, si no guarda en la rama edicion-actual"
 agent: agent
 ---
 
