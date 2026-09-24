@@ -1,4 +1,17 @@
+---
+author: "Julián Calderón Almendros"
+---
+
 # Tema 1. Mecánica teórica
+
+* **Asignatura:** Complementos de Mecánica Cuántica (Máster en Computación Cuántica)
+* **Propósito:** apuntes de autoestudio elaborados para preparar la asignatura.
+* **Última edición:** 2026-09-24
+* **Autor:** Julián Calderón Almendros
+* **Correo electrónico:** julian.calderon.almendros at gmail.com
+* **GitHub:** [\@julian1c2a](https://github.com/julian1c2a)
+* **Proyecto:** <https://github.com/julian1c2a/MCC>
+* **Licencia:** [Creative Commons Reconocimiento 4.0 Internacional (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.es). Se permite copiar, redistribuir, modificar y reutilizar este material con cualquier finalidad, incluso comercial, siempre que se reconozca la autoría original, se enlace la licencia y se indique si se han hecho cambios.
 
 ## 1. Mecánica ondulatoria
 
@@ -12,7 +25,7 @@ Este sistema describe un Movimiento Armónico Simple (MAS). Aplicando la Segunda
 
 $$
 \begin{aligned}
-m ⋅ \dfrac{d^2y}{dt^2} = -k ⋅ y
+m \cdot \dfrac{d^2y}{dt^2} = -k \cdot y
 \end{aligned}
 $$
 
@@ -20,7 +33,7 @@ La solución a esta ecuación nos da la posición $y$ de la masa en función de 
 
 $$
 \begin{aligned}
-y(t) = A ⋅ \cos(\omega ⋅ t + \phi)
+y(t) = A \cdot \cos(\omega \cdot t + \phi)
 \end{aligned}
 $$
 
@@ -44,7 +57,7 @@ Una perturbación viajera (onda armónica) moviéndose a lo largo de la cuerda s
 
 $$
 \begin{aligned}
-y(x,t) = A \sin(k ⋅ x \pm \omega ⋅ t)
+y(x,t) = A \cdot \sin(k \cdot x \pm \omega \cdot t)
 \end{aligned}
 $$
 
@@ -52,25 +65,54 @@ Donde se introduce una nueva variable espacial:
 
 * $k$ es el número de onda ($k = \dfrac{2 \cdot \pi}{\lambda}$), que describe la periodicidad en el espacio ($\lambda$ es la longitud de onda).
 
+El signo del argumento determina el sentido de propagación. Con $k \cdot x - \omega \cdot t$, un punto de fase constante cumple $k \cdot x - \omega \cdot t = \text{cte}$, es decir, $x = \dfrac{\omega}{k} \cdot t + \text{cte}$: la perturbación avanza hacia $x$ crecientes. Con $k \cdot x + \omega \cdot t$, el mismo razonamiento da $x = -\dfrac{\omega}{k} \cdot t + \text{cte}$: la perturbación avanza hacia $x$ decrecientes.
+
+Nota sobre la notación: en el apartado 1.1 la letra $k$ designaba la constante elástica del muelle; a partir de aquí designa el número de onda. Son magnitudes distintas (la primera se mide en N/m y la segunda en rad/m), y el contexto indica en cada caso a cuál se refiere.
+
 #### 1.2.1. Ondas estacionarias
 
-Dado que nos has indicado que la cuerda está entre dos puntos fijos (por ejemplo, en $x=0$ y $x=L$), la onda viaja, rebota en un extremo y se superpone consigo misma. Esta interferencia crea una onda estacionaria. Matemáticamente, al aplicar las condiciones de contorno (los extremos no pueden moverse, $y=0$), la función $y(x,t)$ toma esta forma específica:
+Si la cuerda está sujeta en dos puntos fijos, por ejemplo en $x=0$ y $x=L$, una onda que viaja hacia un extremo se refleja en él y vuelve en sentido contrario. En la cuerda coexisten entonces dos ondas de igual amplitud y frecuencia que se propagan en sentidos opuestos:
 
 $$
 \begin{aligned}
-y(x,t) = 2 ⋅ A \cdot \sin(k ⋅ x) ⋅ \cos(\omega ⋅ t)
+y(x,t) = A \cdot \sin(k \cdot x - \omega \cdot t) + A \cdot \sin(k \cdot x + \omega \cdot t)
 \end{aligned}
 $$
 
-Esta hermosa ecuación separa la parte espacial de la temporal y nos dice que cada punto $x$ de la cuerda realiza un Movimiento Armónico Simple en el tiempo ($\cos(\omega ⋅ t)$), pero la amplitud de esa oscilación depende de su posición espacial ($2 ⋅ A \sin(k ⋅ x)$). Los puntos donde $\sin(k ⋅ x) = 0$ nunca se mueven; se llaman nodos.
-
-### 1.3. Generalización: representación compleja
-
-En física, es extremadamente común y conveniente generalizar la función de onda utilizando notación compleja. Apoyándonos en la fórmula de Euler ($e^{i ⋅ \theta} = \cos(\theta) + i\sin(\theta)$), una onda viajera puede expresarse en su forma compleja como:
+Aplicando la identidad trigonométrica $\sin a + \sin b = 2 \cdot \sin\left(\dfrac{a+b}{2}\right) \cdot \cos\left(\dfrac{a-b}{2}\right)$ con $a = k \cdot x - \omega \cdot t$ y $b = k \cdot x + \omega \cdot t$, se obtiene $\dfrac{a+b}{2} = k \cdot x$ y $\dfrac{a-b}{2} = -\omega \cdot t$. Como el coseno es par, $\cos(-\omega \cdot t) = \cos(\omega \cdot t)$, y la suma queda:
 
 $$
 \begin{aligned}
-y(x,t) = A \cdot e^{i ⋅ (\omega ⋅ t - k ⋅ x)}
+y(x,t) = 2 \cdot A \cdot \sin(k \cdot x) \cdot \cos(\omega \cdot t)
+\end{aligned}
+$$
+
+Esta superposición se llama onda estacionaria. La expresión es el producto de un factor que solo depende de $x$ y otro que solo depende de $t$. Su lectura es la siguiente: cada punto $x$ de la cuerda realiza un Movimiento Armónico Simple en el tiempo ($\cos(\omega \cdot t)$), con una amplitud que depende de su posición ($2 \cdot A \cdot \sin(k \cdot x)$).
+
+Las condiciones de contorno (los extremos no pueden moverse) restringen los valores posibles de $k$:
+
+* En $x = 0$: $y(0,t) = 2 \cdot A \cdot \sin(0) \cdot \cos(\omega \cdot t) = 0$ para todo $t$. Esta condición se cumple automáticamente.
+* En $x = L$: $y(L,t) = 0$ para todo $t$ exige $\sin(k \cdot L) = 0$, es decir, $k \cdot L = n \cdot \pi$ con $n$ entero positivo.
+
+Por tanto, solo son posibles los números de onda y longitudes de onda
+
+$$
+\begin{aligned}
+k_n = \dfrac{n \cdot \pi}{L}, \qquad \lambda_n = \dfrac{2 \cdot \pi}{k_n} = \dfrac{2 \cdot L}{n}, \qquad n = 1, 2, 3, \dots
+\end{aligned}
+$$
+
+Cada valor de $n$ define un modo normal (o armónico) de la cuerda. El valor $n=0$ se excluye porque da $y \equiv 0$.
+
+Los puntos donde $\sin(k \cdot x) = 0$ no se mueven nunca; se llaman **nodos**. Para el modo $n$ están en $x = \dfrac{j \cdot L}{n}$, con $j = 0, 1, \dots, n$. Los puntos donde $|\sin(k \cdot x)| = 1$ oscilan con la amplitud máxima $2 \cdot A$; se llaman **vientres** o antinodos.
+
+### 1.3. Generalización: representación compleja
+
+En física es habitual escribir la función de onda en notación compleja. Apoyándonos en la fórmula de Euler ($e^{i \cdot \theta} = \cos(\theta) + i \cdot \sin(\theta)$), una onda viajera puede expresarse en su forma compleja como:
+
+$$
+\begin{aligned}
+y(x,t) = A \cdot e^{i \cdot (\omega \cdot t - k \cdot x)}
 \end{aligned}
 $$
 
@@ -78,15 +120,24 @@ Dado que las magnitudes físicas observables en mecánica clásica (como el desp
 
 $$
 \begin{aligned}
-y_{real}(x,t) = \Re\{A ⋅ e^{i ⋅ (\omega ⋅ t - k ⋅ x)}\} = A ⋅ \cos(\omega ⋅ t - k ⋅ x)
+y_{real}(x,t) = \Re\{A \cdot e^{i \cdot (\omega \cdot t - k \cdot x)}\} = A \cdot \cos(\omega \cdot t - k \cdot x)
 \end{aligned}
 $$
 
-¿Por qué usar una notación compleja?
+Motivos para usar la notación compleja:
 
-1. Simplicidad matemática: Operar con funciones exponenciales es mucho más fácil que con senos y cosenos. Al derivar o integrar (por ejemplo, al introducir la función en la Ecuación de Ondas), la exponencial mantiene su forma y solo "escupirá" constantes hacia afuera (derivadas respecto al tiempo multiplican por $i ⋅ \omega$, y respecto a la posición por $-i ⋅ k$). Además, sumar ondas (para calcular interferencias) se reduce a factorizar exponenciales.
-2. Fase inicial: Cualquier desfase inicial $\phi$ se puede absorber fácilmente definiendo una amplitud compleja $\tilde{A} = A ⋅ e^{i ⋅ \phi}$.
-3. Puente a la mecánica cuántica: Mientras que en la mecánica clásica la parte imaginaria es solo una herramienta matemática y tomamos la parte real al final, en la mecánica ondulatoria cuántica, la función de onda de una partícula $\Psi(x,t)$ es intrínsecamente compleja.
+1. Simplicidad del cálculo: al derivar o integrar una exponencial, la función conserva su forma y solo aparece un factor constante. Derivar respecto al tiempo equivale a multiplicar por $i \cdot \omega$, y derivar respecto a la posición equivale a multiplicar por $-i \cdot k$:
+   $$
+   \begin{aligned}
+   \dfrac{\partial}{\partial t} e^{i \cdot (\omega \cdot t - k \cdot x)} = i \cdot \omega \cdot e^{i \cdot (\omega \cdot t - k \cdot x)}, \qquad
+   \dfrac{\partial}{\partial x} e^{i \cdot (\omega \cdot t - k \cdot x)} = -i \cdot k \cdot e^{i \cdot (\omega \cdot t - k \cdot x)}
+   \end{aligned}
+   $$
+   Con senos y cosenos, en cambio, cada derivada intercambia una función por la otra y cambia signos. Además, el producto de exponenciales se reduce a sumar exponentes ($e^{a} \cdot e^{b} = e^{a+b}$), lo que evita las identidades trigonométricas al superponer ondas.
+2. Fase inicial: un desfase inicial $\phi$ se incorpora definiendo una amplitud compleja $\tilde{A} = A \cdot e^{i \cdot \phi}$, ya que $\tilde{A} \cdot e^{i \cdot (\omega \cdot t - k \cdot x)} = A \cdot e^{i \cdot (\omega \cdot t - k \cdot x + \phi)}$.
+3. Relación con la mecánica cuántica: en mecánica clásica la parte imaginaria es solo una herramienta de cálculo y al final se toma la parte real. En mecánica cuántica, en cambio, la función de onda de una partícula $\Psi(x,t)$ es compleja por naturaleza y no se toma su parte real.
+
+Limitación del método: tomar la parte real conmuta con las operaciones lineales (sumar, multiplicar por constantes reales, derivar, integrar), pero no con el producto. En general, $\Re\{z_1 \cdot z_2\} \neq \Re\{z_1\} \cdot \Re\{z_2\}$. Por eso, cuando se calculan magnitudes cuadráticas, como la energía o la intensidad, hay que tomar primero la parte real de cada factor.
 
 ### 1.4. La ecuación de ondas
 
@@ -98,7 +149,7 @@ Para una perturbación $y(x,t)$ que viaja a lo largo de una sola dimensión (el 
 
 $$
 \begin{aligned}
-\dfrac{\partial^2 y}{\partial x^2} = \dfrac{1}{v^2} ⋅ \dfrac{\partial^2 y}{\partial t^2}
+\dfrac{\partial^2 y}{\partial x^2} = \dfrac{1}{v^2} \cdot \dfrac{\partial^2 y}{\partial t^2}
 \end{aligned}
 $$
 
@@ -106,18 +157,18 @@ Aquí, $v$ representa la velocidad de propagación (o velocidad de fase) de la o
 
 #### 1.4.2. Comprobación con la representación compleja
 
-Podemos demostrar fácilmente por qué la solución compleja que vimos en el apartado anterior, $y(x,t) = A \cdot e^{i ⋅ (\omega ⋅ t - k ⋅ x)}$, es una solución válida. Gracias a las propiedades de la función exponencial, calcular las segundas derivadas parciales es un proceso directo:
+Se puede comprobar que la expresión compleja del apartado anterior, $y(x,t) = A \cdot e^{i \cdot (\omega \cdot t - k \cdot x)}$, es solución de la ecuación de ondas. Como la derivada de la exponencial es proporcional a la propia exponencial, las segundas derivadas parciales se obtienen directamente:
 
-1. Derivada temporal: Al derivar dos veces respecto al tiempo, multiplicamos por $i ⋅ \omega$ cada vez.
+1. Derivada temporal: Al derivar dos veces respecto al tiempo, multiplicamos por $i \cdot \omega$ cada vez.
    $$
    \begin{aligned}
-   \dfrac{\partial^2 y}{\partial t^2} = (i ⋅ \omega)^2 ⋅ A ⋅ e^{i ⋅ (\omega ⋅ t - k ⋅ x)} = -\omega^2 ⋅ y
+   \dfrac{\partial^2 y}{\partial t^2} = (i \cdot \omega)^2 \cdot A \cdot e^{i \cdot (\omega \cdot t - k \cdot x)} = -\omega^2 \cdot y
    \end{aligned}
    $$
-2. Derivada espacial: Al derivar dos veces respecto a la posición, multiplicamos por $-i ⋅ k$ cada vez.
+2. Derivada espacial: Al derivar dos veces respecto a la posición, multiplicamos por $-i \cdot k$ cada vez.
    $$
    \begin{aligned}
-   \dfrac{\partial^2 y}{\partial x^2} = (-i ⋅ k)^2 ⋅ A ⋅ e^{i ⋅ (\omega ⋅ t - k ⋅ x)} = -k^2 ⋅ y
+   \dfrac{\partial^2 y}{\partial x^2} = (-i \cdot k)^2 \cdot A \cdot e^{i \cdot (\omega \cdot t - k \cdot x)} = -k^2 \cdot y
    \end{aligned}
    $$
 
@@ -125,11 +176,11 @@ Si sustituimos estos resultados de nuevo en la ecuación de ondas general, obten
 
 $$
 \begin{aligned}
--k^2 ⋅ y = \dfrac{1}{v^2} ⋅ (-\omega^2 ⋅ y)
+-k^2 \cdot y = \dfrac{1}{v^2} \cdot (-\omega^2 \cdot y)
 \end{aligned}
 $$
 
-Simplificando (dividiendo entre $-y$), llegamos a una relación fundamental entre los parámetros de la onda:
+Dividiendo entre $-y$ (en los puntos donde $y \neq 0$; como la igualdad debe cumplirse para todo $x$ y $t$, basta con uno de ellos), se obtiene una relación entre los parámetros de la onda:
 
 $$
 \begin{aligned}
@@ -137,9 +188,11 @@ k^2 = \dfrac{\omega^2}{v^2} \implies v = \dfrac{\omega}{k}
 \end{aligned}
 $$
 
-Antes de interpretar este resultado, conviene precisar dos conceptos. Una **relación de dispersión** es una ecuación que vincula la frecuencia angular $\omega$ de una onda con su número de onda $k$, es decir, que indica cómo depende $\omega$ de $k$. En este caso, la ecuación anterior puede escribirse como $\omega = v k$: la relación es lineal y la velocidad de fase $v = \omega/k$ no depende de la frecuencia. Por ello, las distintas componentes de frecuencia de un pulso viajan todas a la misma velocidad y el pulso conserva su forma; a estas ondas se las llama **no dispersivas**. Si la velocidad dependiera de $\omega$ o de $k$, cada componente avanzaría a una velocidad distinta y el pulso se deformaría al propagarse: habría dispersión.
+donde se han tomado $\omega$, $k$ y $v$ positivos. Por tanto, la exponencial compleja es solución si y solo si $\omega$ y $k$ satisfacen esta relación.
 
-Esta es la relación de dispersión para ondas no dispersivas, que define la velocidad de la onda en función de su frecuencia angular ($\omega$) y su número de onda ($k$).
+Antes de interpretar este resultado, conviene precisar dos conceptos. Una **relación de dispersión** es una ecuación que vincula la frecuencia angular $\omega$ de una onda con su número de onda $k$, es decir, que indica cómo depende $\omega$ de $k$. En este caso, la ecuación anterior puede escribirse como $\omega = v \cdot k$: la relación es lineal y la velocidad de fase $v = \omega/k$ no depende de la frecuencia. Por ello, las distintas componentes de frecuencia de un pulso viajan todas a la misma velocidad y el pulso conserva su forma; a estas ondas se las llama **no dispersivas**. Si la velocidad dependiera de $\omega$ o de $k$, cada componente avanzaría a una velocidad distinta y el pulso se deformaría al propagarse: habría dispersión.
+
+En resumen, $\omega = v \cdot k$ es la relación de dispersión de las ondas no dispersivas: la velocidad de la onda, $v = \omega/k$, es la misma para cualquier frecuencia angular $\omega$ y cualquier número de onda $k$.
 
 <!-- AI:T1-01
 Tarea: aclarar los conceptos de relación de dispersión y ondas no dispersivas.
@@ -148,13 +201,13 @@ Estado: hecho.
 
 #### 1.4.3. La solución de d'Alembert (ondas viajeras arbitrarias)
 
-Aunque las soluciones armónicas (senos, cosenos o exponenciales complejas) son las más comunes, Jean le Rond d'Alembert demostró que la ecuación de ondas admite soluciones mucho más generales.
+Las soluciones armónicas (senos, cosenos o exponenciales complejas) son un caso particular. Jean le Rond d'Alembert demostró que la ecuación de ondas unidimensional admite soluciones de forma arbitraria.
 
-Definamos los argumentos de las dos ondas viajeras como $u_- = \omega ⋅ t - k ⋅ x$ y $u_+ = \omega ⋅ t + k ⋅ x$. Si $f$ y $g$ son funciones arbitrarias dos veces diferenciables, la solución general de d'Alembert es:
+Definamos los argumentos de las dos ondas viajeras como $u_- = \omega \cdot t - k \cdot x$ y $u_+ = \omega \cdot t + k \cdot x$. Si $f$ y $g$ son funciones arbitrarias dos veces diferenciables, la solución general de d'Alembert es:
 
 $$
 \begin{aligned}
-y(x,t) = f(u_-) + g(u_+) = f(\omega ⋅ t - k ⋅ x) + g(\omega ⋅ t + k ⋅ x)
+y(x,t) = f(u_-) + g(u_+) = f(\omega \cdot t - k \cdot x) + g(\omega \cdot t + k \cdot x)
 \end{aligned}
 $$
 
@@ -163,26 +216,35 @@ Tarea: presentar la solución completa como suma de dos ondas viajeras independi
 Estado: hecho.
 -->
 
-Comprobémoslo aplicando la regla de la cadena a ambas funciones:
+Para comprobarlo se aplica la regla de la cadena. Las derivadas de los argumentos son $\dfrac{\partial u_\mp}{\partial t} = \omega$, $\dfrac{\partial u_-}{\partial x} = -k$ y $\dfrac{\partial u_+}{\partial x} = k$. Por tanto, las primeras derivadas son:
 
 $$
 \begin{aligned}
-\dfrac{\partial^2 y}{\partial t^2} &= \omega^2 ⋅ \left[f''(u_-) + g''(u_+)\right], \\
-\dfrac{\partial^2 y}{\partial x^2} &= k^2 ⋅ \left[f''(u_-) + g''(u_+)\right].
+\dfrac{\partial y}{\partial t} &= \omega \cdot f'(u_-) + \omega \cdot g'(u_+), \\
+\dfrac{\partial y}{\partial x} &= -k \cdot f'(u_-) + k \cdot g'(u_+).
 \end{aligned}
 $$
 
-Como la relación de dispersión obtenida antes es $\omega = v k$, se cumple:
+Derivando una segunda vez, cada factor $\pm k$ o $\omega$ aparece al cuadrado y los signos desaparecen:
+
+$$
+\begin{aligned}
+\dfrac{\partial^2 y}{\partial t^2} &= \omega^2 \cdot \left[f''(u_-) + g''(u_+)\right], \\
+\dfrac{\partial^2 y}{\partial x^2} &= k^2 \cdot \left[f''(u_-) + g''(u_+)\right].
+\end{aligned}
+$$
+
+Como la relación de dispersión obtenida antes es $\omega = v \cdot k$, se cumple:
 
 $$
 \begin{aligned}
 \dfrac{\partial^2 y}{\partial x^2}
-&= \dfrac{\omega^2}{v^2} ⋅ \left[f''(u_-) + g''(u_+)\right] \\
-&= \dfrac{1}{v^2} \dfrac{\partial^2 y}{\partial t^2}.
+&= \dfrac{\omega^2}{v^2} \cdot \left[f''(u_-) + g''(u_+)\right] \\
+&= \dfrac{1}{v^2} \cdot \dfrac{\partial^2 y}{\partial t^2}.
 \end{aligned}
 $$
 
-Por tanto, cualquier par de funciones suaves $f$ y $g$ produce una solución. La primera componente, $f(\omega ⋅ t - k ⋅ x)$, viaja hacia la derecha, mientras que $g(\omega ⋅ t + k ⋅ x)$ viaja hacia la izquierda. Esto permite describir, por ejemplo, un pulso que se propaga y otro que regresa tras reflejarse en un extremo de la cuerda.
+Por tanto, cualquier par de funciones $f$ y $g$ dos veces diferenciables produce una solución. La primera componente, $f(\omega \cdot t - k \cdot x)$, viaja hacia la derecha: su argumento es constante cuando $x = \dfrac{\omega}{k} \cdot t + \text{cte} = v \cdot t + \text{cte}$, de modo que el perfil de $f$ se traslada sin deformarse con velocidad $v$ hacia $x$ crecientes. Por el mismo razonamiento, $g(\omega \cdot t + k \cdot x)$ viaja hacia la izquierda con velocidad $v$. Esto permite describir, por ejemplo, un pulso que se propaga y otro que regresa tras reflejarse en un extremo de la cuerda.
 
 #### 1.4.4. Solución general por separación de variables
 
@@ -190,7 +252,7 @@ La forma más sistemática de resolver la ecuación de ondas (especialmente cuan
 
 $$
 \begin{aligned}
-y(x,t) = X(x) ⋅ T(t)
+y(x,t) = X(x) \cdot T(t)
 \end{aligned}
 $$
 
@@ -198,41 +260,49 @@ Si calculamos las segundas derivadas y las sustituimos en la ecuación de ondas 
 
 $$
 \begin{aligned}
-X''(x) ⋅ T(t) = \dfrac{1}{v^2} \cdot X(x) ⋅ T''(t)
+X''(x) \cdot T(t) = \dfrac{1}{v^2} \cdot X(x) \cdot T''(t)
 \end{aligned}
 $$
 
-Dividiendo toda la ecuación por $X(x) ⋅ T(t)$, separamos las variables a cada lado de la igualdad:
+Dividiendo toda la ecuación por $X(x) \cdot T(t)$, separamos las variables a cada lado de la igualdad:
 
 $$
 \begin{aligned}
-\dfrac{X''(x)}{X(x)} = \dfrac{1}{v^2} ⋅ \dfrac{T''(t)}{T(t)}
+\dfrac{X''(x)}{X(x)} = \dfrac{1}{v^2} \cdot \dfrac{T''(t)}{T(t)}
 \end{aligned}
 $$
 
-Dado que el lado izquierdo depende exclusivamente de $x$ y el lado derecho exclusivamente de $t$, la única forma de que esta igualdad se cumpla para cualquier valor de $x$ y $t$ es que ambos lados sean iguales a una misma constante. Para obtener soluciones oscilatorias (y no exponenciales que divergen), esta constante de separación debe ser negativa, y la llamaremos $-k^2$:
+Dado que el lado izquierdo depende exclusivamente de $x$ y el lado derecho exclusivamente de $t$, la única forma de que esta igualdad se cumpla para cualquier valor de $x$ y $t$ es que ambos lados sean iguales a una misma constante. (Si se fija $t$ y se varía $x$, el lado derecho no cambia, luego el izquierdo tampoco puede cambiar; y viceversa.)
+
+El signo de la constante de separación lo deciden las condiciones de contorno de la cuerda fija, $X(0) = X(L) = 0$:
+
+* Si la constante es positiva, $+\mu^2$, la ecuación $X'' = \mu^2 \cdot X$ tiene soluciones $X = C_1 \cdot e^{\mu \cdot x} + C_2 \cdot e^{-\mu \cdot x}$. Imponer $X(0)=0$ da $C_2 = -C_1$, y entonces $X(L) = 2 \cdot C_1 \cdot \sinh(\mu \cdot L) = 0$ obliga a $C_1 = 0$: solo queda la solución trivial.
+* Si la constante es cero, $X'' = 0$ da $X = C_1 + C_2 \cdot x$, y las dos condiciones de contorno obligan a $C_1 = C_2 = 0$.
+* Si la constante es negativa, las soluciones son senos y cosenos, que sí pueden anularse en ambos extremos.
+
+Por tanto, la constante de separación debe ser negativa, y la llamaremos $-k^2$:
 
 $$
 \begin{aligned}
-\dfrac{X''(x)}{X(x)} = -k^2 \quad \text{y} \quad \dfrac{1}{v^2} ⋅ \dfrac{T''(t)}{T(t)} = -k^2
+\dfrac{X''(x)}{X(x)} = -k^2 \quad \text{y} \quad \dfrac{1}{v^2} \cdot \dfrac{T''(t)}{T(t)} = -k^2
 \end{aligned}
 $$
 
 Esto descompone la ecuación en derivadas parciales en dos Ecuaciones Diferenciales Ordinarias (EDOs) simples:
 
-1. Ecuación espacial: $X''(x) + k^2 ⋅ X(x) = 0$
-2. Ecuación temporal: $T''(t) + \omega^2 ⋅ T(t) = 0 \quad$ (donde hemos definido $\omega = k ⋅ v$)
+1. Ecuación espacial: $X''(x) + k^2 \cdot X(x) = 0$
+2. Ecuación temporal: $T''(t) + \omega^2 \cdot T(t) = 0 \quad$ (donde hemos definido $\omega = k \cdot v$)
 
 La solución general para estas ecuaciones son combinaciones lineales de senos y cosenos (o exponenciales complejas):
 
 $$
 \begin{aligned}
-X(x) = A_1 ⋅ \cos(k ⋅ x) + B_1 ⋅ \sin(k ⋅ x)
+X(x) = A_1 \cdot \cos(k \cdot x) + B_1 \cdot \sin(k \cdot x)
 \end{aligned}
 $$
 $$
 \begin{aligned}
-T(t) = A_2 ⋅ \cos(\omega ⋅ t) + B_2 ⋅ \sin(\omega ⋅ t)
+T(t) = A_2 \cdot \cos(\omega \cdot t) + B_2 \cdot \sin(\omega \cdot t)
 \end{aligned}
 $$
 
@@ -240,11 +310,16 @@ Por lo tanto, la solución general para un modo normal de vibración es el produ
 
 $$
 \begin{aligned}
-y(x,t) = \left( A_1 ⋅ \cos(k ⋅ x) + B_1 ⋅ \sin(k ⋅ x) \right) ⋅ \left( A_2 ⋅ \cos(\omega ⋅ t) + B_2 ⋅ \sin(\omega ⋅ t) \right)
+y(x,t) = \left( A_1 \cdot \cos(k \cdot x) + B_1 \cdot \sin(k \cdot x) \right) \cdot \left( A_2 \cdot \cos(\omega \cdot t) + B_2 \cdot \sin(\omega \cdot t) \right)
 \end{aligned}
 $$
 
-Aplicando las condiciones de contorno (como $y(0,t)=0$ en la cuerda), muchas de estas constantes se anulan, llegándose a las ecuaciones de ondas estacionarias que vimos en el apartado 1.2.1.
+Las condiciones de contorno fijan varias de estas constantes:
+
+* $y(0,t) = 0$ para todo $t$ exige $X(0) = A_1 = 0$, de modo que $X(x) = B_1 \cdot \sin(k \cdot x)$.
+* $y(L,t) = 0$ para todo $t$ exige $B_1 \cdot \sin(k \cdot L) = 0$. Como $B_1 = 0$ daría la solución trivial, debe ser $\sin(k \cdot L) = 0$, es decir, $k_n = \dfrac{n \cdot \pi}{L}$ y, en consecuencia, $\omega_n = v \cdot k_n = \dfrac{n \cdot \pi \cdot v}{L}$.
+
+Absorbiendo $B_1$ en las constantes temporales, el modo $n$ es $y_n(x,t) = \sin(k_n \cdot x) \cdot \left( a_n \cdot \cos(\omega_n \cdot t) + b_n \cdot \sin(\omega_n \cdot t) \right)$, que es la onda estacionaria del apartado 1.2.1. Como la ecuación de ondas es lineal, la suma de todos los modos también es solución; esa suma es una serie de Fourier en senos, y sus coeficientes $a_n$ y $b_n$ se determinan a partir de la forma y la velocidad iniciales de la cuerda, del mismo modo que se hace en el apartado siguiente para la membrana.
 
 #### 1.4.5. Generalización a dos dimensiones: membranas y series de Fourier
 
@@ -253,7 +328,7 @@ Para una superficie, como una membrana tensa, el desplazamiento transversal $y(x
 $$
 \begin{aligned}
 \dfrac{\partial^2 y}{\partial t^2}
-= v^2 \left( \dfrac{\partial^2 y}{\partial x^2} + \dfrac{\partial^2 y}{\partial z^2} \right).
+= v^2 \cdot \left( \dfrac{\partial^2 y}{\partial x^2} + \dfrac{\partial^2 y}{\partial z^2} \right).
 \end{aligned}
 $$
 
@@ -262,10 +337,10 @@ En este caso, la fórmula de d'Alembert no proporciona la solución general: una
 $$
 \begin{aligned}
 y(x,z,t)
-= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty}
-\left[A_{mn}\cos(\omega_{mn}t) + B_{mn}\sin(\omega_{mn}t)\right]
-\sin\left(\dfrac{m\pi x}{L_x}\right)
-\sin\left(\dfrac{n\pi z}{L_z}\right).
+&= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty}
+\left[A_{mn} \cdot \cos(\omega_{mn} \cdot t) + B_{mn} \cdot \sin(\omega_{mn} \cdot t)\right] \\
+&\quad \cdot \sin\left(\dfrac{m \cdot \pi \cdot x}{L_x}\right)
+\cdot \sin\left(\dfrac{n \cdot \pi \cdot z}{L_z}\right).
 \end{aligned}
 $$
 
@@ -273,7 +348,7 @@ Cada par de enteros positivos $(m,n)$ identifica un modo normal de vibración. L
 
 $$
 \begin{aligned}
-\omega_{mn} = v\pi\sqrt{\left(\dfrac{m}{L_x}\right)^2 + \left(\dfrac{n}{L_z}\right)^2}.
+\omega_{mn} = v \cdot \pi \cdot \sqrt{\left(\dfrac{m}{L_x}\right)^2 + \left(\dfrac{n}{L_z}\right)^2}.
 \end{aligned}
 $$
 
@@ -282,19 +357,19 @@ Para determinar los coeficientes, fijamos el desplazamiento inicial $y_0(x,z)=y(
 $$
 \begin{aligned}
 A_{mn}
-= \dfrac{4}{L_xL_z}
+= \dfrac{4}{L_x \cdot L_z}
 \int_0^{L_x}\int_0^{L_z}
 y_0(x,z)
-\sin\left(\dfrac{m\pi x}{L_x}\right)
-\sin\left(\dfrac{n\pi z}{L_z}\right)
+\cdot \sin\left(\dfrac{m \cdot \pi \cdot x}{L_x}\right)
+\cdot \sin\left(\dfrac{n \cdot \pi \cdot z}{L_z}\right)
 \, dz\, dx,
 \\
 B_{mn}
-= \dfrac{4}{L_xL_z\omega_{mn}}
+= \dfrac{4}{L_x \cdot L_z \cdot \omega_{mn}}
 \int_0^{L_x}\int_0^{L_z}
 u_0(x,z)
-\sin\left(\dfrac{m\pi x}{L_x}\right)
-\sin\left(\dfrac{n\pi z}{L_z}\right)
+\cdot \sin\left(\dfrac{m \cdot \pi \cdot x}{L_x}\right)
+\cdot \sin\left(\dfrac{n \cdot \pi \cdot z}{L_z}\right)
 \, dz\, dx.
 \end{aligned}
 $$
@@ -322,9 +397,9 @@ En una región tridimensional acotada, las condiciones de contorno seleccionan u
 $$
 \begin{aligned}
 \Phi_{mnp}(x,y,z)
-= \sin\left(\dfrac{m\pi x}{L_x}\right)
-\sin\left(\dfrac{n\pi y}{L_y}\right)
-\sin\left(\dfrac{p\pi z}{L_z}\right),
+= \sin\left(\dfrac{m \cdot \pi \cdot x}{L_x}\right)
+\cdot \sin\left(\dfrac{n \cdot \pi \cdot y}{L_y}\right)
+\cdot \sin\left(\dfrac{p \cdot \pi \cdot z}{L_z}\right),
 \end{aligned}
 $$
 
@@ -333,7 +408,7 @@ donde $m$, $n$ y $p$ son enteros positivos. Al combinar esta parte espacial con 
 $$
 \begin{aligned}
 \omega_{mnp}
-= v\pi\sqrt{
+= v \cdot \pi \cdot \sqrt{
 \left(\dfrac{m}{L_x}\right)^2
 + \left(\dfrac{n}{L_y}\right)^2
 + \left(\dfrac{p}{L_z}\right)^2}.
@@ -349,10 +424,10 @@ La solución general se obtiene superponiendo todos los modos normales:
 $$
 \begin{aligned}
 \Psi(x,y,z,t)
-= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \sum_{p=1}^{\infty}
-\left[A_{mnp}\cos(\omega_{mnp}t)
-+ B_{mnp}\sin(\omega_{mnp}t)\right]
-\Phi_{mnp}(x,y,z).
+&= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \sum_{p=1}^{\infty}
+\left[A_{mnp} \cdot \cos(\omega_{mnp} \cdot t)
++ B_{mnp} \cdot \sin(\omega_{mnp} \cdot t)\right] \\
+&\quad \cdot \Phi_{mnp}(x,y,z).
 \end{aligned}
 $$
 
@@ -360,22 +435,22 @@ Para expresarlos de forma explícita, definimos el campo inicial $\Psi_0(x,y,z)=
 
 $$
 \begin{aligned}
-A_{mnp} &= \dfrac{8}{L_xL_yL_z}
+A_{mnp} &= \dfrac{8}{L_x \cdot L_y \cdot L_z}
 \int_0^{L_x}\int_0^{L_y}\int_0^{L_z}
 \Psi_0(x,y,z) \\
-&\quad \cdot \sin\left(\dfrac{m\pi x}{L_x}\right)
-\sin\left(\dfrac{n\pi y}{L_y}\right) \\
+&\quad \cdot \sin\left(\dfrac{m \cdot \pi \cdot x}{L_x}\right)
+\cdot \sin\left(\dfrac{n \cdot \pi \cdot y}{L_y}\right) \\
 &\quad \cdot
-\sin\left(\dfrac{p\pi z}{L_z}\right)
+\sin\left(\dfrac{p \cdot \pi \cdot z}{L_z}\right)
 \, dz\, dy\, dx,
 \\
-B_{mnp} &= \dfrac{8}{L_xL_yL_z\omega_{mnp}}
+B_{mnp} &= \dfrac{8}{L_x \cdot L_y \cdot L_z \cdot \omega_{mnp}}
 \int_0^{L_x}\int_0^{L_y}\int_0^{L_z}
 V_0(x,y,z) \\
-&\quad \cdot \sin\left(\dfrac{m\pi x}{L_x}\right)
-\sin\left(\dfrac{n\pi y}{L_y}\right) \\
+&\quad \cdot \sin\left(\dfrac{m \cdot \pi \cdot x}{L_x}\right)
+\cdot \sin\left(\dfrac{n \cdot \pi \cdot y}{L_y}\right) \\
 &\quad \cdot
-\sin\left(\dfrac{p\pi z}{L_z}\right)
+\sin\left(\dfrac{p \cdot \pi \cdot z}{L_z}\right)
 \, dz\, dy\, dx.
 \end{aligned}
 $$
@@ -396,17 +471,17 @@ $$
 \begin{aligned}
 \nabla^2 y
 = \dfrac{\partial^2 y}{\partial r^2}
-+ \dfrac{1}{r}\dfrac{\partial y}{\partial r}
-+ \dfrac{1}{r^2}\dfrac{\partial^2 y}{\partial \theta^2}.
++ \dfrac{1}{r} \cdot \dfrac{\partial y}{\partial r}
++ \dfrac{1}{r^2} \cdot \dfrac{\partial^2 y}{\partial \theta^2}.
 \end{aligned}
 $$
 
-La ecuación de ondas sigue siendo $\dfrac{\partial^2 y}{\partial t^2}=v^2\nabla^2y$, pero la separación de variables ya no genera senos en la coordenada radial, sino funciones de Bessel. Si el borde circular de radio $R$ está fijo, los modos espaciales tienen la forma:
+La ecuación de ondas sigue siendo $\dfrac{\partial^2 y}{\partial t^2}=v^2 \cdot \nabla^2y$, pero la separación de variables ya no genera senos en la coordenada radial, sino funciones de Bessel. Si el borde circular de radio $R$ está fijo, los modos espaciales tienen la forma:
 
 $$
 \begin{aligned}
-J_m\left(\dfrac{\alpha_{mn}r}{R}\right)
-\left[C_{mn}\cos(m\theta) + D_{mn}\sin(m\theta)\right],
+J_m\left(\dfrac{\alpha_{mn} \cdot r}{R}\right)
+\cdot \left[C_{mn} \cdot \cos(m \cdot \theta) + D_{mn} \cdot \sin(m \cdot \theta)\right],
 \end{aligned}
 $$
 
@@ -414,7 +489,7 @@ donde $J_m$ es la función de Bessel de primera especie y $\alpha_{mn}$ es el en
 
 $$
 \begin{aligned}
-\omega_{mn} = \dfrac{v\alpha_{mn}}{R}.
+\omega_{mn} = \dfrac{v \cdot \alpha_{mn}}{R}.
 \end{aligned}
 $$
 
@@ -427,24 +502,24 @@ Para una cavidad esférica se usan coordenadas $(r,\theta,\varphi)$. El Laplacia
 $$
 \begin{aligned}
 \nabla^2 \Psi
-= \dfrac{1}{r^2}\dfrac{\partial}{\partial r}
-\left(r^2\dfrac{\partial \Psi}{\partial r}\right)
-+ \dfrac{1}{r^2\sin\theta}\dfrac{\partial}{\partial\theta}
-\left(\sin\theta\dfrac{\partial\Psi}{\partial\theta}\right)
-+ \dfrac{1}{r^2\sin^2\theta}\dfrac{\partial^2\Psi}{\partial\varphi^2}.
+= \dfrac{1}{r^2} \cdot \dfrac{\partial}{\partial r}
+\left(r^2 \cdot \dfrac{\partial \Psi}{\partial r}\right)
++ \dfrac{1}{r^2 \cdot \sin\theta} \cdot \dfrac{\partial}{\partial\theta}
+\left(\sin\theta \cdot \dfrac{\partial\Psi}{\partial\theta}\right)
++ \dfrac{1}{r^2 \cdot \sin^2\theta} \cdot \dfrac{\partial^2\Psi}{\partial\varphi^2}.
 \end{aligned}
 $$
 
-La parte angular de los modos separados está descrita por los armónicos esféricos $Y_\ell^m(\theta,\varphi)$, mientras que la parte radial regular en el origen está descrita por las funciones de Bessel esféricas $j_\ell(kr)$. Para una esfera de radio $R$ con frontera fija, una base modal es:
+La parte angular de los modos separados está descrita por los armónicos esféricos $Y_\ell^m(\theta,\varphi)$, mientras que la parte radial regular en el origen está descrita por las funciones de Bessel esféricas $j_\ell(k \cdot r)$. Para una esfera de radio $R$ con frontera fija, una base modal es:
 
 $$
 \begin{aligned}
-j_\ell\left(\dfrac{\beta_{\ell n}r}{R}\right)
-Y_\ell^m(\theta,\varphi),
+j_\ell\left(\dfrac{\beta_{\ell n} \cdot r}{R}\right)
+\cdot Y_\ell^m(\theta,\varphi),
 \end{aligned}
 $$
 
-donde $\beta_{\ell n}$ es el enésimo cero positivo de $j_\ell$. Las frecuencias permitidas son $\omega_{\ell n}=v\beta_{\ell n}/R$. La solución se obtiene sumando estos modos con amplitudes determinadas por el campo y la velocidad iniciales.
+donde $\beta_{\ell n}$ es el enésimo cero positivo de $j_\ell$. Las frecuencias permitidas son $\omega_{\ell n}=v \cdot \beta_{\ell n}/R$. La solución se obtiene sumando estos modos con amplitudes determinadas por el campo y la velocidad iniciales.
 
 #### 2.3.3. Espacio ilimitado: ondas planas y transformada de Fourier
 
@@ -453,8 +528,8 @@ Cuando no hay fronteras que impongan modos discretos, las ondas planas son la ba
 $$
 \begin{aligned}
 \Psi(\mathbf{r},t)
-= A\,e^{i(\mathbf{k}\cdot\mathbf{r}-\omega t)},
-\qquad \omega = v|\mathbf{k}|.
+= A \cdot e^{i \cdot (\mathbf{k} \cdot \mathbf{r}-\omega \cdot t)},
+\qquad \omega = v \cdot |\mathbf{k}|.
 \end{aligned}
 $$
 
@@ -464,7 +539,7 @@ La solución general se expresa entonces mediante una transformada de Fourier, e
 
 ### 3.1. Funcionales y optimización variacional
 
-El cálculo de variaciones estudia problemas en los que no se busca el mejor número, sino la mejor función. Para ello se usa un **funcional**: una regla que recibe una función completa como entrada y devuelve un número real. Por ejemplo, una expresión de la forma
+El cálculo de variaciones estudia problemas en los que la incógnita no es un número (el valor de una variable que optimiza una función), sino una función completa. Para ello se usa un **funcional**: una regla que recibe una función completa como entrada y devuelve un número real. Por ejemplo, una expresión de la forma
 
 $$
 \begin{aligned}
@@ -500,9 +575,9 @@ Partimos de una curva candidata $y(x)$ cuyos extremos están fijados. Para compa
 
 $$
 \begin{aligned}
-y_\epsilon(x) = y(x) + \epsilon\eta(x),
+y_\epsilon(x) = y(x) + \epsilon \cdot \eta(x),
 \qquad
-y_\epsilon'(x) = y'(x) + \epsilon\eta'(x),
+y_\epsilon'(x) = y'(x) + \epsilon \cdot \eta'(x),
 \end{aligned}
 $$
 
@@ -512,21 +587,21 @@ $$
 \begin{aligned}
 \Phi(\epsilon)
 = J[y_\epsilon]
-= \int_a^b F\left(x,y(x)+\epsilon\eta(x),y'(x)+\epsilon\eta'(x)\right)\,dx.
+= \int_a^b F\left(x,y(x)+\epsilon \cdot \eta(x),y'(x)+\epsilon \cdot \eta'(x)\right)\,dx.
 \end{aligned}
 $$
 
-Si $y$ hace estacionario el funcional, entonces $\Phi$ debe ser estacionaria en $\epsilon=0$. La primera variación se define como $\delta J=\Phi'(0)$; por tanto, la condición de estacionariedad es $\delta J=0$. Derivando bajo el signo integral y aplicando la regla de la cadena se obtiene:
+Si $y$ hace estacionario el funcional, entonces $\Phi$ debe ser estacionaria en $\epsilon=0$. La primera variación se define como $\delta J=\Phi'(0)$; por tanto, la condición de estacionariedad es $\delta J=0$. Derivando bajo el signo integral y aplicando la regla de la cadena (el integrando depende de $\epsilon$ a través de su segundo argumento, con derivada $\eta$, y de su tercer argumento, con derivada $\eta'$) se obtiene:
 
 $$
 \begin{aligned}
 \delta J
-= \left.\dfrac{d\Phi}{d\epsilon}\right|_{\epsilon=0} \\
+&= \left.\dfrac{d\Phi}{d\epsilon}\right|_{\epsilon=0} \\
 &= \int_a^b
 \left[
-\dfrac{\partial F}{\partial y}\eta
-+ \dfrac{\partial F}{\partial y'}\eta'
-\right]dx.
+\dfrac{\partial F}{\partial y} \cdot \eta
++ \dfrac{\partial F}{\partial y'} \cdot \eta'
+\right]\,dx.
 \end{aligned}
 $$
 
@@ -534,9 +609,9 @@ El segundo término contiene la derivada de la variación. Lo reescribimos media
 
 $$
 \begin{aligned}
-\int_a^b \dfrac{\partial F}{\partial y'}\eta'\,dx
-= \left[\dfrac{\partial F}{\partial y'}\eta\right]_a^b
-- \int_a^b \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial y'}\right)\eta\,dx.
+\int_a^b \dfrac{\partial F}{\partial y'} \cdot \eta'\,dx
+= \left[\dfrac{\partial F}{\partial y'} \cdot \eta\right]_a^b
+- \int_a^b \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial y'}\right) \cdot \eta\,dx.
 \end{aligned}
 $$
 
@@ -549,7 +624,7 @@ $$
 \left[
 \dfrac{\partial F}{\partial y}
 - \dfrac{d}{dx}\left(\dfrac{\partial F}{\partial y'}\right)
-\right]\eta(x)\,dx.
+\right] \cdot \eta(x)\,dx.
 \end{aligned}
 $$
 
@@ -585,7 +660,7 @@ Este funcional se llama **acción** cuando $\mathcal{L}$ es una densidad lagrang
 
 $$
 \begin{aligned}
-f_\epsilon(x,t) = f(x,t) + \epsilon\eta(x,t).
+f_\epsilon(x,t) = f(x,t) + \epsilon \cdot \eta(x,t).
 \end{aligned}
 $$
 
@@ -595,11 +670,11 @@ $$
 \begin{aligned}
 \dfrac{\partial f_\epsilon}{\partial t}
 = \dfrac{\partial f}{\partial t}
-+ \epsilon\dfrac{\partial\eta}{\partial t},
++ \epsilon \cdot \dfrac{\partial\eta}{\partial t},
 \\
 \dfrac{\partial f_\epsilon}{\partial x}
 = \dfrac{\partial f}{\partial x}
-+ \epsilon\dfrac{\partial\eta}{\partial x}.
++ \epsilon \cdot \dfrac{\partial\eta}{\partial x}.
 \end{aligned}
 $$
 
@@ -610,12 +685,12 @@ $$
 \delta S
 = \int_{t_1}^{t_2}\int_{x_1}^{x_2}
 \Bigg[
-\dfrac{\partial\mathcal{L}}{\partial f}\eta
+\dfrac{\partial\mathcal{L}}{\partial f} \cdot \eta
 + \dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial t}\right)}
-\dfrac{\partial\eta}{\partial t}
+\cdot \dfrac{\partial\eta}{\partial t}
 + \dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial x}\right)}
-\dfrac{\partial\eta}{\partial x}
-\Bigg]dx\,dt.
+\cdot \dfrac{\partial\eta}{\partial x}
+\Bigg]\,dx\,dt.
 \end{aligned}
 $$
 
@@ -631,7 +706,7 @@ $$
 \left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial t}\right)}\right)
 - \dfrac{\partial}{\partial x}
 \left(\dfrac{\partial\mathcal{L}}{\partial\left(\dfrac{\partial f}{\partial x}\right)}\right)
-\Bigg]\eta(x,t)\,dx\,dt.
+\Bigg] \cdot \eta(x,t)\,dx\,dt.
 \end{aligned}
 $$
 
@@ -648,7 +723,7 @@ $$
 \end{aligned}
 $$
 
-La expresión unidimensional anterior se recupera si el campo depende sólo de $x$. En más dimensiones espaciales aparecen un término análogo por cada derivada espacial del campo.
+La expresión unidimensional anterior se recupera si el campo depende sólo de $x$. En más dimensiones espaciales aparece un término análogo por cada derivada espacial del campo.
 
 #### 3.1.4. Ecuación de Euler-Lagrange en tres dimensiones espaciales
 
@@ -686,33 +761,39 @@ $$
 \end{aligned}
 $$
 
-La pauta es transparente: además del término temporal ya conocido, aparece un término de Euler-Lagrange por cada dirección espacial. Para varios campos $f_a$, se obtiene una ecuación de esta forma para cada índice $a$.
+La estructura es la misma que en el caso anterior: además del término temporal, aparece un término de Euler-Lagrange por cada dirección espacial. Para varios campos $f_a$, se obtiene una ecuación de esta forma para cada índice $a$.
 
 ### 3.2. Ejemplo: la braquistócrona
 
-Para comprender la optimización de funcionales fuera del contexto abstracto de la mecánica analítica, consideremos uno de los problemas históricos que dio origen al cálculo de variaciones en 1696: el problema de la braquistócrona.
+Como ejemplo de optimización de un funcional fuera de la mecánica analítica, se considera el problema de la braquistócrona, planteado por Johann Bernoulli en 1696 y considerado uno de los orígenes del cálculo de variaciones.
 
-Imagina dos puntos $A$ (origen $0,0$) y $B$ (donde $B$ está más abajo y desplazado horizontalmente). Buscamos la forma exacta de un alambre, definido por una curva $y(x)$, por el cual una cuenta resbalará sin fricción bajo el efecto de la gravedad en el menor tiempo posible. Para simplificar los signos, diremos que la gravedad actúa en el eje $+y$ (hacia abajo).
+Sean dos puntos: $A$, situado en el origen $(0,0)$, y $B = (x_B, y_B)$, situado más abajo y desplazado horizontalmente. Se busca la forma de un alambre, descrito por una curva $y(x)$ que une $A$ con $B$, tal que una cuenta que parte del reposo en $A$ y desliza sin rozamiento por él bajo la acción de la gravedad llegue a $B$ en el menor tiempo posible. Para simplificar los signos, el eje $+y$ se orienta hacia abajo, en el sentido de la gravedad.
 
-Buscamos una función $y(x)$ que minimice el funcional del Tiempo total ($T$). Sabemos que el tiempo es la integral de la distancia sobre la velocidad ($dt = ds / v$). Usando el teorema de Pitágoras para el elemento de arco infinitesimal ($ds = \sqrt{dx^2 + dy^2} = \sqrt{1 + (y')^2} dx$, donde $y' = \dfrac{dy}{dx}$) y la conservación de energía para aislar la velocidad ($E_{cinetica} = E_{potencial} \implies \dfrac{1}{2}mv^2 = mgy \implies v = \sqrt{2gy}$), el funcional del tiempo queda como:
+La magnitud que se minimiza es el tiempo total de recorrido $T$, que es un funcional de $y(x)$. Se construye en tres pasos:
 
-$$
-\begin{aligned}
-T[y(x)] = \int_{0}^{x_B} \dfrac{\sqrt{1 + (y')^2}}{\sqrt{2gy}} dx
-\end{aligned}
-$$
+1. En un tramo de longitud $ds$ recorrido con rapidez $v$, el tiempo empleado es $dt = \dfrac{ds}{v}$.
+2. Por el teorema de Pitágoras, el elemento de arco es $ds = \sqrt{dx^2 + dy^2} = \sqrt{1 + (y')^2} \cdot dx$, donde $y' = \dfrac{dy}{dx}$.
+3. Por conservación de la energía mecánica, y puesto que la cuenta parte del reposo en $y=0$, la energía cinética ganada es igual a la energía potencial perdida tras descender una altura $y$: $\dfrac{1}{2} \cdot m \cdot v^2 = m \cdot g \cdot y$, de donde $v = \sqrt{2 \cdot g \cdot y}$. La masa se cancela, así que la curva óptima no depende de ella.
 
-En este problema estrictamente matemático y geométrico, el integrando es nuestra función objetivo, comportándose analíticamente igual que una densidad Lagrangiana:
+Sumando las contribuciones $dt$ a lo largo de la curva, el funcional del tiempo queda:
 
 $$
 \begin{aligned}
-\mathcal{L}(y, y', x) = \dfrac{\sqrt{1 + (y')^2}}{\sqrt{2gy}}
+T[y(x)] = \int_{0}^{x_B} \dfrac{\sqrt{1 + (y')^2}}{\sqrt{2 \cdot g \cdot y}} \, dx
 \end{aligned}
 $$
 
-Resolución paso a paso: La Identidad de Beltrami
+El integrando desempeña aquí el papel de la función $F(x,y,y')$ del apartado 3.1.2. Aunque este problema no procede de la mecánica analítica, se suele denotar con la misma letra que un lagrangiano, porque las ecuaciones que se le aplican son las mismas:
 
-Para encontrar la curva $y(x)$ que minimiza este funcional, debemos aplicar la Ecuación de Euler-Lagrange unidimensional:
+$$
+\begin{aligned}
+\mathcal{L}(y, y', x) = \dfrac{\sqrt{1 + (y')^2}}{\sqrt{2 \cdot g \cdot y}}
+\end{aligned}
+$$
+
+#### Resolución mediante la identidad de Beltrami
+
+La curva $y(x)$ que minimiza este funcional debe satisfacer la ecuación de Euler-Lagrange unidimensional (la del apartado 3.1.2, multiplicada por $-1$):
 
 $$
 \begin{aligned}
@@ -720,21 +801,34 @@ $$
 \end{aligned}
 $$
 
-Sin embargo, calcular estas derivadas completas directamente conduce a un álgebra extremadamente tediosa. Afortunadamente, notamos una propiedad crucial en nuestra $\mathcal{L}$: no depende explícitamente de la coordenada $x$ (la $x$ no aparece en la fórmula, solo $y$ y $y'$).
+Aplicarla directamente exige calcular $\dfrac{d}{dx}\left( \dfrac{\partial \mathcal{L}}{\partial y'} \right)$, lo que produce una ecuación de segundo orden con muchos términos. Se puede evitar observando que $\mathcal{L}$ no depende explícitamente de $x$: en su expresión solo aparecen $y$ e $y'$.
 
-Cuando esto ocurre en el cálculo de variaciones, la Ecuación de Euler-Lagrange se simplifica en una constante de movimiento (una primera integral) conocida como la Identidad de Beltrami:
+En ese caso, la ecuación de Euler-Lagrange admite una primera integral (una cantidad que se conserva a lo largo de la solución), conocida como identidad de Beltrami:
 
 $$
 \begin{aligned}
-\mathcal{L} - y' \dfrac{\partial \mathcal{L}}{\partial y'} = C
+\mathcal{L} - y' \cdot \dfrac{\partial \mathcal{L}}{\partial y'} = C
 \end{aligned}
 $$
 
-Vamos a aplicar esto paso a paso. Primero, calculemos la derivada parcial de $\mathcal{L}$ respecto a $y'$:
+donde $C$ es una constante. Para justificarla, se deriva el lado izquierdo respecto de $x$. Como $\mathcal{L}$ depende de $x$ a través de $y$ y de $y'$ (y, en general, también explícitamente), la regla de la cadena da:
 
 $$
 \begin{aligned}
-\dfrac{\partial \mathcal{L}}{\partial y'} = \dfrac{1}{\sqrt{2gy}} \cdot \dfrac{1}{2\sqrt{1 + (y')^2}} \cdot 2y' = \dfrac{y'}{\sqrt{2gy}\sqrt{1 + (y')^2}}
+\dfrac{d}{dx}\left( \mathcal{L} - y' \cdot \dfrac{\partial \mathcal{L}}{\partial y'} \right)
+&= \dfrac{\partial \mathcal{L}}{\partial x} + y' \cdot \dfrac{\partial \mathcal{L}}{\partial y} + y'' \cdot \dfrac{\partial \mathcal{L}}{\partial y'}
+- y'' \cdot \dfrac{\partial \mathcal{L}}{\partial y'} - y' \cdot \dfrac{d}{dx}\left( \dfrac{\partial \mathcal{L}}{\partial y'} \right) \\
+&= \dfrac{\partial \mathcal{L}}{\partial x} - y' \cdot \left[ \dfrac{d}{dx}\left( \dfrac{\partial \mathcal{L}}{\partial y'} \right) - \dfrac{\partial \mathcal{L}}{\partial y} \right].
+\end{aligned}
+$$
+
+El corchete es nulo cuando $y(x)$ satisface la ecuación de Euler-Lagrange, y $\dfrac{\partial \mathcal{L}}{\partial x} = 0$ por hipótesis. Por tanto, la derivada es cero y la expresión es constante. La identidad sustituye una ecuación de segundo orden por otra de primer orden.
+
+Se aplica a continuación. Primero se calcula la derivada parcial de $\mathcal{L}$ respecto a $y'$, tratando $y$ como constante:
+
+$$
+\begin{aligned}
+\dfrac{\partial \mathcal{L}}{\partial y'} = \dfrac{1}{\sqrt{2 \cdot g \cdot y}} \cdot \dfrac{1}{2 \cdot \sqrt{1 + (y')^2}} \cdot 2 \cdot y' = \dfrac{y'}{\sqrt{2 \cdot g \cdot y} \cdot \sqrt{1 + (y')^2}}
 \end{aligned}
 $$
 
@@ -742,15 +836,15 @@ Ahora introducimos $\mathcal{L}$ y esta derivada en la Identidad de Beltrami:
 
 $$
 \begin{aligned}
-\dfrac{\sqrt{1 + (y')^2}}{\sqrt{2gy}} - y' \left( \dfrac{y'}{\sqrt{2gy}\sqrt{1 + (y')^2}} \right) = C
+\dfrac{\sqrt{1 + (y')^2}}{\sqrt{2 \cdot g \cdot y}} - y' \cdot \left( \dfrac{y'}{\sqrt{2 \cdot g \cdot y} \cdot \sqrt{1 + (y')^2}} \right) = C
 \end{aligned}
 $$
 
-Podemos agrupar la constante de gravedad $\dfrac{1}{\sqrt{2g}}$ junto con la constante arbitraria $C$ del lado derecho (creando una nueva constante $C_1$), dejándonos con:
+Ambos términos del lado izquierdo llevan el factor $\dfrac{1}{\sqrt{2 \cdot g}}$. Multiplicando la ecuación por $\sqrt{2 \cdot g}$ y definiendo la nueva constante $C_1 = C \cdot \sqrt{2 \cdot g}$, queda:
 
 $$
 \begin{aligned}
-\dfrac{\sqrt{1 + (y')^2}}{\sqrt{y}} - \dfrac{(y')^2}{\sqrt{y}\sqrt{1 + (y')^2}} = C_1
+\dfrac{\sqrt{1 + (y')^2}}{\sqrt{y}} - \dfrac{(y')^2}{\sqrt{y} \cdot \sqrt{1 + (y')^2}} = C_1
 \end{aligned}
 $$
 
@@ -758,53 +852,68 @@ Para restar estas fracciones, multiplicamos el primer término arriba y abajo po
 
 $$
 \begin{aligned}
-\dfrac{1 + (y')^2 - (y')^2}{\sqrt{y}\sqrt{1 + (y')^2}} = C_1 \implies \dfrac{1}{\sqrt{y(1 + (y')^2)}} = C_1
+\dfrac{1 + (y')^2 - (y')^2}{\sqrt{y} \cdot \sqrt{1 + (y')^2}} = C_1 \implies \dfrac{1}{\sqrt{y \cdot (1 + (y')^2)}} = C_1
 \end{aligned}
 $$
 
-Si elevamos al cuadrado ambos lados e invertimos la fracción, la constante al cuadrado e invertida seguirá siendo una constante, que por conveniencia geométrica llamaremos $2r$:
+Elevando al cuadrado ambos lados e invirtiendo, se obtiene de nuevo una constante, $1/C_1^2$. Se la denota $2 \cdot r$ porque, como se verá más abajo, $r$ resulta ser el radio de la circunferencia que genera la curva solución:
 
 $$
 \begin{aligned}
-y(1 + (y')^2) = \dfrac{1}{C_1^2} = 2r
+y \cdot (1 + (y')^2) = \dfrac{1}{C_1^2} = 2 \cdot r
 \end{aligned}
 $$
 
-¡Hemos llegado a la ecuación diferencial de la curva óptima! Despejando la pendiente $y'$ (que es $\dfrac{dy}{dx}$):
+Esta es la ecuación diferencial de primer orden que satisface la curva óptima. Despejando la pendiente $y' = \dfrac{dy}{dx}$ y tomando la raíz positiva (en el tramo inicial la cuenta desciende, de modo que $y$ crece con $x$):
 
 $$
 \begin{aligned}
-(y')^2 = \dfrac{2r - y}{y} \implies \dfrac{dy}{dx} = \sqrt{\dfrac{2r - y}{y}}
+(y')^2 = \dfrac{2 \cdot r - y}{y} \implies \dfrac{dy}{dx} = \sqrt{\dfrac{2 \cdot r - y}{y}}
 \end{aligned}
 $$
 
-Esta no es la ecuación de una línea recta, ni de una parábola. Esta es la clásica ecuación diferencial de una cicloide invertida. La solución paramétrica que satisface esta ecuación es:
+Esta es la ecuación diferencial de una cicloide. Con el eje $y$ orientado hacia abajo, la curva tiene el aspecto de una cicloide invertida respecto a su representación habitual. Su solución en forma paramétrica, con parámetro $\theta$ y condición inicial $(x,y) = (0,0)$ en $\theta = 0$, es:
 
 $$
 \begin{aligned}
-x(\theta) = r(\theta - \sin \theta)
+x(\theta) = r \cdot (\theta - \sin \theta)
 \end{aligned}
 $$
 
 $$
 \begin{aligned}
-y(\theta) = r(1 - \cos \theta)
+y(\theta) = r \cdot (1 - \cos \theta)
 \end{aligned}
 $$
 
-Físicamente, una cicloide es la curva trazada por un punto en el borde de una rueda de radio $r$ a medida que rueda sin deslizar. Resulta que la naturaleza "sabe" calcular variaciones: el camino más rápido para caer bajo la gravedad no es la distancia más corta (línea recta), sino dejarse caer de forma más pronunciada al principio para ganar velocidad rápidamente, siguiendo una cicloide.
+Comprobación: derivando respecto de $\theta$, $\dfrac{dx}{d\theta} = r \cdot (1 - \cos\theta)$ y $\dfrac{dy}{d\theta} = r \cdot \sin\theta$, luego
 
-(Nota: De forma análoga, el problema isoperimétrico busca la curva cerrada $y(x)$ que maximice el funcional del Área contenida, dado un perímetro constante, cuya solución variacional resulta ser un círculo).
+$$
+\begin{aligned}
+\left(\dfrac{dy}{dx}\right)^2
+= \dfrac{\sin^2\theta}{(1-\cos\theta)^2}
+= \dfrac{(1-\cos\theta) \cdot (1+\cos\theta)}{(1-\cos\theta)^2}
+= \dfrac{1+\cos\theta}{1-\cos\theta}.
+\end{aligned}
+$$
+
+Por otro lado, sustituyendo $y = r \cdot (1-\cos\theta)$ en el lado derecho de la ecuación diferencial, $\dfrac{2 \cdot r - y}{y} = \dfrac{r \cdot (1+\cos\theta)}{r \cdot (1-\cos\theta)} = \dfrac{1+\cos\theta}{1-\cos\theta}$. Ambas expresiones coinciden.
+
+Las dos constantes que quedan, $r$ y el valor final del parámetro $\theta_B$, se determinan imponiendo que la curva pase por $B$: $x_B = r \cdot (\theta_B - \sin\theta_B)$ e $y_B = r \cdot (1 - \cos\theta_B)$.
+
+Geométricamente, una cicloide es la curva que describe un punto del borde de una rueda de radio $r$ cuando esta rueda sin deslizar sobre una recta; $\theta$ es el ángulo girado por la rueda. Desde el punto de vista físico, el resultado indica que la trayectoria de tiempo mínimo no es la de longitud mínima (el segmento recto $AB$): la cicloide empieza con una pendiente más pronunciada (vertical en $A$, pues $dy/dx \to \infty$ cuando $y \to 0$), de modo que la cuenta adquiere velocidad al principio del recorrido, y esa mayor velocidad compensa la mayor longitud del camino.
+
+(Nota: otro problema clásico del mismo tipo es el problema isoperimétrico: entre todas las curvas cerradas de longitud fija, encontrar la que encierra el área máxima. La solución es la circunferencia. A diferencia de la braquistócrona, este problema incluye una restricción (la longitud fija), que se incorpora mediante un multiplicador de Lagrange).
 
 ### 3.3. Variaciones y derivada funcional
 
-Para estudiar si un funcional es estacionario, se compara una función candidata $f_0$ con funciones próximas de la forma $f_\epsilon = f_0 + \epsilon \eta$, donde $\epsilon$ es un parámetro real pequeño y $\eta$ es una perturbación suave que respeta las condiciones de contorno. La **primera variación** es el cambio lineal del funcional al variar $\epsilon$ alrededor de cero.
+Para estudiar si un funcional es estacionario, se compara una función candidata $f_0$ con funciones próximas de la forma $f_\epsilon = f_0 + \epsilon \cdot \eta$, donde $\epsilon$ es un parámetro real pequeño y $\eta$ es una perturbación suave que respeta las condiciones de contorno. La **primera variación** es el cambio lineal del funcional al variar $\epsilon$ alrededor de cero.
 
 La derivada funcional $\dfrac{\delta J}{\delta f}$ desempeña para un funcional $J[f]$ el papel que la derivada ordinaria desempeña para una función de una variable. La condición $\delta J = 0$ expresa que ninguna perturbación admisible cambia el valor de $J$ en primer orden. En el caso de la acción mecánica, esta condición conduce a las ecuaciones de Euler-Lagrange.
 
 ## 4. El formalismo lagrangiano
 
-El formalismo lagrangiano es una reformulación de la mecánica clásica que, en lugar de basarse en fuerzas vectoriales, se fundamenta en principios energéticos y variacionales. Resulta especialmente potente al extenderse a medios continuos y campos, como en la propagación de ondas.
+El formalismo lagrangiano es una reformulación de la mecánica clásica que, en lugar de basarse en fuerzas vectoriales, se fundamenta en principios energéticos y variacionales. Trabaja con magnitudes escalares (energías) en lugar de vectoriales (fuerzas), y se extiende de forma directa a medios continuos y campos, como los que describen la propagación de ondas.
 
 Para un sistema continuo, por ejemplo el desplazamiento transversal de una cuerda, el estado está descrito por un campo $f(x,t)$. La densidad lagrangiana $\mathcal{L}$ asigna una expresión local a cada punto del espacio-tiempo a partir del campo, de sus derivadas y, en el caso general, de la posición y del tiempo de forma explícita:
 
@@ -833,29 +942,29 @@ f,
 \dfrac{\partial f}{\partial t},
 \dfrac{\partial f}{\partial x},
 x,t
-\right)dx \, dt.
+\right) \, dx \, dt.
 \end{aligned}
 $$
 
-El Principio de Hamilton establece que el campo físico es aquel para el que esta acción es estacionaria: $\delta S = 0$.
+El Principio de Hamilton establece que el campo físico que realmente se da es aquel para el que esta acción es estacionaria: $\delta S = 0$.
 
 ### 4.1. Ecuaciones de Euler-Lagrange para campos continuos
 
-Volviendo a nuestro sistema físico continuo, para encontrar esa función $f$ óptima, sometemos el campo a una variación infinitesimal $f \rightarrow f + \delta f$. Asumimos que esta variación se anula en los bordes de integración espaciales y temporales (es decir, el sistema empieza y acaba en estados fijos conocidos, por lo que $\delta f = 0$ en $x_1, x_2, t_1, t_2$).
+Volviendo al sistema físico continuo, para encontrar el campo $f$ que hace estacionaria la acción se somete el campo a una variación infinitesimal $f \rightarrow f + \delta f$. Asumimos que esta variación se anula en los bordes de integración espaciales y temporales (es decir, el sistema empieza y acaba en estados fijos conocidos, por lo que $\delta f = 0$ en $x_1, x_2, t_1, t_2$).
 
 La variación total de la Acción $S$ ante este pequeño cambio arbitrario de la función viene dada por la regla de la cadena para múltiples variables, aplicada al integrando $\mathcal{L}$:
 
 $$
 \begin{aligned}
-\delta S = \int \int \left[ \dfrac{\partial \mathcal{L}}{\partial f}\delta f + \dfrac{\partial \mathcal{L}}{\partial \left( \dfrac{\partial f}{\partial t} \right)}\delta \left( \dfrac{\partial f}{\partial t} \right) + \dfrac{\partial \mathcal{L}}{\partial \left( \dfrac{\partial f}{\partial x} \right)}\delta \left( \dfrac{\partial f}{\partial x} \right) \right] dx \, dt = 0
+\delta S = \int \int \left[ \dfrac{\partial \mathcal{L}}{\partial f} \cdot \delta f + \dfrac{\partial \mathcal{L}}{\partial \left( \dfrac{\partial f}{\partial t} \right)} \cdot \delta \left( \dfrac{\partial f}{\partial t} \right) + \dfrac{\partial \mathcal{L}}{\partial \left( \dfrac{\partial f}{\partial x} \right)} \cdot \delta \left( \dfrac{\partial f}{\partial x} \right) \right] \, dx \, dt = 0
 \end{aligned}
 $$
 
-Justificación matemática: Conmutación de $\delta$ y $\partial$
+#### Justificación: conmutación de $\delta$ y $\partial$
 
-Para continuar operando matemáticamente, necesitamos poder intercambiar el operador variación ($\delta$) con la derivada espacial o temporal (por ejemplo, asumiendo que $\delta(\partial_t f) = \partial_t (\delta f)$).
+Para continuar es necesario intercambiar el operador variación ($\delta$) con la derivada espacial o temporal, es decir, usar que $\delta(\partial_t f) = \partial_t (\delta f)$ y $\delta(\partial_x f) = \partial_x (\delta f)$.
 
-Para justificar esto de forma rigurosa, definamos qué es exactamente una "variación" $\delta f$. Imaginemos la función del campo real (la solución física) $f_0(x,t)$ y perturbémosla sumándole una función suave y totalmente arbitraria $\eta(x,t)$ (que se anula en las fronteras), ponderada por un parámetro escalar minúsculo $\epsilon$:
+Para justificarlo hay que precisar qué es una variación $\delta f$. Sea $f_0(x,t)$ el campo físico (la solución buscada). Se perturba sumándole una función suave arbitraria $\eta(x,t)$, que se anula en las fronteras, multiplicada por un parámetro real pequeño $\epsilon$:
 
 $$
 \begin{aligned}
@@ -867,37 +976,47 @@ El operador variación $\delta$ representa matemáticamente la diferencial respe
 
 $$
 \begin{aligned}
-\delta f = \left. \dfrac{\partial f}{\partial \epsilon} \right\vert{}_{\epsilon=0} d\epsilon = \eta(x,t) \, d\epsilon
+\delta f = \left. \dfrac{\partial f}{\partial \epsilon} \right\vert{}_{\epsilon=0} \cdot d\epsilon = \eta(x,t) \cdot d\epsilon
 \end{aligned}
 $$
 
-Dado que las coordenadas del espacio ($x$), el tiempo ($t$) y el parámetro de variación abstracta ($\epsilon$) son variables completamente independientes, sus derivadas parciales mixtas conmutan según el Teorema de Clairaut-Schwarz (siempre que las funciones sean suficientemente continuas). Por lo tanto:
+La posición $x$, el tiempo $t$ y el parámetro $\epsilon$ son variables independientes de la función $f(x,t,\epsilon)$. Si $f_0$ y $\eta$ son de clase $C^2$, el teorema de Clairaut-Schwarz garantiza que las derivadas parciales mixtas respecto de $\epsilon$ y de $t$ (o de $x$) conmutan. Por lo tanto:
 
 $$
 \begin{aligned}
-\delta \left( \dfrac{\partial f}{\partial t} \right) = \dfrac{\partial}{\partial \epsilon} \left( \dfrac{\partial f}{\partial t} \right) d\epsilon = \dfrac{\partial}{\partial t} \left( \dfrac{\partial f}{\partial \epsilon} \right) d\epsilon = \dfrac{\partial}{\partial t} (\delta f)
+\delta \left( \dfrac{\partial f}{\partial t} \right) = \dfrac{\partial}{\partial \epsilon} \left( \dfrac{\partial f}{\partial t} \right) \cdot d\epsilon = \dfrac{\partial}{\partial t} \left( \dfrac{\partial f}{\partial \epsilon} \right) \cdot d\epsilon = \dfrac{\partial}{\partial t} (\delta f)
 \end{aligned}
 $$
 
-Esta independencia lineal entre el espacio-tiempo y el "espacio de las variaciones" es lo que nos garantiza el derecho a sacar la derivada fuera de la variación.
+El mismo argumento, con $x$ en lugar de $t$, da $\delta(\partial_x f) = \partial_x(\delta f)$. En resumen, como $\epsilon$ es independiente de $x$ y de $t$, variar y derivar son operaciones que conmutan.
 
-Integración por partes y la Derivada Funcional
+#### Integración por partes y derivada funcional
 
-Volviendo a la ecuación original $\delta S=0$ y sabiendo que podemos conmutar operadores, reescribimos el segundo y tercer término, para luego aplicar integración por partes (la regla del producto de derivadas a la inversa).
-
-Al integrar por partes, aparecen términos evaluados en las fronteras de integración. Sin embargo, como hemos establecido como restricción fundamental que la variación es nula en los bordes ($\delta f = 0$), esos términos evaluados en la frontera matemática desaparecen. Solo nos quedan los nuevos integrandos con un signo menos:
+Volviendo a la ecuación $\delta S=0$, se usa la conmutación para escribir el segundo y el tercer término con derivadas de $\delta f$, y después se integran por partes (la regla de la derivada del producto, leída en sentido inverso). Para el término temporal, con $x$ fijo:
 
 $$
 \begin{aligned}
-\delta S = \int \int \left[ \dfrac{\partial \mathcal{L}}{\partial f} - \dfrac{\partial}{\partial t}\left( \dfrac{\partial \mathcal{L}}{\partial \left(\dfrac{\partial f}{\partial t}\right)} \right) - \dfrac{\partial}{\partial x}\left( \dfrac{\partial \mathcal{L}}{\partial \left(\dfrac{\partial f}{\partial x}\right)} \right) \right] \delta f \, dx \, dt = 0
+\int_{t_1}^{t_2} \dfrac{\partial \mathcal{L}}{\partial \left(\dfrac{\partial f}{\partial t}\right)} \cdot \dfrac{\partial (\delta f)}{\partial t} \, dt
+= \left[ \dfrac{\partial \mathcal{L}}{\partial \left(\dfrac{\partial f}{\partial t}\right)} \cdot \delta f \right]_{t_1}^{t_2}
+- \int_{t_1}^{t_2} \dfrac{\partial}{\partial t}\left( \dfrac{\partial \mathcal{L}}{\partial \left(\dfrac{\partial f}{\partial t}\right)} \right) \cdot \delta f \, dt
+\end{aligned}
+$$
+
+y análogamente para el término espacial, integrando en $x$ con $t$ fijo.
+
+Los términos de borde (los corchetes evaluados en $t_1, t_2$ o en $x_1, x_2$) se anulan porque, por hipótesis, la variación es nula en los bordes ($\delta f = 0$). Solo quedan las integrales, con signo menos:
+
+$$
+\begin{aligned}
+\delta S = \int \int \left[ \dfrac{\partial \mathcal{L}}{\partial f} - \dfrac{\partial}{\partial t}\left( \dfrac{\partial \mathcal{L}}{\partial \left(\dfrac{\partial f}{\partial t}\right)} \right) - \dfrac{\partial}{\partial x}\left( \dfrac{\partial \mathcal{L}}{\partial \left(\dfrac{\partial f}{\partial x}\right)} \right) \right] \cdot \delta f \, dx \, dt = 0
 \end{aligned}
 $$
 
 Al corchete de esta integral se le conoce matemáticamente como la derivada funcional de la Acción $S$ respecto al campo $f(x,t)$ (denotada comúnmente como $\dfrac{\delta S}{\delta f}$).
 
-Para que esta integral doble sea idénticamente igual a cero, independientemente de la forma caprichosa que tenga la variación arbitraria $\delta f$ que hayamos elegido, el corchete entero (la derivada funcional) debe ser forzosamente nulo en todo punto del espacio-tiempo. Este es el Lema Fundamental del Cálculo de Variaciones.
+Para que esta integral doble sea cero para cualquier elección de la variación $\delta f$, el corchete (la derivada funcional) debe anularse en todo punto del espacio-tiempo. Este es el lema fundamental del cálculo de variaciones. (Idea de la demostración: si el corchete fuera positivo en algún punto, por continuidad lo sería en un entorno; eligiendo $\delta f$ positiva en ese entorno y nula fuera, la integral sería positiva, en contradicción con $\delta S = 0$.)
 
-Esto nos conduce a la magistral Ecuación de Euler-Lagrange para campos continuos:
+Se obtiene así la ecuación de Euler-Lagrange para campos continuos, escrita aquí con el signo cambiado respecto a la del apartado 3.1.3 (ambas formas son equivalentes):
 
 $$
 \begin{aligned}
@@ -905,13 +1024,13 @@ $$
 \end{aligned}
 $$
 
-Cualquier sistema físico continuo descrito por una densidad lagrangiana $\mathcal{L}$ obedecerá esta ecuación diferencial, asegurando así que la Acción del sistema se mantenga minimizada/estacionaria.
+Todo sistema físico continuo descrito por una densidad lagrangiana $\mathcal{L}$ obedece esta ecuación diferencial, que es la condición necesaria para que su acción sea estacionaria. El principio de Hamilton exige estacionariedad, no necesariamente un mínimo: la solución puede corresponder a un mínimo, a un máximo o a un punto de silla de la acción.
 
 ### 4.2. Sistemas discretos de partículas
 
 Hasta ahora hemos tratado medios continuos mediante una densidad lagrangiana ($\mathcal{L}$) integrada sobre el volumen. Sin embargo, en mecánica clásica es muy habitual tratar con sistemas discretos compuestos por $N$ puntos materiales (partículas puntuales) con masa.
 
-Para este tipo de sistemas, ya no integramos sobre el espacio, sino que definimos la posición del sistema mediante un conjunto de coordenadas generalizadas $q_i$. Si tenemos $N$ partículas moviéndose en 3 dimensiones, necesitaremos $3N$ coordenadas (por ejemplo, $q_1 = x_1, q_2 = y_1, q_3 = z_1, q_4 = x_2...$ hasta $q_{3N}$).
+Para este tipo de sistemas, ya no integramos sobre el espacio, sino que definimos la posición del sistema mediante un conjunto de coordenadas generalizadas $q_i$. Si tenemos $N$ partículas moviéndose libremente en 3 dimensiones, necesitaremos $3 \cdot N$ coordenadas (por ejemplo, $q_1 = x_1, q_2 = y_1, q_3 = z_1, q_4 = x_2...$ hasta $q_{3N}$). Si existen $r$ ligaduras independientes (por ejemplo, una distancia fija entre dos partículas), el número de coordenadas independientes, o grados de libertad, se reduce a $n = 3 \cdot N - r$. Las coordenadas generalizadas no tienen por qué ser cartesianas: pueden ser ángulos, distancias u otras variables que describan la configuración.
 
 Las derivadas temporales de estas coordenadas se denominan velocidades generalizadas, expresadas mediante la notación de punto de Newton:
 
@@ -921,23 +1040,25 @@ $$
 \end{aligned}
 $$
 
-En este contexto discreto, el operador que define al sistema se convierte en una función escalar llamada el Lagrangiano ($L$), que depende explícitamente de las coordenadas generalizadas, las velocidades generalizadas y, opcionalmente, del tiempo:
+En este contexto discreto, la densidad lagrangiana se sustituye por una función escalar llamada Lagrangiano ($L$), que depende explícitamente de las coordenadas generalizadas, las velocidades generalizadas y, opcionalmente, del tiempo:
 
 $$
 \begin{aligned}
-L = L(q_1, q_2, ..., q_{3N}, \dot{q}_1, \dot{q}_2, ..., \dot{q}_{3N}, t) \equiv L(q_i, \dot{q}_i, t)
+L = L(q_1, q_2, ..., q_{n}, \dot{q}_1, \dot{q}_2, ..., \dot{q}_{n}, t) \equiv L(q_i, \dot{q}_i, t)
 \end{aligned}
 $$
+
+donde $n$ es el número de grados de libertad ($n = 3 \cdot N$ si no hay ligaduras).
 
 La Acción se define ahora como una única integral en el tiempo del Lagrangiano a lo largo de la trayectoria del sistema entre un estado inicial $t_1$ y uno final $t_2$:
 
 $$
 \begin{aligned}
-S = \int_{t_1}^{t_2} L(q_i, \dot{q}_i, t) dt
+S = \int_{t_1}^{t_2} L(q_i, \dot{q}_i, t) \, dt
 \end{aligned}
 $$
 
-Aplicando el Principio de Hamilton ($\delta S = 0$) y la misma maquinaria de cálculo de variaciones (integración por partes en una sola variable, el tiempo), obtenemos un conjunto de $3N$ ecuaciones diferenciales ordinarias acopladas:
+Aplicando el Principio de Hamilton ($\delta S = 0$) y el mismo procedimiento del apartado 3.1.2 (ahora con una sola variable de integración, el tiempo, y una variación independiente $\delta q_i$ para cada coordenada), obtenemos un conjunto de $n$ ecuaciones diferenciales ordinarias acopladas, una por coordenada ($i = 1, \dots, n$):
 
 $$
 \begin{aligned}
@@ -947,10 +1068,10 @@ $$
 
 Estas son las Ecuaciones de Euler-Lagrange para sistemas discretos. Cada término tiene un significado físico directo:
 
-1. El término $\dfrac{\partial L}{\partial \dot{q}_i}$ se define como el momento generalizado (o momento conjugado) $p_i$. (Si $L = \dfrac{1}{2}m\dot{x}^2 - V(x)$, entonces $\dfrac{\partial L}{\partial \dot{x}} = m\dot{x} = p_x$).
+1. El término $\dfrac{\partial L}{\partial \dot{q}_i}$ se define como el momento generalizado (o momento conjugado) $p_i$. (Si $L = \dfrac{1}{2} \cdot m \cdot \dot{x}^2 - V(x)$, entonces $\dfrac{\partial L}{\partial \dot{x}} = m \cdot \dot{x} = p_x$).
 2. El término $\dfrac{\partial L}{\partial q_i}$ se define como la fuerza generalizada $F_i$. (Si $V$ solo depende de $x$, entonces $\dfrac{\partial L}{\partial x} = -\dfrac{\partial V}{\partial x} = F_x$).
 
-Sustituyendo estas definiciones, la ecuación se lee como $\dfrac{d p_i}{dt} = F_i$, lo que demuestra que el formalismo lagrangiano recupera maravillosamente la Segunda Ley de Newton, pero con la enorme ventaja de que las ecuaciones de Euler-Lagrange mantienen exactamente la misma forma matemática independientemente del sistema de coordenadas elegido (cartesianas, polares, cilíndricas o variables abstractas).
+Sustituyendo estas definiciones, la ecuación se lee como $\dfrac{d p_i}{dt} = F_i$, que en coordenadas cartesianas es la Segunda Ley de Newton. La diferencia respecto a la formulación newtoniana es que las ecuaciones de Euler-Lagrange tienen la misma forma en cualquier sistema de coordenadas (cartesianas, polares, cilíndricas o variables abstractas). En coordenadas no cartesianas, la energía cinética puede depender de $q_i$ (por ejemplo, en polares $T = \dfrac{1}{2} \cdot m \cdot (\dot{r}^2 + r^2 \cdot \dot{\theta}^2)$ depende de $r$), y entonces $\dfrac{\partial L}{\partial q_i}$ incluye, además de la fuerza, términos procedentes de $T$, como la fuerza centrífuga $m \cdot r \cdot \dot{\theta}^2$ en la ecuación de $r$.
 
 ### 4.3. Por qué $L = T - V$: el puente desde Newton
 
@@ -962,13 +1083,13 @@ L = T - V
 \end{aligned}
 $$
 
-Pero, ¿de dónde sale esta estructura exacta? No es un capricho; es la consecuencia matemática de obligar a las ecuaciones de Euler-Lagrange a ser idénticas a la Segunda Ley de Newton en presencia de fuerzas conservativas.
+Esta forma no es arbitraria: es la que hace que las ecuaciones de Euler-Lagrange coincidan con la Segunda Ley de Newton cuando las fuerzas son conservativas.
 
-Veámoslo para una única partícula en una dimensión (coordenada $x$). La Segunda Ley de Newton nos dice:
+Se muestra a continuación para una única partícula en una dimensión (coordenada $x$). La Segunda Ley de Newton nos dice:
 
 $$
 \begin{aligned}
-m \ddot{x} = F_x
+m \cdot \ddot{x} = F_x
 \end{aligned}
 $$
 
@@ -976,16 +1097,16 @@ Si la fuerza es conservativa, deriva de un potencial $V(x)$, de modo que $F_x = 
 
 $$
 \begin{aligned}
-m \ddot{x} = -\dfrac{\partial V}{\partial x}
+m \cdot \ddot{x} = -\dfrac{\partial V}{\partial x}
 \end{aligned}
 $$
 
-Por otro lado, la energía cinética de la partícula es $T = \dfrac{1}{2}m\dot{x}^2$. Notemos dos propiedades matemáticas de $T$:
+Por otro lado, la energía cinética de la partícula es $T = \dfrac{1}{2} \cdot m \cdot \dot{x}^2$. Notemos dos propiedades matemáticas de $T$:
 
-1. Si derivamos $T$ respecto a la velocidad $\dot{x}$, obtenemos el momento: $\dfrac{\partial T}{\partial \dot{x}} = m\dot{x}$. Si a esto le aplicamos la derivada temporal, recuperamos la fuerza inercial (masa por aceleración): $\dfrac{d}{dt}\left( \dfrac{\partial T}{\partial \dot{x}} \right) = m\ddot{x}$.
-2. Si derivamos $T$ respecto a la posición $x$, el resultado es cero (en coordenadas cartesianas, la energía cinética no depende de dónde estés, solo de lo rápido que vayas): $\dfrac{\partial T}{\partial x} = 0$.
+1. Si derivamos $T$ respecto a la velocidad $\dot{x}$, obtenemos el momento: $\dfrac{\partial T}{\partial \dot{x}} = m \cdot \dot{x}$. Si a esto le aplicamos la derivada temporal, recuperamos la fuerza inercial (masa por aceleración): $\dfrac{d}{dt}\left( \dfrac{\partial T}{\partial \dot{x}} \right) = m \cdot \ddot{x}$.
+2. Si derivamos $T$ respecto a la posición $x$, el resultado es cero (en coordenadas cartesianas, la energía cinética depende solo de la velocidad de la partícula, no de su posición): $\dfrac{\partial T}{\partial x} = 0$.
 
-Con esto en mente, podemos reescribir el término $m\ddot{x}$ de la ley de Newton usando exclusivamente derivadas de la energía cinética:
+Con esto en mente, podemos reescribir el término $m \cdot \ddot{x}$ de la ley de Newton usando exclusivamente derivadas de la energía cinética:
 
 $$
 \begin{aligned}
@@ -1001,7 +1122,12 @@ $$
 \end{aligned}
 $$
 
-Aquí viene el truco final. Dado que la energía potencial $V(x)$ depende únicamente de la posición y no de la velocidad, su derivada parcial respecto a la velocidad es cero ($\dfrac{\partial V}{\partial \dot{x}} = 0$). Y, como ya vimos, $\dfrac{\partial T}{\partial x} = 0$. Esto nos permite "engañar" a la ecuación agrupando ambas energías bajo las mismas derivadas sin alterar el resultado matemático:
+El último paso consiste en sumar términos nulos. Como la energía potencial $V(x)$ depende únicamente de la posición, su derivada parcial respecto a la velocidad es cero: $\dfrac{\partial V}{\partial \dot{x}} = 0$. Y, como se vio en el punto 2, $\dfrac{\partial T}{\partial x} = 0$. Por tanto:
+
+* $\dfrac{\partial (T - V)}{\partial \dot{x}} = \dfrac{\partial T}{\partial \dot{x}} - 0 = \dfrac{\partial T}{\partial \dot{x}}$.
+* $-\dfrac{\partial (T - V)}{\partial x} = -0 + \dfrac{\partial V}{\partial x} = \dfrac{\partial V}{\partial x}$.
+
+Sustituyendo ambas igualdades en la ecuación anterior, las dos energías quedan agrupadas bajo las mismas derivadas sin que cambie la ecuación:
 
 $$
 \begin{aligned}
@@ -1009,13 +1135,15 @@ $$
 \end{aligned}
 $$
 
-¡Esta es exactamente la ecuación de Euler-Lagrange! Si comparamos esta expresión con la forma general $\dfrac{d}{dt}\left( \dfrac{\partial L}{\partial \dot{x}} \right) - \dfrac{\partial L}{\partial x} = 0$, la conclusión es inevitable: el operador $L$ que hace que el principio variacional reproduzca la dinámica newtoniana conservativa debe ser, por definición, $L = T - V$.
+Esta ecuación tiene la forma de la ecuación de Euler-Lagrange, $\dfrac{d}{dt}\left( \dfrac{\partial L}{\partial \dot{x}} \right) - \dfrac{\partial L}{\partial x} = 0$, con $L = T - V$. Es decir, tomando $L = T - V$, el principio variacional reproduce la dinámica newtoniana de una partícula sometida a fuerzas conservativas.
 
-(Nota: En sistemas mecánicos complejos con vínculos y coordenadas generalizadas abstractas $q_i$, se utiliza el Principio de d'Alembert (o de los Trabajos Virtuales) para demostrar de forma más rigurosa que esta misma estructura $L = T - V$ se mantiene inviolable).
+Esta elección no es la única posible: multiplicar $L$ por una constante no nula, o sumarle la derivada temporal total de una función $G(q,t)$, produce las mismas ecuaciones de movimiento. $L = T - V$ es la elección estándar.
+
+(Nota: En sistemas mecánicos con ligaduras y coordenadas generalizadas $q_i$, se utiliza el Principio de d'Alembert (o de los Trabajos Virtuales) para demostrar de forma general que la misma estructura $L = T - V$ sigue siendo válida, siempre que las fuerzas deriven de un potencial y las ligaduras no realicen trabajo).
 
 ## 5. Introducción a la transformada de Legendre
 
-La transformada de Legendre permite describir una misma función mediante su pendiente, en lugar de mediante su variable original. No es un simple cambio de letras: sustituye la variable $v$ por la cantidad conjugada $p$, definida como la pendiente de la gráfica de $F$:
+La transformada de Legendre permite describir una misma función mediante su pendiente, en lugar de mediante su variable original. No se trata de renombrar la variable: la transformada sustituye la variable $v$ por la cantidad conjugada $p$, definida como la pendiente de la gráfica de $F$:
 
 $$
 \begin{aligned}
@@ -1029,27 +1157,27 @@ Supongamos que $F(v)$ es diferenciable y convexa. En cada valor de $v$, la recta
 
 $$
 \begin{aligned}
-\ell(u) = F(v) + p(u-v).
+\ell(u) = F(v) + p \cdot (u-v).
 \end{aligned}
 $$
 
-Si evaluamos esta recta en $u=0$, obtenemos su ordenada en el origen, $\ell(0)=F(v)-pv$. La cantidad opuesta, $pv-F(v)$, depende de la pendiente $p$ y permite codificar la misma familia de rectas tangentes. Por definición, la transformada de Legendre de $F$ es:
+Si evaluamos esta recta en $u=0$, obtenemos su ordenada en el origen, $\ell(0)=F(v)-p \cdot v$. La cantidad opuesta, $p \cdot v-F(v)$, depende de la pendiente $p$ y permite codificar la misma familia de rectas tangentes. Por definición, la transformada de Legendre de $F$ es:
 
 $$
 \begin{aligned}
-G(p) = p v - F(v),
+G(p) = p \cdot v - F(v),
 \end{aligned}
 $$
 
 donde $v$ debe expresarse como función de $p$ mediante $p=F'(v)$. La convexidad asegura localmente que esta relación puede invertirse y que cada pendiente corresponde a un único punto de contacto. Por ello, la transformación conserva la información de $F$, pero la describe mediante su variable conjugada $p$.
 
-Al derivar $G(p)=pv(p)-F(v(p))$ respecto de $p$, se ve el intercambio de variables de manera algebraica:
+Al derivar $G(p)=p \cdot v(p)-F(v(p))$ respecto de $p$, se ve el intercambio de variables de manera algebraica:
 
 $$
 \begin{aligned}
 \dfrac{dG}{dp}
-&= v + p\dfrac{dv}{dp} - \dfrac{dF}{dv}\dfrac{dv}{dp} \\
-&= v + \left(p-\dfrac{dF}{dv}\right)\dfrac{dv}{dp} \\
+&= v + p \cdot \dfrac{dv}{dp} - \dfrac{dF}{dv} \cdot \dfrac{dv}{dp} \\
+&= v + \left(p-\dfrac{dF}{dv}\right) \cdot \dfrac{dv}{dp} \\
 &= v.
 \end{aligned}
 $$
@@ -1070,7 +1198,7 @@ Su variable conjugada es la pendiente:
 
 $$
 \begin{aligned}
-p = \dfrac{dF}{dv} = 2v,
+p = \dfrac{dF}{dv} = 2 \cdot v,
 \qquad
 v = \dfrac{p}{2}.
 \end{aligned}
@@ -1081,8 +1209,8 @@ Sustituimos esta expresión de $v$ en la definición de la transformada:
 $$
 \begin{aligned}
 G(p)
-&= pv - F(v) \\
-&= p\left(\dfrac{p}{2}\right) - \left(\dfrac{p}{2}\right)^2 \\
+&= p \cdot v - F(v) \\
+&= p \cdot \left(\dfrac{p}{2}\right) - \left(\dfrac{p}{2}\right)^2 \\
 &= \dfrac{p^2}{4}.
 \end{aligned}
 $$
@@ -1093,7 +1221,7 @@ $$
 \begin{aligned}
 v = \dfrac{dG}{dp} = \dfrac{p}{2},
 \qquad
-p=2v.
+p=2 \cdot v.
 \end{aligned}
 $$
 
@@ -1102,8 +1230,8 @@ La doble transformada vale entonces:
 $$
 \begin{aligned}
 F^{**}(v)
-&= vp-G(p) \\
-&= v(2v)-\dfrac{(2v)^2}{4} \\
+&= v \cdot p-G(p) \\
+&= v \cdot (2 \cdot v)-\dfrac{(2 \cdot v)^2}{4} \\
 &= v^2 = F(v).
 \end{aligned}
 $$
@@ -1124,13 +1252,13 @@ p_i = \dfrac{\partial L}{\partial \dot{q}_i}
 \end{aligned}
 $$
 
-Nuestro objetivo ahora es crear una nueva función, el Hamiltoniano ($H$), que dependa exclusivamente de posiciones, momentos y del tiempo: $H(q_i, p_i, t)$. Para lograr este cambio de variables, las matemáticas nos ofrecen una herramienta específica: la Transformada de Legendre.
+El objetivo es construir una nueva función, el Hamiltoniano ($H$), que dependa exclusivamente de posiciones, momentos y del tiempo: $H(q_i, p_i, t)$. El cambio de variables $\dot{q}_i \to p_i$ se realiza mediante la transformada de Legendre de la sección 5.
 
-La transformada de Legendre nos permite pasar de una función que depende de una variable (en este caso, $\dot{q}_i$) a otra función que dependa de la derivada de esa variable respecto a la función original (es decir, $p_i$). La definición general del Hamiltoniano se construye así:
+La transformada de Legendre pasa de una función que depende de una variable (en este caso, $L$ como función de $\dot{q}_i$) a otra que depende de la derivada parcial de la función original respecto a esa variable (es decir, de $p_i = \partial L/\partial \dot{q}_i$). Las variables $q_i$ y $t$ no intervienen en la transformación y actúan como parámetros. Para que el cambio sea posible hay que poder despejar las velocidades $\dot{q}_i$ en función de $(q_i, p_i, t)$, lo que exige que la matriz de segundas derivadas $\dfrac{\partial^2 L}{\partial \dot{q}_i \partial \dot{q}_j}$ sea invertible (en el caso de una variable, $L$ convexa en $\dot{q}$, como en la sección 5). La definición general del Hamiltoniano, análoga a $G(p) = p \cdot v - F(v)$ con una suma sobre todas las coordenadas, es:
 
 $$
 \begin{aligned}
-H(q_i, p_i, t) = \sum_{i} p_i \dot{q}_i - L(q_i, \dot{q}_i, t)
+H(q_i, p_i, t) = \sum_{i} p_i \cdot \dot{q}_i - L(q_i, \dot{q}_i, t)
 \end{aligned}
 $$
 
@@ -1140,15 +1268,15 @@ Para descubrir qué forma toman las ecuaciones de movimiento en este nuevo marco
 
 #### Primer método: usando la definición de la transformada de Legendre
 
-Si diferenciamos la ecuación $H = \sum p_i \dot{q}_i - L$, aplicando la regla del producto y la regla de la cadena para la diferencial de $L(q_i, \dot{q}_i, t)$, obtenemos:
+Si diferenciamos la ecuación $H = \sum p_i \cdot \dot{q}_i - L$, aplicando la regla del producto y la regla de la cadena para la diferencial de $L(q_i, \dot{q}_i, t)$, obtenemos:
 
 $$
 \begin{aligned}
-dH = \sum_{i} (\dot{q}_i dp_i + p_i d\dot{q}_i) - \left[ \sum_{i} \left( \dfrac{\partial L}{\partial q_i} dq_i + \dfrac{\partial L}{\partial \dot{q}_i} d\dot{q}_i \right) + \dfrac{\partial L}{\partial t} dt \right]
+dH = \sum_{i} (\dot{q}_i \cdot dp_i + p_i \cdot d\dot{q}_i) - \left[ \sum_{i} \left( \dfrac{\partial L}{\partial q_i} \cdot dq_i + \dfrac{\partial L}{\partial \dot{q}_i} \cdot d\dot{q}_i \right) + \dfrac{\partial L}{\partial t} \cdot dt \right]
 \end{aligned}
 $$
 
-Ahora usamos nuestras dos definiciones clave provenientes del formalismo lagrangiano:
+Ahora usamos dos relaciones del formalismo lagrangiano:
 
 1. $p_i = \dfrac{\partial L}{\partial \dot{q}_i}$ (definición de momento).
 2. $\dot{p}_i = \dfrac{\partial L}{\partial q_i}$ (es la propia Ecuación de Euler-Lagrange, $\dfrac{d p_i}{dt} = \dfrac{\partial L}{\partial q_i}$).
@@ -1157,15 +1285,15 @@ Sustituyendo esto en el corchete:
 
 $$
 \begin{aligned}
-dH = \sum_{i} (\dot{q}_i dp_i + p_i d\dot{q}_i) - \sum_{i} (\dot{p}_i dq_i + p_i d\dot{q}_i) - \dfrac{\partial L}{\partial t} dt
+dH = \sum_{i} (\dot{q}_i \cdot dp_i + p_i \cdot d\dot{q}_i) - \sum_{i} (\dot{p}_i \cdot dq_i + p_i \cdot d\dot{q}_i) - \dfrac{\partial L}{\partial t} \cdot dt
 \end{aligned}
 $$
 
-Notamos que el término $p_i d\dot{q}_i$ aparece sumando y restando, por lo que se cancela de forma espectacular. Esto es el núcleo de la transformada de Legendre: elimina la dependencia de los diferenciales de velocidad ($d\dot{q}_i$). Nos queda:
+El término $p_i \cdot d\dot{q}_i$ aparece una vez sumando y otra restando, por lo que se cancela. Esta cancelación es la propiedad central de la transformada de Legendre: $dH$ no contiene los diferenciales de velocidad $d\dot{q}_i$, lo que confirma que $H$ no depende de las velocidades, sino de $q_i$, $p_i$ y $t$. Nos queda:
 
 $$
 \begin{aligned}
-dH = \sum_{i} (\dot{q}_i dp_i - \dot{p}_i dq_i) - \dfrac{\partial L}{\partial t} dt
+dH = \sum_{i} (\dot{q}_i \cdot dp_i - \dot{p}_i \cdot dq_i) - \dfrac{\partial L}{\partial t} \cdot dt
 \end{aligned}
 $$
 
@@ -1175,13 +1303,19 @@ Sabemos por definición que $H$ es una función de $q_i$, $p_i$ y $t$. Su difere
 
 $$
 \begin{aligned}
-dH = \sum_{i} \left( \dfrac{\partial H}{\partial q_i} dq_i + \dfrac{\partial H}{\partial p_i} dp_i \right) + \dfrac{\partial H}{\partial t} dt
+dH = \sum_{i} \left( \dfrac{\partial H}{\partial q_i} \cdot dq_i + \dfrac{\partial H}{\partial p_i} \cdot dp_i \right) + \dfrac{\partial H}{\partial t} \cdot dt
 \end{aligned}
 $$
 
-Igualando coeficientes:
+#### Igualación de coeficientes
 
-Como ambos métodos deben darnos el mismo diferencial $dH$, podemos igualar término a término los coeficientes que acompañan a $dq_i$, $dp_i$ y $dt$. Esto nos proporciona el sistema de ecuaciones fundamentales de la mecánica hamiltoniana, conocidas como Ecuaciones Canónicas de Hamilton:
+Ambos métodos calculan el mismo diferencial $dH$. Como $q_i$, $p_i$ y $t$ son variables independientes en el espacio de fases, sus diferenciales $dq_i$, $dp_i$ y $dt$ también lo son, y los coeficientes que los acompañan deben coincidir término a término:
+
+* Coeficiente de $dp_i$: $\dfrac{\partial H}{\partial p_i} = \dot{q}_i$.
+* Coeficiente de $dq_i$: $\dfrac{\partial H}{\partial q_i} = -\dot{p}_i$.
+* Coeficiente de $dt$: $\dfrac{\partial H}{\partial t} = -\dfrac{\partial L}{\partial t}$.
+
+Las dos primeras son las ecuaciones de movimiento de la mecánica hamiltoniana, conocidas como Ecuaciones Canónicas de Hamilton:
 
 $$
 \begin{aligned}
@@ -1195,38 +1329,212 @@ $$
 \end{aligned}
 $$
 
-Y adicionalmente: $\dfrac{\partial H}{\partial t} = -\dfrac{\partial L}{\partial t}$.
+La tercera relaciona la dependencia temporal explícita de ambas funciones: $H$ depende explícitamente del tiempo si y solo si $L$ lo hace.
 
-A diferencia del formalismo lagrangiano, que nos daba $N$ ecuaciones diferenciales de segundo orden, el formalismo hamiltoniano nos proporciona $2N$ ecuaciones diferenciales acopladas de primer orden. Estas ecuaciones dictan cómo fluye el sistema trazando una única e inequívoca trayectoria a través del espacio de las fases de $2N$ dimensiones.
+Con $n$ grados de libertad, el formalismo lagrangiano da $n$ ecuaciones diferenciales de segundo orden en las $q_i$, mientras que el formalismo hamiltoniano da $2 \cdot n$ ecuaciones diferenciales acopladas de primer orden en las $q_i$ y las $p_i$. El número total de condiciones iniciales necesarias es el mismo en ambos casos ($2 \cdot n$: posiciones y velocidades, o posiciones y momentos). Dado un punto inicial $(q_i(t_0), p_i(t_0))$, el teorema de existencia y unicidad de las ecuaciones diferenciales ordinarias garantiza (para $H$ suficientemente regular) que existe una única trayectoria en el espacio de fases, de dimensión $2 \cdot n$, que pasa por él. En consecuencia, dos trayectorias distintas del espacio de fases no se cortan.
 
 ## 7. Significado físico del Hamiltoniano
 
-En la inmensa mayoría de los sistemas mecánicos convencionales (específicamente aquellos donde las fuerzas son conservativas, la energía potencial $V$ no depende de las velocidades, y las ecuaciones de transformación entre las coordenadas espaciales y las generalizadas no dependen explícitamente del tiempo), el Hamiltoniano resulta ser idéntico a la Energía Mecánica Total del sistema.
+El Hamiltoniano se ha definido como una transformada de Legendre del Lagrangiano, $H = \sum_i p_i \cdot \dot{q}_i - L$, sin ninguna referencia a la energía. Esta sección estudia cuándo coincide con la energía mecánica total $E = T + V$ y cuándo se conserva. Son dos preguntas distintas y, como se verá, sus respuestas son independientes.
 
-Veamos por qué. Si la energía cinética $T$ es una función cuadrática de las velocidades (como es habitual, ej. $T = \dfrac{1}{2}m\dot{x}^2$), se cumple una propiedad matemática del Teorema de Euler para funciones homogéneas que establece que:
+### 7.1. Funciones homogéneas y teorema de Euler
 
-$$
-\begin{aligned}
-\sum_{i} \dot{q}_i \dfrac{\partial T}{\partial \dot{q}_i} = 2T
-\end{aligned}
-$$
-
-Como el momento es $p_i = \dfrac{\partial L}{\partial \dot{q}_i}$ y $L = T - V$ (donde $V$ no depende de las velocidades), entonces $\dfrac{\partial L}{\partial \dot{q}_i} = \dfrac{\partial T}{\partial \dot{q}_i}$. Por tanto:
+Una función $f(x_1, \dots, x_n)$ es **homogénea de grado $k$** si, para todo $\lambda > 0$,
 
 $$
 \begin{aligned}
-\sum_{i} p_i \dot{q}_i = \sum_{i} \dot{q}_i \dfrac{\partial T}{\partial \dot{q}_i} = 2T
+f(\lambda \cdot x_1, \dots, \lambda \cdot x_n) = \lambda^k \cdot f(x_1, \dots, x_n).
 \end{aligned}
 $$
 
-Sustituyendo esto en nuestra definición original del Hamiltoniano ($H = \sum p_i \dot{q}_i - L$):
+Por ejemplo, $a \cdot x^2 + b \cdot x \cdot y + c \cdot y^2$ es homogénea de grado 2, $a \cdot x + b \cdot y$ lo es de grado 1 y una función que no depende de las $x_i$ lo es de grado 0.
+
+**Teorema de Euler.** Si $f$ es diferenciable y homogénea de grado $k$, entonces
 
 $$
 \begin{aligned}
-H = 2T - (T - V) = T + V = E_{total}
+\sum_{i=1}^{n} x_i \cdot \dfrac{\partial f}{\partial x_i} = k \cdot f.
 \end{aligned}
 $$
 
-Esta es la razón por la que en mecánica cuántica (que toma la mecánica hamiltoniana como punto de partida clásico), el "Operador Hamiltoniano" $\hat{H}$ es precisamente el operador asociado a la energía total del sistema.
+Demostración: se deriva la igualdad de la definición respecto de $\lambda$. En el lado izquierdo, por la regla de la cadena, cada argumento $\lambda \cdot x_i$ aporta su derivada $x_i$:
+
+$$
+\begin{aligned}
+\sum_{i=1}^{n} x_i \cdot \dfrac{\partial f}{\partial x_i}(\lambda \cdot x_1, \dots, \lambda \cdot x_n) = k \cdot \lambda^{k-1} \cdot f(x_1, \dots, x_n).
+\end{aligned}
+$$
+
+Evaluando en $\lambda = 1$ se obtiene el resultado.
+
+En mecánica, la homogeneidad que interesa es respecto de las **velocidades generalizadas** $\dot{q}_i$, con las coordenadas $q_i$ y el tiempo $t$ fijos. No se trata de homogeneidad en las variables espaciales: $T = \dfrac{1}{2} \cdot m \cdot \dot{x}^2$ es homogénea de grado 2 en $\dot{x}$, sea cual sea la dependencia en $x$.
+
+### 7.2. Descomposición de la energía cinética
+
+Sea un sistema de partículas de masas $m_a$ cuyas posiciones se expresan en función de las coordenadas generalizadas y, posiblemente, del tiempo: $\mathbf{r}_a = \mathbf{r}_a(q_1, \dots, q_n, t)$. La dependencia explícita de $t$ aparece cuando las ligaduras se mueven (un alambre que gira, un soporte que oscila); en ese caso el sistema se llama **reónomo**. Si $\mathbf{r}_a$ no depende explícitamente de $t$, se llama **esclerónomo**.
+
+Por la regla de la cadena, la velocidad de cada partícula es
+
+$$
+\begin{aligned}
+\dot{\mathbf{r}}_a = \sum_{j} \dfrac{\partial \mathbf{r}_a}{\partial q_j} \cdot \dot{q}_j + \dfrac{\partial \mathbf{r}_a}{\partial t}.
+\end{aligned}
+$$
+
+Al sustituir en $T = \dfrac{1}{2} \cdot \sum_a m_a \cdot \dot{\mathbf{r}}_a \cdot \dot{\mathbf{r}}_a$ y desarrollar el cuadrado, la energía cinética se separa en tres partes, homogéneas de grados 2, 1 y 0 en las velocidades:
+
+$$
+\begin{aligned}
+T &= T_2 + T_1 + T_0, \\
+T_2 &= \dfrac{1}{2} \cdot \sum_{j,k} M_{jk} \cdot \dot{q}_j \cdot \dot{q}_k,
+\qquad M_{jk} = \sum_a m_a \cdot \dfrac{\partial \mathbf{r}_a}{\partial q_j} \cdot \dfrac{\partial \mathbf{r}_a}{\partial q_k}, \\
+T_1 &= \sum_{j} b_j \cdot \dot{q}_j,
+\qquad b_j = \sum_a m_a \cdot \dfrac{\partial \mathbf{r}_a}{\partial q_j} \cdot \dfrac{\partial \mathbf{r}_a}{\partial t}, \\
+T_0 &= \dfrac{1}{2} \cdot \sum_a m_a \cdot \dfrac{\partial \mathbf{r}_a}{\partial t} \cdot \dfrac{\partial \mathbf{r}_a}{\partial t}.
+\end{aligned}
+$$
+
+Los coeficientes $M_{jk}$, $b_j$ y $T_0$ dependen de $q$ y de $t$, pero no de las velocidades. En un sistema esclerónomo, $\dfrac{\partial \mathbf{r}_a}{\partial t} = \mathbf{0}$, de modo que $T_1 = T_0 = 0$ y $T = T_2$ es homogénea de grado 2.
+
+### 7.3. Expresión general del Hamiltoniano
+
+Del mismo modo, el Lagrangiano se descompone en partes homogéneas en las velocidades, $L = L_2 + L_1 + L_0$. Si el potencial $V(q,t)$ no depende de las velocidades, $L_2 = T_2$, $L_1 = T_1$ y $L_0 = T_0 - V$.
+
+Como $p_i = \dfrac{\partial L}{\partial \dot{q}_i}$, el teorema de Euler aplicado a cada parte da
+
+$$
+\begin{aligned}
+\sum_i p_i \cdot \dot{q}_i = \sum_i \dot{q}_i \cdot \dfrac{\partial L}{\partial \dot{q}_i} = 2 \cdot L_2 + 1 \cdot L_1 + 0 \cdot L_0,
+\end{aligned}
+$$
+
+y, restando $L$,
+
+$$
+\begin{aligned}
+H = 2 \cdot L_2 + L_1 - (L_2 + L_1 + L_0) = L_2 - L_0.
+\end{aligned}
+$$
+
+La parte lineal en las velocidades, $L_1$, desaparece del Hamiltoniano. Con $V$ independiente de las velocidades:
+
+$$
+\begin{aligned}
+H &= T_2 - T_0 + V, \\
+E &= T + V = T_2 + T_1 + T_0 + V, \\
+E - H &= T_1 + 2 \cdot T_0.
+\end{aligned}
+$$
+
+**Condición para que $H$ sea la energía total.** $H = E$ para todo estado del sistema si y solo si $T_1 + 2 \cdot T_0 = 0$ para cualesquiera velocidades. Como $T_1$ es lineal en las velocidades y $T_0$ no depende de ellas, esto exige $T_1 = 0$ y $T_0 = 0$ por separado; es decir, que $T$ sea homogénea de grado 2 en las velocidades. Esto se cumple siempre en los sistemas esclerónomos. Por tanto, si $V$ no depende de las velocidades:
+
+$$
+\begin{aligned}
+H = T + V = E \iff T \text{ es homogénea de grado 2 en las } \dot{q}_i.
+\end{aligned}
+$$
+
+El caso más sencillo es una partícula en coordenadas cartesianas, con $T = \dfrac{1}{2} \cdot m \cdot \dot{x}^2$ y $V(x)$: entonces $p \cdot \dot{x} = \dot{x} \cdot \dfrac{\partial T}{\partial \dot{x}} = \dot{x} \cdot m \cdot \dot{x} = 2 \cdot T$, y $H = 2 \cdot T - (T - V) = T + V$.
+
+### 7.4. Dependencia explícita del tiempo y conservación de $H$
+
+Usando la regla de la cadena y las ecuaciones canónicas:
+
+$$
+\begin{aligned}
+\dfrac{dH}{dt}
+&= \sum_{i} \left( \dfrac{\partial H}{\partial q_i} \cdot \dot{q}_i + \dfrac{\partial H}{\partial p_i} \cdot \dot{p}_i \right) + \dfrac{\partial H}{\partial t} \\
+&= \sum_{i} \left( \dfrac{\partial H}{\partial q_i} \cdot \dfrac{\partial H}{\partial p_i} - \dfrac{\partial H}{\partial p_i} \cdot \dfrac{\partial H}{\partial q_i} \right) + \dfrac{\partial H}{\partial t} \\
+&= \dfrac{\partial H}{\partial t} = -\dfrac{\partial L}{\partial t},
+\end{aligned}
+$$
+
+donde la última igualdad es la tercera relación obtenida en la sección 6.2. Por tanto, $H$ se conserva a lo largo del movimiento si y solo si $L$ (equivalentemente, $H$) no depende explícitamente del tiempo.
+
+La conservación de $H$ y su igualdad con $E$ son propiedades independientes:
+
+* $H = E$ depende de la forma de $T$ (homogénea de grado 2) y de que $V$ no dependa de las velocidades.
+* La conservación de $H$ depende de que no haya dependencia explícita del tiempo en $L$.
+
+Un sistema reónomo puede tener un Lagrangiano sin dependencia explícita del tiempo (por ejemplo, si la ligadura gira con velocidad angular constante): entonces $H$ se conserva aunque no sea la energía. En ese caso, a la cantidad conservada $H$ se la llama **integral de Jacobi**. A la inversa, un sistema esclerónomo con un potencial que depende del tiempo tiene $H = E$, pero $E$ no se conserva.
+
+### 7.5. Ejemplos
+
+#### Cuenta en una varilla que gira: $H$ se conserva, pero $H \neq E$
+
+Una cuenta de masa $m$ desliza sin rozamiento por una varilla recta horizontal que gira en torno a un eje vertical con velocidad angular constante $\omega$. Se toma como coordenada generalizada la distancia $r$ de la cuenta al eje. Las coordenadas cartesianas son $x = r \cdot \cos(\omega \cdot t)$ e $y = r \cdot \sin(\omega \cdot t)$, que dependen explícitamente de $t$: el sistema es reónomo. Derivando:
+
+$$
+\begin{aligned}
+\dot{x} &= \dot{r} \cdot \cos(\omega \cdot t) - r \cdot \omega \cdot \sin(\omega \cdot t), \\
+\dot{y} &= \dot{r} \cdot \sin(\omega \cdot t) + r \cdot \omega \cdot \cos(\omega \cdot t), \\
+T &= \dfrac{1}{2} \cdot m \cdot (\dot{x}^2 + \dot{y}^2) = \dfrac{1}{2} \cdot m \cdot \dot{r}^2 + \dfrac{1}{2} \cdot m \cdot \omega^2 \cdot r^2.
+\end{aligned}
+$$
+
+Aquí $T_2 = \dfrac{1}{2} \cdot m \cdot \dot{r}^2$, $T_1 = 0$ y $T_0 = \dfrac{1}{2} \cdot m \cdot \omega^2 \cdot r^2$. La varilla es horizontal, así que $V = 0$ y $L = T$. Entonces $p = \dfrac{\partial L}{\partial \dot{r}} = m \cdot \dot{r}$ y
+
+$$
+\begin{aligned}
+H &= p \cdot \dot{r} - L = \dfrac{1}{2} \cdot m \cdot \dot{r}^2 - \dfrac{1}{2} \cdot m \cdot \omega^2 \cdot r^2 = T_2 - T_0, \\
+E &= T = \dfrac{1}{2} \cdot m \cdot \dot{r}^2 + \dfrac{1}{2} \cdot m \cdot \omega^2 \cdot r^2.
+\end{aligned}
+$$
+
+La diferencia es $E - H = 2 \cdot T_0 = m \cdot \omega^2 \cdot r^2$, como predice la sección 7.3.
+
+* $L$ no depende explícitamente de $t$, luego $H$ se conserva.
+* $E$ no se conserva. La ecuación de Euler-Lagrange es $m \cdot \ddot{r} - m \cdot \omega^2 \cdot r = 0$, es decir, $\ddot{r} = \omega^2 \cdot r$, y entonces
+  $$
+  \begin{aligned}
+  \dfrac{dE}{dt} = m \cdot \dot{r} \cdot \ddot{r} + m \cdot \omega^2 \cdot r \cdot \dot{r} = 2 \cdot m \cdot \omega^2 \cdot r \cdot \dot{r}.
+  \end{aligned}
+  $$
+  Esta potencia la aporta la varilla: la fuerza de ligadura es perpendicular a la varilla, pero la varilla se mueve, y esa fuerza realiza trabajo sobre la cuenta.
+
+#### Oscilador con constante elástica variable: $H = E$, pero no se conserva
+
+Sea $L = \dfrac{1}{2} \cdot m \cdot \dot{x}^2 - \dfrac{1}{2} \cdot k(t) \cdot x^2$, donde la constante elástica $k(t)$ cambia con el tiempo por una acción externa. La relación entre $x$ y la posición no depende del tiempo, así que $T$ es homogénea de grado 2 y
+
+$$
+\begin{aligned}
+H = \dfrac{p^2}{2 \cdot m} + \dfrac{1}{2} \cdot k(t) \cdot x^2 = T + V = E.
+\end{aligned}
+$$
+
+Sin embargo, $\dfrac{dH}{dt} = \dfrac{\partial H}{\partial t} = \dfrac{1}{2} \cdot \dot{k}(t) \cdot x^2 \neq 0$: la energía cambia porque el agente externo que modifica el muelle realiza trabajo sobre el sistema.
+
+#### Partícula cargada en un campo electromagnético: potencial que depende de la velocidad
+
+Para una partícula de carga $q$ en un campo con potenciales $\phi(\mathbf{r},t)$ y $\mathbf{A}(\mathbf{r},t)$, el Lagrangiano es
+
+$$
+\begin{aligned}
+L = \dfrac{1}{2} \cdot m \cdot \mathbf{v} \cdot \mathbf{v} - q \cdot \phi + q \cdot \mathbf{v} \cdot \mathbf{A}.
+\end{aligned}
+$$
+
+Aquí la hipótesis «$V$ no depende de las velocidades» no se cumple: hay un término lineal en las velocidades, $L_1 = q \cdot \mathbf{v} \cdot \mathbf{A}$. Aplicando $H = L_2 - L_0$:
+
+$$
+\begin{aligned}
+H = \dfrac{1}{2} \cdot m \cdot \mathbf{v} \cdot \mathbf{v} + q \cdot \phi = \dfrac{\left|\mathbf{p} - q \cdot \mathbf{A}\right|^2}{2 \cdot m} + q \cdot \phi,
+\end{aligned}
+$$
+
+donde $\mathbf{p} = m \cdot \mathbf{v} + q \cdot \mathbf{A}$ es el momento canónico. El término magnético no aparece en $H$, lo que concuerda con que la fuerza magnética no realiza trabajo. $H$ es la energía cinética más la energía potencial eléctrica, y se conserva solo si $\phi$ y $\mathbf{A}$ no dependen explícitamente del tiempo.
+
+### 7.6. Resumen
+
+Con un potencial independiente de las velocidades:
+
+| Sistema | ¿$H = E$? | ¿Se conserva $H$? |
+| --- | --- | --- |
+| Esclerónomo, $V(q)$ | Sí | Sí |
+| Esclerónomo, $V(q,t)$ | Sí | No |
+| Reónomo, $L$ sin $t$ explícito | No: $E - H = T_1 + 2 \cdot T_0$ | Sí (integral de Jacobi) |
+| Reónomo, $L$ con $t$ explícito | No | No |
+
+En mecánica cuántica, que toma la mecánica hamiltoniana como punto de partida clásico, el operador Hamiltoniano $\hat{H}$ se construye a partir del Hamiltoniano clásico. En los sistemas del primer caso de la tabla, que son los habituales en los problemas básicos (partícula en un potencial, átomo de hidrógeno, oscilador armónico), $\hat{H}$ es el operador asociado a la energía total del sistema.
 
 &nbsp;

@@ -17,6 +17,12 @@ build/
 *.xdv
 *.pdf.bak
 
+# Borrador personal (REPASA_BORRADOR)
+BORRADOR.md
+
+# Claude Code: configuración local
+.claude/settings.local.json
+
 # Editor
 .vscode/*
 !.vscode/settings.json

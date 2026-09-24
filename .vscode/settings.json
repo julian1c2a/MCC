@@ -1,3 +1,5 @@
 {
-    "editor.linkedEditing": true
+    "editor.linkedEditing": true,
+    "claudeCode.useCtrlEnterToSend": true,
+    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/latex/workshop"
 }
