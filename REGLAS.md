@@ -321,7 +321,7 @@ Publica la web en GitHub Pages: <https://julian1c2a.github.io/MCC/>.
 
 1. La IA redacta el mensaje de commit, como en GUARDA_y_SUBE.
 2. Ejecutar `pwsh scripts/publica-web.ps1 -Mensaje "<mensaje>"`, que:
-   - activa GitHub Pages la primera vez;
+   - activa GitHub Pages la primera vez y define la variable del repositorio `PAGES_ACTIVO=1` (hasta entonces, los push no lanzan la publicación);
    - ejecuta GUARDA_y_SUBE y, si falla, no publica;
    - lanza el workflow `.github/workflows/pages.yml`, espera a que termine y muestra la URL.
 3. Una vez activado Pages, cada GUARDA_y_SUBE que cambie `html/` o `doc_out/` publica la web automáticamente; PUBLICA_WEB sirve para forzar la publicación y comprobarla.

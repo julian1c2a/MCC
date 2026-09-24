@@ -20,6 +20,9 @@ concurrency:
 
 jobs:
   publicar:
+    # En los push solo se publica si PUBLICA_WEB ya activó Pages (variable del repositorio
+    # PAGES_ACTIVO=1); así, antes de activarlo, los push no producen ejecuciones fallidas.
+    if: github.event_name == 'workflow_dispatch' || vars.PAGES_ACTIVO == '1'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

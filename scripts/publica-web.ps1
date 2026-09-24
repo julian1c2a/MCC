@@ -27,6 +27,9 @@ if ($LASTEXITCODE -ne 0) {
     & $gh api -X POST "repos/$repo/pages" -f build_type=workflow | Out-Null
     if ($LASTEXITCODE -ne 0) { throw 'No se pudo activar GitHub Pages.' }
 }
+# Desde ahora, cada push a main que cambie html/ o doc_out/ publica la web (ver pages.yml).
+& $gh variable set PAGES_ACTIVO --body 1 --repo $repo
+if ($LASTEXITCODE -ne 0) { throw 'No se pudo definir la variable PAGES_ACTIVO del repositorio.' }
 
 # 2. Validar, commit y push.
 & pwsh -NoProfile -File "$PSScriptRoot/guarda-y-sube.ps1" -Mensaje $Mensaje
