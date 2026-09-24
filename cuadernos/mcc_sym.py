@@ -8,7 +8,7 @@ REGLAS.md, sección 7.
 - ``comprobar``, ``es_cero``: comprobaciones que hacen fallar el cuaderno si no se cumplen
   (``scripts/comprueba-cuadernos.ps1`` los ejecuta todos).
 - ``legendre``, ``legendre_multi``, ``hessiana``: transformada de Legendre.
-- ``euler_lagrange``, ``hamiltoniano``: mecánica analítica.
+- ``euler_lagrange``, ``euler_lagrange_campo``, ``hamiltoniano``: mecánica analítica.
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ import sympy as sp
 __all__ = [
     "sp", "latex_mcc", "mostrar", "es_cero", "comprobar",
     "hessiana", "legendre", "legendre_multi", "Legendre",
-    "euler_lagrange", "hamiltoniano",
+    "euler_lagrange", "euler_lagrange_campo", "hamiltoniano",
 ]
 
 
@@ -155,6 +155,15 @@ def euler_lagrange(L, qs, t):
     """Ecuaciones de Euler-Lagrange d/dt(∂L/∂q̇) − ∂L/∂q = 0 para las funciones ``qs`` de ``t``."""
     qs = list(qs) if isinstance(qs, (list, tuple)) else [qs]
     return [sp.Eq(sp.simplify(sp.diff(sp.diff(L, sp.diff(q, t)), t) - sp.diff(L, q)), 0) for q in qs]
+
+
+def euler_lagrange_campo(densidad, campo, variables):
+    """Ecuación de Euler-Lagrange de un campo ``campo`` (p. ej. f(x, t)) con densidad
+    lagrangiana ``densidad``: ∂ℒ/∂f − Σ_μ ∂_μ(∂ℒ/∂(∂_μ f)) = 0. Devuelve la expresión del
+    lado izquierdo simplificada (la ecuación es «expresión = 0»)."""
+    from sympy.calculus.euler import euler_equations
+    (ecuacion,) = euler_equations(densidad, campo, variables)
+    return sp.simplify(ecuacion.lhs - ecuacion.rhs)
 
 
 def hamiltoniano(L, qs, t, ps):

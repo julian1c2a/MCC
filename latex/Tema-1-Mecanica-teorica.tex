@@ -72,14 +72,14 @@
   pdfcreator={LaTeX via pandoc}}
 
 \ifXeTeX
-\special{pdf:trailerid [ <b757066b316d6340143999b6560edc93> <b757066b316d6340143999b6560edc93> ]}
+\special{pdf:trailerid [ <361bafc9bc1e85a08d771aa007c9aab6> <361bafc9bc1e85a08d771aa007c9aab6> ]}
 \fi
 \ifPDFTeX
 \pdftrailerid{}
-\pdftrailer{/ID [ <b757066b316d6340143999b6560edc93> <b757066b316d6340143999b6560edc93> ]}
+\pdftrailer{/ID [ <361bafc9bc1e85a08d771aa007c9aab6> <361bafc9bc1e85a08d771aa007c9aab6> ]}
 \fi
 \ifLuaTeX
-\pdfvariable trailerid {[ <b757066b316d6340143999b6560edc93> <b757066b316d6340143999b6560edc93> ]}
+\pdfvariable trailerid {[ <361bafc9bc1e85a08d771aa007c9aab6> <361bafc9bc1e85a08d771aa007c9aab6> ]}
 \fi
 
 \author{Julián Calderón Almendros}
@@ -1463,6 +1463,12 @@ circunferencia. A diferencia de la braquistócrona, este problema incluye
 una restricción (la longitud fija), que se incorpora mediante un
 multiplicador de Lagrange).
 
+\textbf{Ejemplo computacional:}
+\href{https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/braquistocrona.py}{cuadernos/tema1/braquistocrona.py}.
+Comprueba con SymPy la identidad de Beltrami, que la cicloide cumple la
+ecuación de Euler-Lagrange y que el tiempo de descenso es
+\(T = \theta_B \cdot \sqrt{r/g}\), menor que por la recta.
+
 \subsubsection{3.3. Variaciones y derivada
 funcional}\label{variaciones-y-derivada-funcional}
 
@@ -1660,6 +1666,14 @@ necesaria para que su acción sea estacionaria. El principio de Hamilton
 exige estacionariedad, no necesariamente un mínimo: la solución puede
 corresponder a un mínimo, a un máximo o a un punto de silla de la
 acción.
+
+\textbf{Ejemplo computacional:}
+\href{https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/ondas.py}{cuadernos/tema1/ondas.py}.
+Obtiene con SymPy la ecuación de ondas como ecuación de Euler-Lagrange
+de la densidad
+\(\mathcal{L} = \dfrac{1}{2} \cdot \mu \cdot \left(\dfrac{\partial f}{\partial t}\right)^2 - \dfrac{1}{2} \cdot \tau \cdot \left(\dfrac{\partial f}{\partial x}\right)^2\)
+de una cuerda, con \(v^2 = \tau/\mu\), y comprueba la solución de
+d'Alembert y las ondas estacionarias del apartado 1.
 
 \subsubsection{4.2. Sistemas discretos de
 partículas}\label{sistemas-discretos-de-partuxedculas}
@@ -2455,6 +2469,13 @@ momento canónico. El término magnético no aparece en \(H\), lo que
 concuerda con que la fuerza magnética no realiza trabajo. \(H\) es la
 energía cinética más la energía potencial eléctrica, y se conserva solo
 si \(\phi\) y \(\mathbf{A}\) no dependen explícitamente del tiempo.
+
+\textbf{Ejemplo computacional:}
+\href{https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/hamiltoniano.py}{cuadernos/tema1/hamiltoniano.py}.
+Comprueba con SymPy los dos primeros ejemplos: en la varilla giratoria,
+\(H = T_2 - T_0\), \(E - H = 2 \cdot T_0\), \(H\) se conserva y \(E\)
+no; en el oscilador con \(k(t)\), \(H = E\) y
+\(dH/dt = \partial H/\partial t\).
 
 \subsubsection{7.6. Resumen}\label{resumen}
 

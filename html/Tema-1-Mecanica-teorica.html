@@ -1510,6 +1510,12 @@ encontrar la que encierra el área máxima. La solución es la
 circunferencia. A diferencia de la braquistócrona, este problema incluye
 una restricción (la longitud fija), que se incorpora mediante un
 multiplicador de Lagrange).</p>
+<p><strong>Ejemplo computacional:</strong> <a
+href="https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/braquistocrona.py">cuadernos/tema1/braquistocrona.py</a>.
+Comprueba con SymPy la identidad de Beltrami, que la cicloide cumple la
+ecuación de Euler-Lagrange y que el tiempo de descenso es <span
+class="math inline">\(T = \theta_B \cdot \sqrt{r/g}\)</span>, menor que
+por la recta.</p>
 <h3 id="variaciones-y-derivada-funcional">3.3. Variaciones y derivada
 funcional</h3>
 <p>Para estudiar si un funcional es estacionario, se compara una función
@@ -1740,6 +1746,15 @@ diferencial, que es la condición necesaria para que su acción sea
 estacionaria. El principio de Hamilton exige estacionariedad, no
 necesariamente un mínimo: la solución puede corresponder a un mínimo, a
 un máximo o a un punto de silla de la acción.</p>
+<p><strong>Ejemplo computacional:</strong> <a
+href="https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/ondas.py">cuadernos/tema1/ondas.py</a>.
+Obtiene con SymPy la ecuación de ondas como ecuación de Euler-Lagrange
+de la densidad <span class="math inline">\(\mathcal{L} = \dfrac{1}{2}
+\cdot \mu \cdot \left(\dfrac{\partial f}{\partial t}\right)^2 -
+\dfrac{1}{2} \cdot \tau \cdot \left(\dfrac{\partial f}{\partial
+x}\right)^2\)</span> de una cuerda, con <span class="math inline">\(v^2
+= \tau/\mu\)</span>, y comprueba la solución de d’Alembert y las ondas
+estacionarias del apartado 1.</p>
 <h3 id="sistemas-discretos-de-partículas">4.2. Sistemas discretos de
 partículas</h3>
 <p>Hasta ahora hemos tratado medios continuos mediante una densidad
@@ -2568,6 +2583,16 @@ potencial eléctrica, y se conserva solo si <span
 class="math inline">\(\phi\)</span> y <span
 class="math inline">\(\mathbf{A}\)</span> no dependen explícitamente del
 tiempo.</p>
+<p><strong>Ejemplo computacional:</strong> <a
+href="https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/hamiltoniano.py">cuadernos/tema1/hamiltoniano.py</a>.
+Comprueba con SymPy los dos primeros ejemplos: en la varilla giratoria,
+<span class="math inline">\(H = T_2 - T_0\)</span>, <span
+class="math inline">\(E - H = 2 \cdot T_0\)</span>, <span
+class="math inline">\(H\)</span> se conserva y <span
+class="math inline">\(E\)</span> no; en el oscilador con <span
+class="math inline">\(k(t)\)</span>, <span class="math inline">\(H =
+E\)</span> y <span class="math inline">\(dH/dt = \partial H/\partial
+t\)</span>.</p>
 <h3 id="resumen">7.6. Resumen</h3>
 <p>Con un potencial independiente de las velocidades:</p>
 <table>

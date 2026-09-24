@@ -905,6 +905,8 @@ Geométricamente, una cicloide es la curva que describe un punto del borde de un
 
 (Nota: otro problema clásico del mismo tipo es el problema isoperimétrico: entre todas las curvas cerradas de longitud fija, encontrar la que encierra el área máxima. La solución es la circunferencia. A diferencia de la braquistócrona, este problema incluye una restricción (la longitud fija), que se incorpora mediante un multiplicador de Lagrange).
 
+**Ejemplo computacional:** [cuadernos/tema1/braquistocrona.py](https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/braquistocrona.py). Comprueba con SymPy la identidad de Beltrami, que la cicloide cumple la ecuación de Euler-Lagrange y que el tiempo de descenso es $T = \theta_B \cdot \sqrt{r/g}$, menor que por la recta.
+
 ### 3.3. Variaciones y derivada funcional
 
 Para estudiar si un funcional es estacionario, se compara una función candidata $f_0$ con funciones próximas de la forma $f_\epsilon = f_0 + \epsilon \cdot \eta$, donde $\epsilon$ es un parámetro real pequeño y $\eta$ es una perturbación suave que respeta las condiciones de contorno. La **primera variación** es el cambio lineal del funcional al variar $\epsilon$ alrededor de cero.
@@ -1025,6 +1027,8 @@ $$
 $$
 
 Todo sistema físico continuo descrito por una densidad lagrangiana $\mathcal{L}$ obedece esta ecuación diferencial, que es la condición necesaria para que su acción sea estacionaria. El principio de Hamilton exige estacionariedad, no necesariamente un mínimo: la solución puede corresponder a un mínimo, a un máximo o a un punto de silla de la acción.
+
+**Ejemplo computacional:** [cuadernos/tema1/ondas.py](https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/ondas.py). Obtiene con SymPy la ecuación de ondas como ecuación de Euler-Lagrange de la densidad $\mathcal{L} = \dfrac{1}{2} \cdot \mu \cdot \left(\dfrac{\partial f}{\partial t}\right)^2 - \dfrac{1}{2} \cdot \tau \cdot \left(\dfrac{\partial f}{\partial x}\right)^2$ de una cuerda, con $v^2 = \tau/\mu$, y comprueba la solución de d'Alembert y las ondas estacionarias del apartado 1.
 
 ### 4.2. Sistemas discretos de partículas
 
@@ -1525,6 +1529,8 @@ H = \dfrac{1}{2} \cdot m \cdot \mathbf{v} \cdot \mathbf{v} + q \cdot \phi = \dfr
 $$
 
 donde $\mathbf{p} = m \cdot \mathbf{v} + q \cdot \mathbf{A}$ es el momento canónico. El término magnético no aparece en $H$, lo que concuerda con que la fuerza magnética no realiza trabajo. $H$ es la energía cinética más la energía potencial eléctrica, y se conserva solo si $\phi$ y $\mathbf{A}$ no dependen explícitamente del tiempo.
+
+**Ejemplo computacional:** [cuadernos/tema1/hamiltoniano.py](https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/hamiltoniano.py). Comprueba con SymPy los dos primeros ejemplos: en la varilla giratoria, $H = T_2 - T_0$, $E - H = 2 \cdot T_0$, $H$ se conserva y $E$ no; en el oscilador con $k(t)$, $H = E$ y $dH/dt = \partial H/\partial t$.
 
 ### 7.6. Resumen
 
