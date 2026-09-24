@@ -35,12 +35,23 @@ if ($LASTEXITCODE -ne 0) { throw 'No se pudo definir la variable PAGES_ACTIVO de
 & pwsh -NoProfile -File "$PSScriptRoot/guarda-y-sube.ps1" -Mensaje $Mensaje
 if ($LASTEXITCODE -ne 0) { Write-Host 'GUARDA_y_SUBE no terminó bien: no se publica.' -ForegroundColor Red; exit 1 }
 
-# 3. Publicar y esperar.
-Write-Host '-- Lanzando el workflow de publicación'
-& $gh workflow run pages.yml --repo $repo --ref main
-if ($LASTEXITCODE -ne 0) { throw 'No se pudo lanzar el workflow pages.yml.' }
-Start-Sleep -Seconds 5
-$runId = & $gh run list --repo $repo --workflow pages.yml --limit 1 --json databaseId --jq '.[0].databaseId'
+# 3. Publicar y esperar. Si el push ya lanzó el workflow (cambios en html/ o doc_out/), se
+# espera a esa ejecución; si no, se lanza a mano. Así no hay dos publicaciones a la vez.
+$sha = git rev-parse HEAD
+function Get-RunDelCommit {
+    & $gh run list --repo $repo --workflow pages.yml --commit $sha --limit 1 --json databaseId --jq '.[0].databaseId'
+}
+Start-Sleep -Seconds 10
+$runId = Get-RunDelCommit
+if (-not $runId) {
+    Write-Host '-- Lanzando el workflow de publicación'
+    & $gh workflow run pages.yml --repo $repo --ref main
+    if ($LASTEXITCODE -ne 0) { throw 'No se pudo lanzar el workflow pages.yml.' }
+    for ($i = 0; $i -lt 12 -and -not $runId; $i++) { Start-Sleep -Seconds 5; $runId = Get-RunDelCommit }
+    if (-not $runId) { throw 'No aparece la ejecución del workflow pages.yml.' }
+} else {
+    Write-Host '-- El push ya ha lanzado la publicación; se espera a que termine'
+}
 & $gh run watch $runId --repo $repo --exit-status
 if ($LASTEXITCODE -ne 0) { Write-Host "La publicación falló: $gh run view $runId --repo $repo --log-failed" -ForegroundColor Red; exit 1 }
 $url = & $gh api "repos/$repo/pages" --jq '.html_url'
