@@ -51,7 +51,7 @@ Los `.tex` se generan desde el Markdown, por lo que una edición directa se perd
 
 Además de la comprobación automática, cuando se añaden o alargan fórmulas se revisa el PDF para confirmar que ninguna invade el margen.
 
-Los PDF son reproducibles: la fecha interna es la de modificación del Markdown (`SOURCE_DATE_EPOCH`) y no llevan identificador aleatorio (`\pdftrailerid{}` en `latex/pandoc-pdf-header.tex`). Si el contenido no cambia, el PDF sale idéntico y git no lo ve modificado.
+Los PDF son reproducibles: la fecha interna es la de modificación del Markdown (`SOURCE_DATE_EPOCH`) y no llevan identificador aleatorio (`\pdftrailerid{}` en `latex/pandoc-pdf-header.tex`). Si el contenido no cambia, el PDF sale idéntico y git no lo ve modificado. Con `-TeX Both`, los PDF de `doc_out/` salen siempre de TeX Live; MiKTeX solo valida (sus PDF quedan en `build/`). Así el resultado no depende de la distribución que compiló la última.
 
 ### 2.5. Entornos instalados
 

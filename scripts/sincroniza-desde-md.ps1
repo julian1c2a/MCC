@@ -92,13 +92,19 @@ foreach ($n in (Get-DocNames $Name)) {
 
     New-Item -ItemType Directory -Force 'doc_out/latex', 'doc_out/markdown' | Out-Null
     foreach ($d in $distros) {
+        # Los PDF de doc_out/ salen siempre de la primera distribución (TeX Live salvo -TeX MiKTeX);
+        # las demás solo validan. Así el PDF no depende de qué distribución compiló la última.
+        $principal = ($d -eq $distros[0])
+
         # 5. LaTeX -> PDF.
         $pdf = Invoke-LatexCompile $texFile $d "build/latex/$d"
-        if (Test-Path $pdf) { Copy-Item $pdf "doc_out/latex/$n.pdf" -Force }
+        if ($principal -and (Test-Path $pdf)) { Copy-Item $pdf "doc_out/latex/$n.pdf" -Force }
 
         # 6. Markdown -> PDF directo.
-        Write-Host "-- Pandoc ($d): $mdFile -> doc_out/markdown/$n.pdf"
-        $out = Invoke-Tool "pandoc (pdf, $d)" 'pandoc' ($PandocCommon + @('--include-in-header=latex/pandoc-pdf-header.tex', '--pdf-engine=pdflatex', "--output=doc_out/markdown/$n.pdf", $mdFile))
+        $salida = if ($principal) { "doc_out/markdown/$n.pdf" } else { "build/pandoc/$d/$n.pdf" }
+        New-Item -ItemType Directory -Force (Split-Path $salida) | Out-Null
+        Write-Host "-- Pandoc ($d): $mdFile -> $salida"
+        $out = Invoke-Tool "pandoc (pdf, $d)" 'pandoc' ($PandocCommon + @('--include-in-header=latex/pandoc-pdf-header.tex', '--pdf-engine=pdflatex', "--output=$salida", $mdFile))
         Test-PandocWarnings "pandoc (pdf, $d)" $out
     }
 
