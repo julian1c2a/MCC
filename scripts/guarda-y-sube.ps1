@@ -27,6 +27,12 @@ $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path -Parent $PSScriptRoot)
 $edicion = 'edicion-actual'
 
+# Git for Windows primero: su Git Credential Manager tiene las credenciales de GitHub
+# (el git de MSYS2 no las tiene y el push falla).
+$gitWindows = 'C:\Program Files\Git\cmd'
+if (Test-Path "$gitWindows\git.exe") { $env:PATH = "$gitWindows;$env:PATH" }
+$env:GIT_TERMINAL_PROMPT = '0'
+
 function Invoke-Git {
     # Ejecuta git y aborta si falla.
     & git @args

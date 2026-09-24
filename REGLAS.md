@@ -53,6 +53,7 @@ Además de la comprobación automática, cuando se añaden o alargan fórmulas s
 | TeX Live 2026 (MSYS2 UCRT64) | `C:\msys64\ucrt64\bin` (`/c/msys64/ucrt64/`) | Distribución por defecto: `pdflatex`, `latexmk`. |
 | MiKTeX 26.5 | `D:\miktex\miktex\bin\x64` (`/d/miktex/`) | Alternativa: `-TeX MiKTeX`, o `-TeX Both` para compilar con ambas. |
 | Pandoc 3.9 | `C:\msys64\usr\bin\pandoc.exe` | Conversión `.md` → `.tex` / PDF / `.html`. |
+| Git for Windows | `C:\Program Files\Git\cmd\git.exe` | `git push` (su Git Credential Manager guarda las credenciales de GitHub; el `git` de MSYS2 no las tiene). |
 | Node.js 24 | `C:\msys64\ucrt64\bin\node.exe` | `scripts/check-md.mjs`. |
 | KaTeX | Extensión de VS Code `goessner.mdmath` (o `KATEX_PATH`) | Validación de fórmulas. |
 
