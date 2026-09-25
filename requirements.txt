@@ -1,5 +1,7 @@
 # Entorno de Python de los cuadernos (cuadernos/). Se instala con scripts/prepara-python.ps1.
 sympy
+scipy
 numpy
 matplotlib
 ipykernel
+pandas
