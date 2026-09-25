@@ -72,14 +72,14 @@
   pdfcreator={LaTeX via pandoc}}
 
 \ifXeTeX
-\special{pdf:trailerid [ <361bafc9bc1e85a08d771aa007c9aab6> <361bafc9bc1e85a08d771aa007c9aab6> ]}
+\special{pdf:trailerid [ <450b74e6adfae4655dab3f7454d2bce3> <450b74e6adfae4655dab3f7454d2bce3> ]}
 \fi
 \ifPDFTeX
 \pdftrailerid{}
-\pdftrailer{/ID [ <361bafc9bc1e85a08d771aa007c9aab6> <361bafc9bc1e85a08d771aa007c9aab6> ]}
+\pdftrailer{/ID [ <450b74e6adfae4655dab3f7454d2bce3> <450b74e6adfae4655dab3f7454d2bce3> ]}
 \fi
 \ifLuaTeX
-\pdfvariable trailerid {[ <361bafc9bc1e85a08d771aa007c9aab6> <361bafc9bc1e85a08d771aa007c9aab6> ]}
+\pdfvariable trailerid {[ <450b74e6adfae4655dab3f7454d2bce3> <450b74e6adfae4655dab3f7454d2bce3> ]}
 \fi
 
 \author{Julián Calderón Almendros}
@@ -98,7 +98,7 @@
   \textbf{Propósito:} apuntes de autoestudio elaborados para preparar la
   asignatura.
 \item
-  \textbf{Última edición:} 2026-09-24
+  \textbf{Última edición:} 2026-09-25
 \item
   \textbf{Autor:} Julián Calderón Almendros
 \item
@@ -1769,6 +1769,17 @@ depende de \(r\)), y entonces \(\dfrac{\partial L}{\partial q_i}\)
 incluye, además de la fuerza, términos procedentes de \(T\), como la
 fuerza centrífuga \(m \cdot r \cdot \dot{\theta}^2\) en la ecuación de
 \(r\).
+
+\textbf{Ejemplo computacional:}
+\href{https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/noether_galileo.py}{cuadernos/tema1/noether\_galileo.py}.
+Para tres partículas con un potencial que solo depende de las distancias
+entre ellas, comprueba con SymPy que las transformaciones de Galileo
+(traslaciones en el tiempo y en el espacio, rotaciones y cambios de
+velocidad) dejan invariante la acción y que las cantidades asociadas por
+el teorema de Noether se conservan: la energía, el momento lineal, el
+momento angular y
+\(M \cdot \mathbf{X}_{\mathrm{cm}} - \mathbf{P} \cdot t\), que expresa
+el movimiento uniforme del centro de masas.
 
 \subsubsection{\texorpdfstring{4.3. Por qué \(L = T - V\): el puente
 desde

@@ -6,7 +6,7 @@ author: "Julián Calderón Almendros"
 
 * **Asignatura:** Complementos de Mecánica Cuántica (Máster en Computación Cuántica)
 * **Propósito:** apuntes de autoestudio elaborados para preparar la asignatura.
-* **Última edición:** 2026-09-24
+* **Última edición:** 2026-09-25
 * **Autor:** Julián Calderón Almendros
 * **Correo electrónico:** julian.calderon.almendros at gmail.com
 * **GitHub:** [\@julian1c2a](https://github.com/julian1c2a)
@@ -1076,6 +1076,8 @@ Estas son las Ecuaciones de Euler-Lagrange para sistemas discretos. Cada términ
 2. El término $\dfrac{\partial L}{\partial q_i}$ se define como la fuerza generalizada $F_i$. (Si $V$ solo depende de $x$, entonces $\dfrac{\partial L}{\partial x} = -\dfrac{\partial V}{\partial x} = F_x$).
 
 Sustituyendo estas definiciones, la ecuación se lee como $\dfrac{d p_i}{dt} = F_i$, que en coordenadas cartesianas es la Segunda Ley de Newton. La diferencia respecto a la formulación newtoniana es que las ecuaciones de Euler-Lagrange tienen la misma forma en cualquier sistema de coordenadas (cartesianas, polares, cilíndricas o variables abstractas). En coordenadas no cartesianas, la energía cinética puede depender de $q_i$ (por ejemplo, en polares $T = \dfrac{1}{2} \cdot m \cdot (\dot{r}^2 + r^2 \cdot \dot{\theta}^2)$ depende de $r$), y entonces $\dfrac{\partial L}{\partial q_i}$ incluye, además de la fuerza, términos procedentes de $T$, como la fuerza centrífuga $m \cdot r \cdot \dot{\theta}^2$ en la ecuación de $r$.
+
+**Ejemplo computacional:** [cuadernos/tema1/noether_galileo.py](https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/noether_galileo.py). Para tres partículas con un potencial que solo depende de las distancias entre ellas, comprueba con SymPy que las transformaciones de Galileo (traslaciones en el tiempo y en el espacio, rotaciones y cambios de velocidad) dejan invariante la acción y que las cantidades asociadas por el teorema de Noether se conservan: la energía, el momento lineal, el momento angular y $M \cdot \mathbf{X}_{\mathrm{cm}} - \mathbf{P} \cdot t$, que expresa el movimiento uniforme del centro de masas.
 
 ### 4.3. Por qué $L = T - V$: el puente desde Newton
 
