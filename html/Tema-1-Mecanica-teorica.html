@@ -1865,6 +1865,21 @@ el teorema de Noether se conservan: la energía, el momento lineal, el
 momento angular y <span class="math inline">\(M \cdot
 \mathbf{X}_{\mathrm{cm}} - \mathbf{P} \cdot t\)</span>, que expresa el
 movimiento uniforme del centro de masas.</p>
+<p><strong>Ejemplo computacional:</strong> <a
+href="https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/galileo_lie_sage.py">cuadernos/tema1/galileo_lie_sage.py</a>.
+Con SageMath, escribe los diez generadores del grupo de Galileo como
+matrices <span class="math inline">\(5 \times 5\)</span>, calcula todos
+sus conmutadores y estudia el álgebra de Lie que forman: su parte
+semisimple es <span class="math inline">\(\mathfrak{so}(3)\)</span> (las
+rotaciones) y su radical resoluble lo forman los cambios de velocidad y
+las traslaciones. Comprueba además que los corchetes de Poisson de las
+cantidades conservadas reproducen esos conmutadores salvo en uno: <span
+class="math inline">\(\{G_i, P_j\} = M \cdot \delta_{ij}\)</span> (<span
+class="math inline">\(M\)</span> es la masa total y <span
+class="math inline">\(\delta_{ij}\)</span>, la delta de Kronecker),
+donde el conmutador correspondiente vale <span
+class="math inline">\(0\)</span>. Ese término constante es una extensión
+central del álgebra.</p>
 <h3 id="por-qué-l-t---v-el-puente-desde-newton">4.3. Por qué <span
 class="math inline">\(L = T - V\)</span>: el puente desde Newton</h3>
 <p>Es común ver definido el Lagrangiano como la diferencia entre la

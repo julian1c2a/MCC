@@ -72,14 +72,14 @@
   pdfcreator={LaTeX via pandoc}}
 
 \ifXeTeX
-\special{pdf:trailerid [ <450b74e6adfae4655dab3f7454d2bce3> <450b74e6adfae4655dab3f7454d2bce3> ]}
+\special{pdf:trailerid [ <dfd6fc8090c15e1f745d63736dfbd83a> <dfd6fc8090c15e1f745d63736dfbd83a> ]}
 \fi
 \ifPDFTeX
 \pdftrailerid{}
-\pdftrailer{/ID [ <450b74e6adfae4655dab3f7454d2bce3> <450b74e6adfae4655dab3f7454d2bce3> ]}
+\pdftrailer{/ID [ <dfd6fc8090c15e1f745d63736dfbd83a> <dfd6fc8090c15e1f745d63736dfbd83a> ]}
 \fi
 \ifLuaTeX
-\pdfvariable trailerid {[ <450b74e6adfae4655dab3f7454d2bce3> <450b74e6adfae4655dab3f7454d2bce3> ]}
+\pdfvariable trailerid {[ <dfd6fc8090c15e1f745d63736dfbd83a> <dfd6fc8090c15e1f745d63736dfbd83a> ]}
 \fi
 
 \author{Julián Calderón Almendros}
@@ -1780,6 +1780,19 @@ el teorema de Noether se conservan: la energía, el momento lineal, el
 momento angular y
 \(M \cdot \mathbf{X}_{\mathrm{cm}} - \mathbf{P} \cdot t\), que expresa
 el movimiento uniforme del centro de masas.
+
+\textbf{Ejemplo computacional:}
+\href{https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/galileo_lie_sage.py}{cuadernos/tema1/galileo\_lie\_sage.py}.
+Con SageMath, escribe los diez generadores del grupo de Galileo como
+matrices \(5 \times 5\), calcula todos sus conmutadores y estudia el
+álgebra de Lie que forman: su parte semisimple es \(\mathfrak{so}(3)\)
+(las rotaciones) y su radical resoluble lo forman los cambios de
+velocidad y las traslaciones. Comprueba además que los corchetes de
+Poisson de las cantidades conservadas reproducen esos conmutadores salvo
+en uno: \(\{G_i, P_j\} = M \cdot \delta_{ij}\) (\(M\) es la masa total y
+\(\delta_{ij}\), la delta de Kronecker), donde el conmutador
+correspondiente vale \(0\). Ese término constante es una extensión
+central del álgebra.
 
 \subsubsection{\texorpdfstring{4.3. Por qué \(L = T - V\): el puente
 desde

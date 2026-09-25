@@ -1079,6 +1079,8 @@ Sustituyendo estas definiciones, la ecuación se lee como $\dfrac{d p_i}{dt} = F
 
 **Ejemplo computacional:** [cuadernos/tema1/noether_galileo.py](https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/noether_galileo.py). Para tres partículas con un potencial que solo depende de las distancias entre ellas, comprueba con SymPy que las transformaciones de Galileo (traslaciones en el tiempo y en el espacio, rotaciones y cambios de velocidad) dejan invariante la acción y que las cantidades asociadas por el teorema de Noether se conservan: la energía, el momento lineal, el momento angular y $M \cdot \mathbf{X}_{\mathrm{cm}} - \mathbf{P} \cdot t$, que expresa el movimiento uniforme del centro de masas.
 
+**Ejemplo computacional:** [cuadernos/tema1/galileo_lie_sage.py](https://github.com/julian1c2a/MCC/blob/main/cuadernos/tema1/galileo_lie_sage.py). Con SageMath, escribe los diez generadores del grupo de Galileo como matrices $5 \times 5$, calcula todos sus conmutadores y estudia el álgebra de Lie que forman: su parte semisimple es $\mathfrak{so}(3)$ (las rotaciones) y su radical resoluble lo forman los cambios de velocidad y las traslaciones. Comprueba además que los corchetes de Poisson de las cantidades conservadas reproducen esos conmutadores salvo en uno: $\{G_i, P_j\} = M \cdot \delta_{ij}$ ($M$ es la masa total y $\delta_{ij}$, la delta de Kronecker), donde el conmutador correspondiente vale $0$. Ese término constante es una extensión central del álgebra.
+
 ### 4.3. Por qué $L = T - V$: el puente desde Newton
 
 Es común ver definido el Lagrangiano como la diferencia entre la Energía Cinética Total ($T$) y la Energía Potencial ($V$):

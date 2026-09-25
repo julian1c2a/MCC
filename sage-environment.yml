@@ -1,0 +1,9 @@
+# Entorno de SageMath para los cuadernos *_sage.py (REGLAS.md 7.5). Se instala en WSL con
+# scripts/prepara-sage.ps1 (Miniforge, entorno conda "sage").
+name: sage
+channels:
+  - conda-forge
+dependencies:
+  - sage
+  - ipykernel
+  - jupyter_server

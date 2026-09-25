@@ -14,6 +14,9 @@ $TexBins = @{
 }
 $MsysBin = 'C:\msys64\usr\bin'      # pandoc, git de MSYS2
 $NodeExe = 'C:\msys64\ucrt64\bin\node.exe'
+# SageMath en WSL (REGLAS.md 7.5): distribución y entorno conda que crea scripts/prepara-sage.ps1.
+$SageDistro = 'Ubuntu'
+$SageEnv = '$HOME/miniforge3/envs/sage'
 $MathJax = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
 $Css = 'tema-1.css'
 $PandocCommon = @('--from=markdown+tex_math_dollars', '--standalone', '--metadata=lang:es')
@@ -32,6 +35,13 @@ function Invoke-Tool {
         $out | Select-Object -Last 30 | ForEach-Object { Write-Host "    $_" }
     }
     return , $out
+}
+
+function ConvertTo-WslPath([string]$Path) {
+    # Ruta de Windows -> ruta en la distribución WSL de Sage (C:\a\b -> /mnt/c/a/b).
+    $p = (& wsl.exe -d $SageDistro --exec wslpath -a ($Path -replace '\\', '/')) | Select-Object -First 1
+    if ($LASTEXITCODE -ne 0 -or -not $p) { throw "wslpath no pudo convertir $Path" }
+    return $p.Trim()
 }
 
 function Test-PandocWarnings([string]$Label, [string[]]$Output) {

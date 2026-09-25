@@ -27,9 +27,17 @@ __all__ = [
 
 # --- Salida ---------------------------------------------------------------------------
 
+def _es_de_sage(obj) -> bool:
+    """True si ``obj`` es un objeto de SageMath (cuadernos *_sage.py, REGLAS.md 7.5)."""
+    return type(obj).__module__.startswith("sage.")
+
+
 def latex_mcc(expr) -> str:
     """LaTeX de ``expr`` con las convenciones de REGLAS.md 4.3: ``\\cdot`` en toda
-    multiplicación, ``\\dfrac`` en lugar de ``\\frac`` y ``\\arcsin`` en lugar de ``\\operatorname{asin}``."""
+    multiplicación, ``\\dfrac`` en lugar de ``\\frac`` y ``\\arcsin`` en lugar de ``\\operatorname{asin}``.
+    Los objetos de SageMath se convierten antes a SymPy."""
+    if _es_de_sage(expr) and hasattr(expr, "_sympy_"):
+        expr = expr._sympy_()
     s = sp.latex(expr, mul_symbol="dot", inv_trig_style="full")
     return re.sub(r"\\frac(?=\{)", r"\\dfrac", s)
 
@@ -70,8 +78,14 @@ def es_cero(expr) -> bool:
 
 def comprobar(condicion, mensaje: str) -> None:
     """Comprueba una condición del cuaderno. ``condicion`` puede ser un booleano o una
-    expresión de SymPy que debe ser 0. Si falla, el cuaderno se detiene con AssertionError."""
-    if isinstance(condicion, sp.logic.boolalg.Boolean) or not isinstance(condicion, sp.Basic):
+    expresión de SymPy o de SageMath que debe ser 0 (o una matriz nula). Si falla, el
+    cuaderno se detiene con AssertionError."""
+    if _es_de_sage(condicion):
+        if hasattr(condicion, "is_relational") and condicion.is_relational():
+            ok = bool(condicion)   # igualdades y desigualdades simbólicas de Sage
+        else:
+            ok = bool(condicion == 0) or (hasattr(condicion, "_sympy_") and es_cero(condicion._sympy_()))
+    elif isinstance(condicion, sp.logic.boolalg.Boolean) or not isinstance(condicion, sp.Basic):
         ok = bool(condicion)       # desigualdades de SymPy (a < b) y booleanos de Python
     else:
         ok = es_cero(condicion)

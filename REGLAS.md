@@ -25,6 +25,7 @@ Es un documento vivo: cada nueva regla que se acuerde se añade aquí, en la sec
 | `.github/workflows/pages.yml` | Publicación de `html/` y `doc_out/` en GitHub Pages. | Sí |
 | `cuadernos/` | Cuadernos de Python con SymPy (sección 7): `mcc_sym.py` (herramientas) y un subdirectorio por tema. | Sí |
 | `requirements.txt`, `.venv/` | Dependencias de Python y su entorno (`.venv` ignorado por git). | `requirements.txt`: sí |
+| `sage-environment.yml` | Entorno de SageMath (en WSL) para los cuadernos `*_sage.py` (sección 7.5). | Sí |
 | `material/` | Modelo de la universidad (`Plantilla_LATEX_FCC_MUCC_UNIR/`), normativa, guías y enunciados. Privado (ignorado por git). | No (el modelo no se modifica) |
 | `trabajos/<nombre>/` | Trabajos del curso (sección 8): `<nombre>.md`, `referencias.bib` y las salidas `<nombre>.tex` y `<nombre>.pdf`. Privado. | El `.md` y el `.bib` |
 | `comunicaciones/` | Documentos informales para el grupo de trabajo (4 alumnos): propuestas, respuestas y notas. Privado (ignorado por git). | Sí |
@@ -67,6 +68,7 @@ Los PDF son reproducibles: la fecha interna es la de modificación del Markdown 
 | Git for Windows | `C:\Program Files\Git\cmd\git.exe` | `git push` (su Git Credential Manager guarda las credenciales de GitHub; el `git` de MSYS2 no las tiene). |
 | GitHub CLI | `C:\Program Files\GitHub CLI\gh.exe` | PUBLICA_WEB: activar GitHub Pages y lanzar el workflow. |
 | Python 3.14 + uv | `.venv\Scripts\python.exe` (creado con `~\.local\bin\uv.exe`) | Cuadernos de SymPy. Se crea o actualiza con `pwsh scripts/prepara-python.ps1`. |
+| SageMath 10.9 (WSL, Ubuntu) | `~/miniforge3/envs/sage` dentro de WSL | Cuadernos `*_sage.py` (sección 7.5). Se crea o actualiza con `pwsh scripts/prepara-sage.ps1`. |
 | Node.js 24 | `C:\msys64\ucrt64\bin\node.exe` | `scripts/check-md.mjs`, `scripts/busca-implicitos.mjs`. |
 | KaTeX | Extensión de VS Code `goessner.mdmath` (o `KATEX_PATH`) | Validación de fórmulas. |
 
@@ -338,7 +340,7 @@ Publica la web en GitHub Pages: <https://julian1c2a.github.io/MCC/>.
 
 Ejemplo simbólico con SymPy de un resultado general de los apuntes. Por ejemplo: «Legendre de $\cos(k \cdot x) \cdot e^{\omega \cdot t}$ respecto de $x$».
 
-1. Localizar el cuaderno del tema y asunto (`cuadernos/tema<n>/<asunto>.py`). Si no existe, crearlo con la cabecera de la sección 7.2.
+1. Localizar el cuaderno del tema y asunto (`cuadernos/tema<n>/<asunto>.py`). Si no existe, crearlo con la cabecera de la sección 7.2. Si el ejemplo necesita lo que SymPy no ofrece (teoría de grupos, álgebras de Lie, paquetes de Maxima), se hace con SageMath en un cuaderno `<asunto>_sage.py` (sección 7.5).
 2. Añadir las celdas del ejemplo con las herramientas de `mcc_sym.py`. Si falta una herramienta general, se añade a `mcc_sym.py`.
 3. Añadir `comprobar(...)` para cada propiedad que el ejemplo debe cumplir.
 4. Ejecutar `pwsh scripts/comprueba-cuadernos.ps1 -Cuaderno <ruta>` y mostrar al usuario los resultados, en LaTeX con el estilo del proyecto.
@@ -391,6 +393,16 @@ Los cuadernos permiten ver qué produce la maquinaria general de los apuntes con
 - Todo cuaderno termina con `comprobar(...)` de las propiedades que ilustra: por ejemplo, $\partial g/\partial p = x$ o que la doble transformada devuelve la función.
 - `pwsh scripts/comprueba-cuadernos.ps1` los ejecuta todos de principio a fin con `-W error`. Falla si alguno lanza una excepción, incumple una comprobación o emite una advertencia de Python.
 - SINCRONIZA (y, por tanto, GUARDA_y_SUBE) lo ejecuta siempre: un cuaderno roto impide que `main` avance.
+
+### 7.5. Cuadernos de SageMath
+
+SageMath reúne en Python Maxima, GAP, PARI/GP y otros sistemas, con álgebras de Lie, teoría de grupos y formas diferenciales. No funciona de forma nativa en Windows, así que se instala en WSL.
+
+- Se usa solo cuando SymPy no basta. El cuaderno se llama `<asunto>_sage.py`, va en el subdirectorio de su tema y sigue el formato de la sección 7.2. Empieza con `from sage.all import *` y después `from mcc_sym import comprobar, mostrar`: las dos funciones aceptan objetos de Sage (una expresión o una matriz que debe ser nula, o una igualdad simbólica).
+- Se escribe en Python normal, no con la sintaxis del preprocesador de Sage: `**` para las potencias y `var("x")` para las variables simbólicas. Así se ejecuta igual en la ventana interactiva y en la comprobación.
+- Entorno: `pwsh scripts/prepara-sage.ps1` instala Miniforge en WSL (distribución `Ubuntu`, variable `$SageDistro` de `scripts/comun.ps1`). Crea o actualiza el entorno conda `sage` a partir de `sage-environment.yml`. También deja en `~/.maxima/maxima-init.lisp` el ajuste que permite compilar los paquetes de Maxima (el ECL de conda-forge no compila con C23).
+- Comprobación: `scripts/comprueba-cuadernos.ps1` ejecuta los `*_sage.py` en WSL con el Python del entorno `sage`, con `-W error` y las mismas reglas que el resto (sección 7.4). Si el entorno no existe, la comprobación falla.
+- Uso interactivo: `pwsh scripts/sage-jupyter.ps1` arranca en WSL un servidor Jupyter en `cuadernos/`, escuchando solo en `localhost`, y muestra su URL. En VS Code, en el selector de kernel del cuaderno: «Select Another Kernel» → «Existing Jupyter Server» → pegar la URL → «Python 3 (ipykernel)». El token se guarda en WSL (`~/.mcc-sage-token`), así que la URL no cambia entre sesiones.
 
 ## 8. Trabajos del curso
 
