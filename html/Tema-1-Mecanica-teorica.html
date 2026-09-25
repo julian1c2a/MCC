@@ -97,6 +97,11 @@ partículas</a></li>
 id="toc-por-qué-l-t---v-el-puente-desde-newton">4.3. Por qué <span
 class="math inline">\(L = T - V\)</span>: el puente desde
 Newton</a></li>
+<li><a
+href="#transformaciones-continuas-campos-vectoriales-curvas-integrales-y-flujos"
+id="toc-transformaciones-continuas-campos-vectoriales-curvas-integrales-y-flujos">4.4.
+Transformaciones continuas: campos vectoriales, curvas integrales y
+flujos</a></li>
 </ul></li>
 <li><a href="#introducción-a-la-transformada-de-legendre"
 id="toc-introducción-a-la-transformada-de-legendre">5. Introducción a la
@@ -1987,6 +1992,328 @@ Principio de d’Alembert (o de los Trabajos Virtuales) para demostrar de
 forma general que la misma estructura <span class="math inline">\(L = T
 - V\)</span> sigue siendo válida, siempre que las fuerzas deriven de un
 potencial y las ligaduras no realicen trabajo).</p>
+<h3
+id="transformaciones-continuas-campos-vectoriales-curvas-integrales-y-flujos">4.4.
+Transformaciones continuas: campos vectoriales, curvas integrales y
+flujos</h3>
+<p>El teorema de Noether relaciona las simetrías de la acción con
+cantidades conservadas. No trabaja con una transformación aislada, sino
+con familias de transformaciones que dependen de forma continua de un
+parámetro, como las traslaciones de longitud <span
+class="math inline">\(s\)</span> o las rotaciones de ángulo <span
+class="math inline">\(s\)</span>. Cada familia de este tipo queda
+descrita por un campo vectorial: el que indica, en cada punto, en qué
+dirección y con qué rapidez empieza a moverlo la transformación. En este
+apartado se estudia esa relación en el caso más sencillo: una dimensión
+espacial y el tiempo.</p>
+<p>El escenario es el plano <span class="math inline">\((t, x)\)</span>.
+La trayectoria de una partícula que se mueve sobre una recta, <span
+class="math inline">\(x(t)\)</span>, es una curva de este plano: su
+gráfica.</p>
+<h4 id="campo-vectorial-y-curvas-integrales">4.4.1. Campo vectorial y
+curvas integrales</h4>
+<p>Un campo vectorial en el plano <span class="math inline">\((t,
+x)\)</span> asigna a cada punto <span class="math inline">\(P = (t,
+x)\)</span> un vector</p>
+<p><span class="math display">\[
+\begin{aligned}
+\xi(P) = \left(\xi^t(t, x),\ \xi^x(t, x)\right).
+\end{aligned}
+\]</span></p>
+<p>Los superíndices <span class="math inline">\(t\)</span> y <span
+class="math inline">\(x\)</span> no son exponentes: indican qué
+coordenada mueve cada componente. <span
+class="math inline">\(\xi^t\)</span> es la componente en la dirección
+del tiempo y <span class="math inline">\(\xi^x\)</span>, la componente
+en la dirección del espacio. Para ser un campo no hace falta ninguna
+condición: cualquier asignación de un vector a cada punto lo es. Las
+condiciones aparecen al exigir que el campo tenga curvas integrales, y
+se estudian en el apartado 4.4.2.</p>
+<p>Una curva integral del campo es una curva <span
+class="math inline">\(s \mapsto (t(s), x(s))\)</span> que en cada punto
+es tangente al vector del campo en ese punto, con su misma longitud. Es
+decir, su vector velocidad respecto del parámetro <span
+class="math inline">\(s\)</span> coincide con el campo:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{dt}{ds} &amp;= \xi^t(t(s), x(s)), \\
+\dfrac{dx}{ds} &amp;= \xi^x(t(s), x(s)).
+\end{aligned}
+\]</span></p>
+<p>Encontrar las curvas integrales de un campo es, por tanto, resolver
+este sistema de dos ecuaciones diferenciales ordinarias de primer orden.
+El parámetro <span class="math inline">\(s\)</span> no es el tiempo
+físico <span class="math inline">\(t\)</span>: es el parámetro de la
+familia de transformaciones.</p>
+<p>Si <span class="math inline">\(\xi^t \neq 0\)</span>, el propio
+tiempo <span class="math inline">\(t\)</span> puede servir de parámetro
+de la curva. Por la regla de la cadena, <span
+class="math inline">\(\dfrac{dx}{ds} = \dfrac{dx}{dt} \cdot
+\dfrac{dt}{ds}\)</span>, y despejando:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{dx}{dt} = \dfrac{dx/ds}{dt/ds} = \dfrac{\xi^x(t, x)}{\xi^t(t,
+x)}.
+\end{aligned}
+\]</span></p>
+<p>El campo es entonces el campo de direcciones de esta ecuación
+diferencial, y sus curvas integrales son las gráficas de sus soluciones
+<span class="math inline">\(x(t)\)</span>. Recíprocamente, cualquier
+ecuación de primer orden <span class="math inline">\(\dfrac{dx}{dt} =
+f(t, x)\)</span> corresponde al campo <span class="math inline">\((1,
+f(t, x))\)</span>.</p>
+<h4 id="condiciones-existencia-unicidad-y-flujo-global">4.4.2.
+Condiciones: existencia, unicidad y flujo global</h4>
+<p>Se supone que el campo está definido en todo el plano (o en una
+región abierta de él). Para medir distancias entre puntos se usa la
+norma euclídea <span class="math inline">\(|(t, x)| = \sqrt{t^2 +
+x^2}\)</span>. Es solo una herramienta técnica para formular las
+condiciones: no tiene significado físico en el plano <span
+class="math inline">\((t, x)\)</span>.</p>
+<ol type="1">
+<li><p><strong>Existencia.</strong> Si <span
+class="math inline">\(\xi^t\)</span> y <span
+class="math inline">\(\xi^x\)</span> son continuas, por cada punto pasa
+al menos una curva integral, definida en un intervalo de valores de
+<span class="math inline">\(s\)</span> alrededor de <span
+class="math inline">\(s = 0\)</span> (teorema de Peano).</p></li>
+<li><p><strong>Unicidad.</strong> Si además el campo es localmente
+lipschitziano, por cada punto pasa una sola curva integral (teorema de
+Picard-Lindelöf). Localmente lipschitziano significa que alrededor de
+cada punto hay una región y una constante <span
+class="math inline">\(K\)</span> tales que, para dos puntos <span
+class="math inline">\(P\)</span> y <span
+class="math inline">\(Q\)</span> de esa región,</p>
+<p><span class="math display">\[
+\begin{aligned}
+|\xi(P) - \xi(Q)| \le K \cdot |P - Q|.
+\end{aligned}
+\]</span></p>
+<p>Una condición suficiente, y la que se comprueba en la práctica, es
+que <span class="math inline">\(\xi^t\)</span> y <span
+class="math inline">\(\xi^x\)</span> tengan derivadas parciales
+continuas: por el teorema del valor medio, <span
+class="math inline">\(K\)</span> es entonces una cota de esas derivadas
+en la región. Con unicidad, dos curvas integrales distintas nunca se
+cortan.</p></li>
+<li><p><strong>Flujo global (campo completo).</strong> Aun con
+existencia y unicidad, una curva integral puede escaparse al infinito
+para un valor finito de <span class="math inline">\(s\)</span>. El campo
+es completo si todas sus curvas integrales están definidas para todo
+<span class="math inline">\(s \in \mathbb{R}\)</span>. Una condición
+suficiente es que el campo, además de ser localmente lipschitziano, no
+crezca más que linealmente: existen constantes <span
+class="math inline">\(A\)</span> y <span
+class="math inline">\(B\)</span> tales que, para todo punto <span
+class="math inline">\(P\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+|\xi(P)| \le A + B \cdot |P|.
+\end{aligned}
+\]</span></p></li>
+</ol>
+<p>Un punto donde el campo se anula, <span class="math inline">\(\xi(P)
+= (0, 0)\)</span>, es un punto fijo: la curva integral que pasa por él
+es constante, porque la curva <span class="math inline">\(s \mapsto
+P\)</span> cumple las dos ecuaciones con derivadas nulas, y por unicidad
+es la única.</p>
+<h5 id="contraejemplo-de-unicidad">Contraejemplo de unicidad</h5>
+<p>El campo <span class="math inline">\((1,\ 2 \cdot
+\sqrt{|x|})\)</span> corresponde a la ecuación <span
+class="math inline">\(\dfrac{dx}{dt} = 2 \cdot \sqrt{|x|}\)</span>. Es
+continuo, pero no lipschitziano en <span class="math inline">\(x =
+0\)</span>: el cociente <span class="math inline">\(\dfrac{|2 \cdot
+\sqrt{|x|} - 0|}{|x - 0|} = \dfrac{2}{\sqrt{|x|}}\)</span> no está
+acotado cuando <span class="math inline">\(x \to 0\)</span>. Por el
+punto <span class="math inline">\((0, 0)\)</span> pasan dos curvas
+integrales:</p>
+<ul>
+<li><span class="math inline">\(x(t) = 0\)</span> para todo <span
+class="math inline">\(t\)</span>, que cumple <span
+class="math inline">\(\dfrac{dx}{dt} = 0 = 2 \cdot
+\sqrt{0}\)</span>;</li>
+<li><span class="math inline">\(x(t) = t^2\)</span> para <span
+class="math inline">\(t \ge 0\)</span>, que cumple <span
+class="math inline">\(\dfrac{dx}{dt} = 2 \cdot t = 2 \cdot
+\sqrt{t^2}\)</span>, porque <span class="math inline">\(t \ge
+0\)</span>.</li>
+</ul>
+<h5 id="contraejemplo-de-completitud">Contraejemplo de completitud</h5>
+<p>El campo <span class="math inline">\((1,\ x^2)\)</span> tiene
+derivadas continuas, pero crece más que linealmente. Corresponde a <span
+class="math inline">\(\dfrac{dx}{dt} = x^2\)</span>. Con <span
+class="math inline">\(x(0) = x_0 &gt; 0\)</span>, separando variables,
+<span class="math inline">\(\dfrac{dx}{x^2} = dt\)</span>, e integrando
+entre <span class="math inline">\(0\)</span> y <span
+class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{1}{x_0} - \dfrac{1}{x(t)} = t
+\quad \Longrightarrow \quad
+x(t) = \dfrac{x_0}{1 - x_0 \cdot t}.
+\end{aligned}
+\]</span></p>
+<p>Comprobación: <span class="math inline">\(\dfrac{dx}{dt} = \dfrac{x_0
+\cdot x_0}{(1 - x_0 \cdot t)^2} = x(t)^2\)</span>. La solución tiende a
+infinito cuando <span class="math inline">\(t \to 1/x_0\)</span>, así
+que la curva integral no está definida para todo valor del
+parámetro.</p>
+<h5 id="otros-dos-sentidos-de-integrable">Otros dos sentidos de
+«integrable»</h5>
+<p>El término «integrable» se usa también con otros dos significados,
+que no deben confundirse con la existencia de curvas integrales:</p>
+<ul>
+<li><strong>Integrabilidad en el sentido de Frobenius.</strong> Pregunta
+si existen superficies tangentes a la vez a dos o más campos, en
+espacios de tres o más dimensiones. Con un único campo que no se anula
+no hay nada que comprobar: siempre tiene curvas integrales.</li>
+<li><strong>Campo gradiente o conservativo.</strong> Un campo es el
+gradiente de una función <span class="math inline">\(\varphi(t,
+x)\)</span>, <span class="math inline">\((\xi^t, \xi^x) =
+\left(\dfrac{\partial \varphi}{\partial t}, \dfrac{\partial
+\varphi}{\partial x}\right)\)</span>, si y solo si <span
+class="math inline">\(\dfrac{\partial \xi^t}{\partial x} =
+\dfrac{\partial \xi^x}{\partial t}\)</span>, en una región sin agujeros
+(simplemente conexa). Esta condición no es necesaria para tener curvas
+integrales ni flujo.</li>
+</ul>
+<h4 id="el-flujo-de-un-campo">4.4.3. El flujo de un campo</h4>
+<p>Si el campo cumple las tres condiciones del apartado 4.4.2, se define
+su flujo: para cada valor del parámetro <span
+class="math inline">\(s\)</span>, la transformación <span
+class="math inline">\(\Phi_s\)</span> del plano lleva cada punto <span
+class="math inline">\(P\)</span> al punto que alcanza, con parámetro
+<span class="math inline">\(s\)</span>, la curva integral que sale de
+<span class="math inline">\(P\)</span> con <span class="math inline">\(s
+= 0\)</span>. (Esta <span class="math inline">\(\Phi_s\)</span> no es la
+función <span class="math inline">\(\Phi(\epsilon)\)</span> del apartado
+3.1.2.)</p>
+<p>El flujo tiene tres propiedades:</p>
+<ol type="1">
+<li><strong><span class="math inline">\(\Phi_0\)</span> es la
+identidad</strong>, porque con <span class="math inline">\(s =
+0\)</span> la curva está todavía en su punto de partida.</li>
+<li><strong><span class="math inline">\(\Phi_r \circ \Phi_s =
+\Phi_{r+s}\)</span>.</strong> La curva <span class="math inline">\(u
+\mapsto \Phi_{u+s}(P)\)</span> es la curva integral que sale de <span
+class="math inline">\(P\)</span>, desplazada en el parámetro. Sigue
+siendo curva integral, porque el campo no depende de <span
+class="math inline">\(s\)</span>, y en <span class="math inline">\(u =
+0\)</span> pasa por <span class="math inline">\(\Phi_s(P)\)</span>. La
+curva <span class="math inline">\(u \mapsto \Phi_u(\Phi_s(P))\)</span>
+es, por definición, la curva integral que sale de <span
+class="math inline">\(\Phi_s(P)\)</span>. Por unicidad, las dos
+coinciden, y en <span class="math inline">\(u = r\)</span> esto da <span
+class="math inline">\(\Phi_r(\Phi_s(P)) = \Phi_{r+s}(P)\)</span>.</li>
+<li><strong><span class="math inline">\(\Phi_s\)</span> es invertible,
+con inversa <span class="math inline">\(\Phi_{-s}\)</span></strong>,
+porque, por la propiedad 2, <span class="math inline">\(\Phi_{-s} \circ
+\Phi_s = \Phi_0\)</span>, que es la identidad.</li>
+</ol>
+<p>Una familia de transformaciones con estas propiedades se llama grupo
+uniparamétrico de transformaciones. El recíproco también se cumple: si
+una familia <span class="math inline">\(\Phi_s\)</span> tiene estas
+propiedades y es derivable respecto de <span
+class="math inline">\(s\)</span>, su campo generador (o generador
+infinitesimal) es</p>
+<p><span class="math display">\[
+\begin{aligned}
+\xi(P) = \left.\dfrac{d}{ds} \Phi_s(P)\right|_{s=0},
+\end{aligned}
+\]</span></p>
+<p>y, si ese campo cumple la condición de unicidad, la familia es su
+flujo. En efecto, derivando <span class="math inline">\(\Phi_{r+s}(P) =
+\Phi_r(\Phi_s(P))\)</span> respecto de <span
+class="math inline">\(r\)</span> en <span class="math inline">\(r =
+0\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{d}{ds} \Phi_s(P) = \left.\dfrac{d}{dr}
+\Phi_r(\Phi_s(P))\right|_{r=0} = \xi(\Phi_s(P)),
+\end{aligned}
+\]</span></p>
+<p>que es exactamente la condición de curva integral: cada curva <span
+class="math inline">\(s \mapsto \Phi_s(P)\)</span> es la curva integral
+del campo que sale de <span class="math inline">\(P\)</span>, única por
+hipótesis. Familia continua de transformaciones y campo vectorial son,
+por tanto, dos descripciones del mismo objeto.</p>
+<p>Para valores pequeños de <span class="math inline">\(s\)</span>, el
+desarrollo de Taylor de <span class="math inline">\(\Phi_s(P)\)</span>
+alrededor de <span class="math inline">\(s = 0\)</span> da</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Phi_s(P) = P + s \cdot \xi(P) + O(s^2).
+\end{aligned}
+\]</span></p>
+<p>Esta es la transformación infinitesimal: a primer orden, cada punto
+se desplaza <span class="math inline">\(s\)</span> veces el vector del
+campo. Es la forma en que el teorema de Noether usa la familia: a través
+de su campo generador.</p>
+<h4 id="ejemplo-las-transformaciones-de-galileo-en-una-dimensión">4.4.4.
+Ejemplo: las transformaciones de Galileo en una dimensión</h4>
+<p>En una dimensión espacial, las transformaciones de Galileo continuas
+son tres: la traslación temporal, la traslación espacial y el cambio a
+un sistema de referencia que se mueve con velocidad constante respecto
+del original. No hay rotaciones, porque un giro necesita al menos dos
+dimensiones espaciales.</p>
+<table>
+<thead>
+<tr>
+<th>Transformación</th>
+<th>Campo <span class="math inline">\((\xi^t, \xi^x)\)</span></th>
+<th>Flujo <span class="math inline">\(\Phi_s(t_0, x_0)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Traslación temporal</td>
+<td><span class="math inline">\((1, 0)\)</span></td>
+<td><span class="math inline">\((t_0 + s,\ x_0)\)</span></td>
+</tr>
+<tr>
+<td>Traslación espacial</td>
+<td><span class="math inline">\((0, 1)\)</span></td>
+<td><span class="math inline">\((t_0,\ x_0 + s)\)</span></td>
+</tr>
+<tr>
+<td>Cambio de velocidad</td>
+<td><span class="math inline">\((0, t)\)</span></td>
+<td><span class="math inline">\((t_0,\ x_0 + s \cdot t_0)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Los flujos se obtienen resolviendo el sistema del apartado 4.4.1 con
+la condición inicial <span class="math inline">\((t(0), x(0)) = (t_0,
+x_0)\)</span>. En el cambio de velocidad:</p>
+<ul>
+<li><span class="math inline">\(\dfrac{dt}{ds} = 0\)</span>, así que
+<span class="math inline">\(t(s) = t_0\)</span> para todo <span
+class="math inline">\(s\)</span>;</li>
+<li><span class="math inline">\(\dfrac{dx}{ds} = t(s) = t_0\)</span>,
+que es constante, así que <span class="math inline">\(x(s) = x_0 + s
+\cdot t_0\)</span>.</li>
+</ul>
+<p>Los tres campos cumplen las tres condiciones del apartado 4.4.2: sus
+componentes son constantes o lineales, luego tienen derivadas continuas
+y crecen como mucho linealmente. Los tres flujos cumplen <span
+class="math inline">\(\Phi_r \circ \Phi_s = \Phi_{r+s}\)</span>. Por
+ejemplo, en el cambio de velocidad, <span
+class="math inline">\(\Phi_r(t_0,\ x_0 + s \cdot t_0) = (t_0,\ x_0 + s
+\cdot t_0 + r \cdot t_0) = \Phi_{r+s}(t_0, x_0)\)</span>.</p>
+<p>En el cambio de velocidad, los vectores del campo apuntan en la
+dirección de <span class="math inline">\(x\)</span> y su longitud crece
+con <span class="math inline">\(|t|\)</span>. El flujo deja fijos los
+puntos con <span class="math inline">\(t = 0\)</span> y desplaza más los
+puntos más alejados de <span class="math inline">\(t = 0\)</span>. Su
+efecto sobre una trayectoria muestra su significado físico: la recta
+<span class="math inline">\(x(t) = x_1 + v \cdot t\)</span>, que
+describe un movimiento uniforme de velocidad <span
+class="math inline">\(v\)</span>, se transforma, punto a punto, en <span
+class="math inline">\(x(t) = x_1 + v \cdot t + s \cdot t = x_1 + (v + s)
+\cdot t\)</span>. Es el mismo movimiento visto desde un sistema de
+referencia que se mueve con velocidad <span
+class="math inline">\(-s\)</span>: el parámetro <span
+class="math inline">\(s\)</span> es la velocidad que se suma.</p>
 <h2 id="introducción-a-la-transformada-de-legendre">5. Introducción a la
 transformada de Legendre</h2>
 <p>La transformada de Legendre permite describir una misma función

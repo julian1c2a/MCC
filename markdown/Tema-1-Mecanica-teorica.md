@@ -1149,6 +1149,154 @@ Esta elección no es la única posible: multiplicar $L$ por una constante no nul
 
 (Nota: En sistemas mecánicos con ligaduras y coordenadas generalizadas $q_i$, se utiliza el Principio de d'Alembert (o de los Trabajos Virtuales) para demostrar de forma general que la misma estructura $L = T - V$ sigue siendo válida, siempre que las fuerzas deriven de un potencial y las ligaduras no realicen trabajo).
 
+### 4.4. Transformaciones continuas: campos vectoriales, curvas integrales y flujos
+
+El teorema de Noether relaciona las simetrías de la acción con cantidades conservadas. No trabaja con una transformación aislada, sino con familias de transformaciones que dependen de forma continua de un parámetro, como las traslaciones de longitud $s$ o las rotaciones de ángulo $s$. Cada familia de este tipo queda descrita por un campo vectorial: el que indica, en cada punto, en qué dirección y con qué rapidez empieza a moverlo la transformación. En este apartado se estudia esa relación en el caso más sencillo: una dimensión espacial y el tiempo.
+
+El escenario es el plano $(t, x)$. La trayectoria de una partícula que se mueve sobre una recta, $x(t)$, es una curva de este plano: su gráfica.
+
+#### 4.4.1. Campo vectorial y curvas integrales
+
+Un campo vectorial en el plano $(t, x)$ asigna a cada punto $P = (t, x)$ un vector
+
+$$
+\begin{aligned}
+\xi(P) = \left(\xi^t(t, x),\ \xi^x(t, x)\right).
+\end{aligned}
+$$
+
+Los superíndices $t$ y $x$ no son exponentes: indican qué coordenada mueve cada componente. $\xi^t$ es la componente en la dirección del tiempo y $\xi^x$, la componente en la dirección del espacio. Para ser un campo no hace falta ninguna condición: cualquier asignación de un vector a cada punto lo es. Las condiciones aparecen al exigir que el campo tenga curvas integrales, y se estudian en el apartado 4.4.2.
+
+Una curva integral del campo es una curva $s \mapsto (t(s), x(s))$ que en cada punto es tangente al vector del campo en ese punto, con su misma longitud. Es decir, su vector velocidad respecto del parámetro $s$ coincide con el campo:
+
+$$
+\begin{aligned}
+\dfrac{dt}{ds} &= \xi^t(t(s), x(s)), \\
+\dfrac{dx}{ds} &= \xi^x(t(s), x(s)).
+\end{aligned}
+$$
+
+Encontrar las curvas integrales de un campo es, por tanto, resolver este sistema de dos ecuaciones diferenciales ordinarias de primer orden. El parámetro $s$ no es el tiempo físico $t$: es el parámetro de la familia de transformaciones.
+
+Si $\xi^t \neq 0$, el propio tiempo $t$ puede servir de parámetro de la curva. Por la regla de la cadena, $\dfrac{dx}{ds} = \dfrac{dx}{dt} \cdot \dfrac{dt}{ds}$, y despejando:
+
+$$
+\begin{aligned}
+\dfrac{dx}{dt} = \dfrac{dx/ds}{dt/ds} = \dfrac{\xi^x(t, x)}{\xi^t(t, x)}.
+\end{aligned}
+$$
+
+El campo es entonces el campo de direcciones de esta ecuación diferencial, y sus curvas integrales son las gráficas de sus soluciones $x(t)$. Recíprocamente, cualquier ecuación de primer orden $\dfrac{dx}{dt} = f(t, x)$ corresponde al campo $(1, f(t, x))$.
+
+#### 4.4.2. Condiciones: existencia, unicidad y flujo global
+
+Se supone que el campo está definido en todo el plano (o en una región abierta de él). Para medir distancias entre puntos se usa la norma euclídea $|(t, x)| = \sqrt{t^2 + x^2}$. Es solo una herramienta técnica para formular las condiciones: no tiene significado físico en el plano $(t, x)$.
+
+1. **Existencia.** Si $\xi^t$ y $\xi^x$ son continuas, por cada punto pasa al menos una curva integral, definida en un intervalo de valores de $s$ alrededor de $s = 0$ (teorema de Peano).
+2. **Unicidad.** Si además el campo es localmente lipschitziano, por cada punto pasa una sola curva integral (teorema de Picard-Lindelöf). Localmente lipschitziano significa que alrededor de cada punto hay una región y una constante $K$ tales que, para dos puntos $P$ y $Q$ de esa región,
+
+   $$
+   \begin{aligned}
+   |\xi(P) - \xi(Q)| \le K \cdot |P - Q|.
+   \end{aligned}
+   $$
+
+   Una condición suficiente, y la que se comprueba en la práctica, es que $\xi^t$ y $\xi^x$ tengan derivadas parciales continuas: por el teorema del valor medio, $K$ es entonces una cota de esas derivadas en la región. Con unicidad, dos curvas integrales distintas nunca se cortan.
+3. **Flujo global (campo completo).** Aun con existencia y unicidad, una curva integral puede escaparse al infinito para un valor finito de $s$. El campo es completo si todas sus curvas integrales están definidas para todo $s \in \mathbb{R}$. Una condición suficiente es que el campo, además de ser localmente lipschitziano, no crezca más que linealmente: existen constantes $A$ y $B$ tales que, para todo punto $P$,
+
+   $$
+   \begin{aligned}
+   |\xi(P)| \le A + B \cdot |P|.
+   \end{aligned}
+   $$
+
+Un punto donde el campo se anula, $\xi(P) = (0, 0)$, es un punto fijo: la curva integral que pasa por él es constante, porque la curva $s \mapsto P$ cumple las dos ecuaciones con derivadas nulas, y por unicidad es la única.
+
+##### Contraejemplo de unicidad
+
+El campo $(1,\ 2 \cdot \sqrt{|x|})$ corresponde a la ecuación $\dfrac{dx}{dt} = 2 \cdot \sqrt{|x|}$. Es continuo, pero no lipschitziano en $x = 0$: el cociente $\dfrac{|2 \cdot \sqrt{|x|} - 0|}{|x - 0|} = \dfrac{2}{\sqrt{|x|}}$ no está acotado cuando $x \to 0$. Por el punto $(0, 0)$ pasan dos curvas integrales:
+
+* $x(t) = 0$ para todo $t$, que cumple $\dfrac{dx}{dt} = 0 = 2 \cdot \sqrt{0}$;
+* $x(t) = t^2$ para $t \ge 0$, que cumple $\dfrac{dx}{dt} = 2 \cdot t = 2 \cdot \sqrt{t^2}$, porque $t \ge 0$.
+
+##### Contraejemplo de completitud
+
+El campo $(1,\ x^2)$ tiene derivadas continuas, pero crece más que linealmente. Corresponde a $\dfrac{dx}{dt} = x^2$. Con $x(0) = x_0 > 0$, separando variables, $\dfrac{dx}{x^2} = dt$, e integrando entre $0$ y $t$:
+
+$$
+\begin{aligned}
+\dfrac{1}{x_0} - \dfrac{1}{x(t)} = t
+\quad \Longrightarrow \quad
+x(t) = \dfrac{x_0}{1 - x_0 \cdot t}.
+\end{aligned}
+$$
+
+Comprobación: $\dfrac{dx}{dt} = \dfrac{x_0 \cdot x_0}{(1 - x_0 \cdot t)^2} = x(t)^2$. La solución tiende a infinito cuando $t \to 1/x_0$, así que la curva integral no está definida para todo valor del parámetro.
+
+##### Otros dos sentidos de «integrable»
+
+El término «integrable» se usa también con otros dos significados, que no deben confundirse con la existencia de curvas integrales:
+
+* **Integrabilidad en el sentido de Frobenius.** Pregunta si existen superficies tangentes a la vez a dos o más campos, en espacios de tres o más dimensiones. Con un único campo que no se anula no hay nada que comprobar: siempre tiene curvas integrales.
+* **Campo gradiente o conservativo.** Un campo es el gradiente de una función $\varphi(t, x)$, $(\xi^t, \xi^x) = \left(\dfrac{\partial \varphi}{\partial t}, \dfrac{\partial \varphi}{\partial x}\right)$, si y solo si $\dfrac{\partial \xi^t}{\partial x} = \dfrac{\partial \xi^x}{\partial t}$, en una región sin agujeros (simplemente conexa). Esta condición no es necesaria para tener curvas integrales ni flujo.
+
+#### 4.4.3. El flujo de un campo
+
+Si el campo cumple las tres condiciones del apartado 4.4.2, se define su flujo: para cada valor del parámetro $s$, la transformación $\Phi_s$ del plano lleva cada punto $P$ al punto que alcanza, con parámetro $s$, la curva integral que sale de $P$ con $s = 0$. (Esta $\Phi_s$ no es la función $\Phi(\epsilon)$ del apartado 3.1.2.)
+
+El flujo tiene tres propiedades:
+
+1. **$\Phi_0$ es la identidad**, porque con $s = 0$ la curva está todavía en su punto de partida.
+2. **$\Phi_r \circ \Phi_s = \Phi_{r+s}$.** La curva $u \mapsto \Phi_{u+s}(P)$ es la curva integral que sale de $P$, desplazada en el parámetro. Sigue siendo curva integral, porque el campo no depende de $s$, y en $u = 0$ pasa por $\Phi_s(P)$. La curva $u \mapsto \Phi_u(\Phi_s(P))$ es, por definición, la curva integral que sale de $\Phi_s(P)$. Por unicidad, las dos coinciden, y en $u = r$ esto da $\Phi_r(\Phi_s(P)) = \Phi_{r+s}(P)$.
+3. **$\Phi_s$ es invertible, con inversa $\Phi_{-s}$**, porque, por la propiedad 2, $\Phi_{-s} \circ \Phi_s = \Phi_0$, que es la identidad.
+
+Una familia de transformaciones con estas propiedades se llama grupo uniparamétrico de transformaciones. El recíproco también se cumple: si una familia $\Phi_s$ tiene estas propiedades y es derivable respecto de $s$, su campo generador (o generador infinitesimal) es
+
+$$
+\begin{aligned}
+\xi(P) = \left.\dfrac{d}{ds} \Phi_s(P)\right|_{s=0},
+\end{aligned}
+$$
+
+y, si ese campo cumple la condición de unicidad, la familia es su flujo. En efecto, derivando $\Phi_{r+s}(P) = \Phi_r(\Phi_s(P))$ respecto de $r$ en $r = 0$:
+
+$$
+\begin{aligned}
+\dfrac{d}{ds} \Phi_s(P) = \left.\dfrac{d}{dr} \Phi_r(\Phi_s(P))\right|_{r=0} = \xi(\Phi_s(P)),
+\end{aligned}
+$$
+
+que es exactamente la condición de curva integral: cada curva $s \mapsto \Phi_s(P)$ es la curva integral del campo que sale de $P$, única por hipótesis. Familia continua de transformaciones y campo vectorial son, por tanto, dos descripciones del mismo objeto.
+
+Para valores pequeños de $s$, el desarrollo de Taylor de $\Phi_s(P)$ alrededor de $s = 0$ da
+
+$$
+\begin{aligned}
+\Phi_s(P) = P + s \cdot \xi(P) + O(s^2).
+\end{aligned}
+$$
+
+Esta es la transformación infinitesimal: a primer orden, cada punto se desplaza $s$ veces el vector del campo. Es la forma en que el teorema de Noether usa la familia: a través de su campo generador.
+
+#### 4.4.4. Ejemplo: las transformaciones de Galileo en una dimensión
+
+En una dimensión espacial, las transformaciones de Galileo continuas son tres: la traslación temporal, la traslación espacial y el cambio a un sistema de referencia que se mueve con velocidad constante respecto del original. No hay rotaciones, porque un giro necesita al menos dos dimensiones espaciales.
+
+| Transformación | Campo $(\xi^t, \xi^x)$ | Flujo $\Phi_s(t_0, x_0)$ |
+| --- | --- | --- |
+| Traslación temporal | $(1, 0)$ | $(t_0 + s,\ x_0)$ |
+| Traslación espacial | $(0, 1)$ | $(t_0,\ x_0 + s)$ |
+| Cambio de velocidad | $(0, t)$ | $(t_0,\ x_0 + s \cdot t_0)$ |
+
+Los flujos se obtienen resolviendo el sistema del apartado 4.4.1 con la condición inicial $(t(0), x(0)) = (t_0, x_0)$. En el cambio de velocidad:
+
+* $\dfrac{dt}{ds} = 0$, así que $t(s) = t_0$ para todo $s$;
+* $\dfrac{dx}{ds} = t(s) = t_0$, que es constante, así que $x(s) = x_0 + s \cdot t_0$.
+
+Los tres campos cumplen las tres condiciones del apartado 4.4.2: sus componentes son constantes o lineales, luego tienen derivadas continuas y crecen como mucho linealmente. Los tres flujos cumplen $\Phi_r \circ \Phi_s = \Phi_{r+s}$. Por ejemplo, en el cambio de velocidad, $\Phi_r(t_0,\ x_0 + s \cdot t_0) = (t_0,\ x_0 + s \cdot t_0 + r \cdot t_0) = \Phi_{r+s}(t_0, x_0)$.
+
+En el cambio de velocidad, los vectores del campo apuntan en la dirección de $x$ y su longitud crece con $|t|$. El flujo deja fijos los puntos con $t = 0$ y desplaza más los puntos más alejados de $t = 0$. Su efecto sobre una trayectoria muestra su significado físico: la recta $x(t) = x_1 + v \cdot t$, que describe un movimiento uniforme de velocidad $v$, se transforma, punto a punto, en $x(t) = x_1 + v \cdot t + s \cdot t = x_1 + (v + s) \cdot t$. Es el mismo movimiento visto desde un sistema de referencia que se mueve con velocidad $-s$: el parámetro $s$ es la velocidad que se suma.
+
 ## 5. Introducción a la transformada de Legendre
 
 La transformada de Legendre permite describir una misma función mediante su pendiente, en lugar de mediante su variable original. No se trata de renombrar la variable: la transformada sustituye la variable $v$ por la cantidad conjugada $p$, definida como la pendiente de la gráfica de $F$:
