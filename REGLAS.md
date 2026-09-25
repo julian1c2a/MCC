@@ -453,11 +453,12 @@ SINCRONIZA_TRABAJO (`scripts/sincroniza-trabajo.ps1`) genera `trabajos/<nombre>/
 
 Excepción: se tolera la advertencia ``You have requested package `estilo_unir-1', but the package provides `unir'``, que produce el propio `estilo_unir-1.sty` y no se puede eliminar sin modificar el modelo.
 
-`trabajos/_plantilla/unir.latex` reproduce `plantilla.tex` y carga `estilo_unir-1.sty` sin modificarlo. Solo añade lo que necesita el LaTeX de Pandoc y tres ajustes técnicos que eliminan advertencias sin cambiar el diseño:
+`trabajos/_plantilla/unir.latex` reproduce `plantilla.tex` y carga `estilo_unir-1.sty` sin modificarlo. Solo añade lo que necesita el LaTeX de Pandoc y cuatro ajustes técnicos que eliminan advertencias sin cambiar el diseño:
 
 - codificación T1: el modelo usa OT1, sin versalita en negrita;
 - `\headheight` de 27,2 pt, la altura que fancyhdr aplicaría de todos modos a la cabecera de dos líneas;
-- `hypertexnames=false`, porque la portada y el cuerpo empiezan ambos en la página 1.
+- `hypertexnames=false`, porque la portada y el cuerpo empiezan ambos en la página 1;
+- `\raggedbottom`: la clase book iguala el final de todas las páginas y, con interlineado 1,5 y párrafos largos, no siempre puede estirarlas (`Underfull \vbox`); así cada página termina en su última línea.
 
 Como en el resto del proyecto, el `.tex` es un derivado: si se edita a mano, hay que portar el cambio al Markdown. El script se niega a sobrescribir un `.tex` más reciente que su Markdown, salvo con `-Force`.
 
