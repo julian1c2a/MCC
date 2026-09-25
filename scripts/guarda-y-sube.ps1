@@ -14,13 +14,21 @@
        - commit "WIP" en edicion-actual y push de esa rama a origin.
      main no se toca: siempre apunta al último estado completamente correcto.
 
+  Antes, guarda y sube los repositorios privados material/ y trabajos/ (si existen y
+  tienen cambios), sin validación previa: son copias de seguridad.
+
 .PARAMETER Mensaje
   Mensaje del commit (en español). En caso de fallo se antepone "WIP: ".
+
+.PARAMETER MensajePrivado
+  Mensaje de los commits de los repositorios privados. Por defecto, una copia de
+  seguridad con fecha y hora.
 #>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]
-    [string]$Mensaje
+    [string]$Mensaje,
+    [string]$MensajePrivado = "Copia de seguridad ($(Get-Date -Format 'yyyy-MM-dd HH:mm'))"
 )
 
 $ErrorActionPreference = 'Stop'
@@ -40,6 +48,26 @@ function Invoke-Git {
 }
 
 function Test-HayCambios { return [bool](git status --porcelain) }
+
+# Copia de seguridad de los repositorios privados (material/ y trabajos/; REGLAS.md 8.1):
+# commit de todo lo cambiado y push a su origin. No depende de la validación de los
+# apuntes: un trabajo a medio escribir también se guarda.
+function Save-Privados {
+    foreach ($d in 'material', 'trabajos') {
+        if (-not (Test-Path "$d/.git")) { continue }
+        Push-Location $d
+        try {
+            if (Test-HayCambios) {
+                Invoke-Git add -A
+                Invoke-Git commit -q -m $MensajePrivado
+                Write-Host "-- Privado ${d}: $(git log -1 --format='%h %s')"
+            }
+            Invoke-Git push -q origin main
+            Write-Host "-- Privado ${d}: al día en GitHub."
+        } finally { Pop-Location }
+    }
+}
+Save-Privados
 
 $rama = git branch --show-current
 if ($rama -notin @('main', $edicion)) { throw "Rama actual '$rama': GUARDA_y_SUBE solo funciona desde main o $edicion." }

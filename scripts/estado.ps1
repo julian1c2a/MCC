@@ -37,6 +37,17 @@ if ($LASTEXITCODE -eq 0 -and $rama -ne 'edicion-actual') {
     Write-Host 'Existe la rama edicion-actual con trabajo sin integrar.' -ForegroundColor Yellow
 }
 
+# Repositorios privados
+Titulo 'Repositorios privados (material/, trabajos/)'
+foreach ($d in 'material', 'trabajos') {
+    if (-not (Test-Path "$d/.git")) { Write-Host "${d}: sin repositorio privado"; continue }
+    Push-Location $d
+    $n = @(git status --porcelain).Count
+    $pos = if ((git status -sb | Select-Object -First 1) -match '\[(.+)\]') { $Matches[1] } else { 'al día' }
+    Write-Host ("{0,-9} {1} cambio(s) sin guardar; respecto a GitHub: {2}" -f "${d}:", $n, $pos)
+    Pop-Location
+}
+
 # Sincronización
 Titulo 'Sincronización de documentos'
 foreach ($md in Get-ChildItem markdown -Filter *.md) {

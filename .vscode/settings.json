@@ -9,5 +9,6 @@
     "python.analysis.extraPaths": ["cuadernos"],
     // La ventana interactiva arranca en cuadernos/, así "from mcc_sym import *" funciona desde cualquier cuaderno.
     "jupyter.notebookFileRoot": "${workspaceFolder}/cuadernos",
-    "jupyter.interactiveWindow.creationMode": "perFile"
+    "jupyter.interactiveWindow.creationMode": "perFile",
+    "chat.sessionSync.enabled": true
 }

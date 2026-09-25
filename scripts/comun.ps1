@@ -40,7 +40,9 @@ function Test-PandocWarnings([string]$Label, [string[]]$Output) {
     }
 }
 
-function Test-LatexLog([string]$Label, [string]$LogPath) {
+function Test-LatexLog([string]$Label, [string]$LogPath, [string[]]$Permitidas = @()) {
+    # $Permitidas: expresiones regulares de advertencias que se toleran (solo las que
+    # provienen de un modelo externo que no se puede modificar; REGLAS.md 8.4).
     if (-not (Test-Path $LogPath)) { Add-Problem "${Label}: no existe el log $LogPath"; return }
     $log = Get-Content $LogPath -Raw -Encoding utf8
     $patterns = @(
@@ -50,7 +52,11 @@ function Test-LatexLog([string]$Label, [string]$LogPath) {
         '(?m)^Missing character[^\n]*'
     )
     foreach ($p in $patterns) {
-        foreach ($m in [regex]::Matches($log, $p)) { Add-Problem "${Label}: $($m.Value.Trim())" }
+        foreach ($m in [regex]::Matches($log, $p)) {
+            $texto = $m.Value.Trim()
+            if ($Permitidas | Where-Object { $texto -match $_ }) { continue }
+            Add-Problem "${Label}: $texto"
+        }
     }
 }
 
@@ -76,14 +82,14 @@ function Set-SourceDate([string]$MdFile) {
     $env:FORCE_SOURCE_DATE = '1'
 }
 
-function Invoke-LatexCompile([string]$TexFile, [string]$Distro, [string]$OutDir) {
+function Invoke-LatexCompile([string]$TexFile, [string]$Distro, [string]$OutDir, [string[]]$Permitidas = @()) {
     # Compila un .tex con latexmk + pdflatex en $OutDir y revisa su log. Devuelve la ruta del PDF.
     $n = [IO.Path]::GetFileNameWithoutExtension($TexFile)
     New-Item -ItemType Directory -Force $OutDir | Out-Null
     Use-TeX $Distro
     Write-Host "-- latexmk ($Distro): $TexFile"
     $null = Invoke-Tool "latexmk ($Distro)" 'latexmk' @('-pdf', '-interaction=nonstopmode', '-halt-on-error', '-file-line-error', "-outdir=$OutDir", $TexFile)
-    Test-LatexLog "LaTeX ($Distro)" "$OutDir/$n.log"
+    Test-LatexLog "LaTeX ($Distro)" "$OutDir/$n.log" $Permitidas
     return "$OutDir/$n.pdf"
 }
 

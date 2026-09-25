@@ -25,6 +25,9 @@ Es un documento vivo: cada nueva regla que se acuerde se añade aquí, en la sec
 | `.github/workflows/pages.yml` | Publicación de `html/` y `doc_out/` en GitHub Pages. | Sí |
 | `cuadernos/` | Cuadernos de Python con SymPy (sección 7): `mcc_sym.py` (herramientas) y un subdirectorio por tema. | Sí |
 | `requirements.txt`, `.venv/` | Dependencias de Python y su entorno (`.venv` ignorado por git). | `requirements.txt`: sí |
+| `material/` | Modelo de la universidad (`Plantilla_LATEX_FCC_MUCC_UNIR/`), normativa, guías y enunciados. Privado (ignorado por git). | No (el modelo no se modifica) |
+| `trabajos/<nombre>/` | Trabajos del curso (sección 8): `<nombre>.md`, `referencias.bib` y las salidas `<nombre>.tex` y `<nombre>.pdf`. Privado. | El `.md` y el `.bib` |
+| `trabajos/_plantilla/` | Plantilla de Pandoc del modelo UNIR (`unir.latex`), estilo APA (`apa-es.csl`) y esqueleto de trabajo. Privado. | Sí |
 
 ## 2. Sincronización y compilación
 
@@ -205,7 +208,8 @@ Antes de ejecutar un comando, hay que guardar los archivos abiertos en el editor
 Publica el trabajo si todo es correcto; si no, lo guarda sin tocar `main`.
 
 1. La IA redacta el mensaje de commit a partir de `git diff` (o usa el que se le dé).
-2. Ejecuta `pwsh scripts/guarda-y-sube.ps1 -Mensaje "<mensaje>"`, que:
+2. Ejecuta `pwsh scripts/guarda-y-sube.ps1 -Mensaje "<mensaje>"` (y `-MensajePrivado "<mensaje>"` si los repositorios privados tienen cambios que merezca describir), que:
+   - guarda y sube antes los repositorios privados `material/` y `trabajos/` (sección 8.1), sin validación;
    - valida todo con SINCRONIZA en TeX Live y MiKTeX (`-TeX Both`);
    - **si es correcto**: commit en `main` y `git push`. Si se estaba en `edicion-actual`, integra la rama en `main` como un único commit, hace push y borra la rama (local y remota);
    - **si hay problemas**: commit `WIP: <mensaje>` en `edicion-actual` (creándola desde `main` si hace falta) y push de esa rama. `main` no cambia.
@@ -339,6 +343,21 @@ Ejemplo simbólico con SymPy de un resultado general de los apuntes. Por ejemplo
 4. Ejecutar `pwsh scripts/comprueba-cuadernos.ps1 -Cuaderno <ruta>` y mostrar al usuario los resultados, en LaTeX con el estilo del proyecto.
 5. Solo si el usuario lo pide, llevar el ejemplo resuelto al Markdown y aplicar SINCRONIZA.
 
+### 6.14. NUEVO_TRABAJO nombre "título" [profesor]
+
+Crea un trabajo del curso con el modelo UNIR (sección 8).
+
+1. Ejecutar `pwsh scripts/nuevo-trabajo.ps1 -Nombre <nombre> -Titulo "<título>" [-Profesor "<profesor>"]`. `<nombre>` es corto, sin espacios ni tildes. Crea `trabajos/<nombre>/<nombre>.md` con los metadatos y los capítulos obligatorios, y un `referencias.bib` vacío.
+2. Si el usuario da el enunciado (o está en `material/`), la IA lo lee y propone el contenido de cada capítulo.
+3. El esqueleto no pasa SINCRONIZA_TRABAJO hasta que se sustituyen sus textos de ejemplo (fecha, profesor, resumen, abstract, palabras clave).
+
+### 6.15. SINCRONIZA_TRABAJO [nombre]
+
+1. Ejecutar `pwsh scripts/sincroniza-trabajo.ps1 [-Name <nombre>] [-TeX Both]`. Por defecto, procesa todos los trabajos. Realiza las comprobaciones de la sección 8.5 y genera `trabajos/<nombre>/<nombre>.tex` y `trabajos/<nombre>/<nombre>.pdf`.
+2. Si hay problemas, corregirlos en el Markdown o en `referencias.bib` y repetir hasta `Todo correcto: sin errores ni advertencias.`
+3. Revisar el PDF: portada, índices, citas y lista de referencias.
+4. Los trabajos son privados: GUARDA_y_SUBE no los guarda ni los publica.
+
 ## 7. Cuadernos de Python (SymPy)
 
 Los cuadernos permiten ver qué produce la maquinaria general de los apuntes con funciones concretas.
@@ -371,3 +390,75 @@ Los cuadernos permiten ver qué produce la maquinaria general de los apuntes con
 - Todo cuaderno termina con `comprobar(...)` de las propiedades que ilustra: por ejemplo, $\partial g/\partial p = x$ o que la doble transformada devuelve la función.
 - `pwsh scripts/comprueba-cuadernos.ps1` los ejecuta todos de principio a fin con `-W error`. Falla si alguno lanza una excepción, incumple una comprobación o emite una advertencia de Python.
 - SINCRONIZA (y, por tanto, GUARDA_y_SUBE) lo ejecuta siempre: un cuaderno roto impide que `main` avance.
+
+## 8. Trabajos del curso
+
+Los trabajos que pide el máster se escriben en Markdown en `trabajos/<nombre>/` y se entregan en PDF, generado con el modelo LaTeX de la universidad.
+
+### 8.1. Privacidad
+
+- `material/` (modelo y documentación de la universidad) y `trabajos/` (los trabajos) son **privados**: están en `.gitignore` y no se suben al repositorio público ni a la web.
+- Cada una es un repositorio git propio, privado en GitHub: `material/` → `github.com/julian1c2a/MCC-material` y `trabajos/` → `github.com/julian1c2a/MCC-trabajos`, ambos en la rama `main`.
+- GUARDA_y_SUBE hace además la copia de seguridad de ambos: commit de todo lo cambiado y push, sin validación previa, para que un trabajo a medio escribir también quede guardado. ESTADO muestra si tienen cambios sin guardar.
+- En otra máquina se recuperan clonándolos dentro del repositorio público: `git clone https://github.com/julian1c2a/MCC-material material` y `git clone https://github.com/julian1c2a/MCC-trabajos trabajos`.
+- Los scripts y estas reglas sí son públicos; no contienen nada del modelo.
+
+### 8.2. Prioridad de las normas
+
+1. **El modelo de la universidad** es obligatorio: `material/Plantilla_LATEX_FCC_MUCC_UNIR/` (`plantilla.tex`, `estilo_unir-1.sty`, `logo_unir.png`; `plantilla.pdf` muestra el resultado). Donde contradiga una regla del proyecto, prevalece el modelo. Este modelo es el de la asignatura Fundamentos de Mecánica Cuántica (CCFF): `estilo_unir-1.sty` fija ese nombre en la portada. Los trabajos de otra asignatura usarán el modelo que dé esa asignatura, en su propio subdirectorio de `material/`.
+2. **APA, 7.ª edición**, con rigor, en todas las citas y en la lista de referencias. Si la universidad da su propia guía APA, prevalece esa guía.
+3. **Las reglas de este documento** en todo lo demás: redacción (sección 3) y fórmulas (secciones 4.2 a 4.4).
+
+Diferencias con los apuntes que impone el modelo:
+
+- No hay bloque de autoría ni licencia: los datos van en la portada del modelo.
+- Los títulos **no se numeran a mano**: `#` es un capítulo y `##` una sección, y LaTeX los numera.
+- La salida es el `.tex` del modelo y su PDF; no se generan HTML ni el PDF directo desde Markdown.
+
+### 8.3. Estructura de un trabajo
+
+`trabajos/<nombre>/<nombre>.md` se crea con NUEVO_TRABAJO a partir de `trabajos/_plantilla/trabajo-modelo.md`:
+
+- **Metadatos YAML**, que rellenan la portada y el comienzo del modelo:
+  - `title`, `author`, `date` (fecha de la portada), `profesor`;
+  - `resumen` (español) y `abstract` (inglés): **150 palabras como máximo** cada uno;
+  - `palabras-clave` y `keywords`: **de 3 a 5** términos cada uno;
+  - `lang: es-ES` (citas y referencias en español) y `bibliography: referencias.bib`;
+  - `indice-figuras` e `indice-tablas`: `true` solo si hay figuras o tablas (el modelo pide quitar esos índices si no las hay).
+- **Capítulos obligatorios, en este orden:** `# Introducción` (con sus apartados de motivación y justificación, planteamiento y estructura del trabajo), `# Contexto y estado de la cuestión`, `# Objetivos`, `# Desarrollo del trabajo`, `# Conclusiones` y `# Bibliografía {-}`, seguido del bloque `::: {#refs}` y `:::`, donde se insertan las referencias.
+- **Apéndices** (opcionales): una línea `\appendix` y después sus capítulos `#`.
+- El modelo exige citar **los trabajos originales** de los autores, no libros de texto que los mencionan, y que la introducción esté bien respaldada por referencias.
+
+### 8.4. Citas y bibliografía (APA 7)
+
+- Las referencias van en `trabajos/<nombre>/referencias.bib` (BibTeX), una entrada por obra. Campos obligatorios según el tipo:
+  - artículo (`@article`): autores, año, título, revista, volumen, páginas y DOI (o URL si no tiene DOI);
+  - libro (`@book`): autores o editores, año, título y editorial (y DOI si lo tiene);
+  - capítulo (`@incollection`): autores, año, título, libro, editorial y páginas;
+  - página web (`@online`): autores, año, título y URL.
+- Los títulos de artículos y libros se escriben en *sentence case* (solo la primera palabra y los nombres propios con mayúscula), como pide APA.
+- Citas en el Markdown: `[@clave]` produce «(Autor, año)»; `@clave` produce «Autor (año)»; `[@clave, p. 12]` añade la página; `[@a; @b]` agrupa varias.
+- Las genera Pandoc con citeproc y `trabajos/_plantilla/apa-es.csl`: el estilo oficial APA 7 de CSL (`apa.csl`) con dos adaptaciones al español, «y» sin coma en lugar de «, &» entre los dos últimos autores y raya corta en los rangos de páginas. Las referencias salen con sangría francesa y alineadas a la izquierda.
+- Solo aparecen en la lista las obras citadas, y toda cita debe estar en `referencias.bib` (si no, Pandoc avisa y la validación falla).
+
+### 8.5. Generación y comprobaciones
+
+SINCRONIZA_TRABAJO (`scripts/sincroniza-trabajo.ps1`) genera `trabajos/<nombre>/<nombre>.tex` con `trabajos/_plantilla/unir.latex` y lo compila a `trabajos/<nombre>/<nombre>.pdf` (compilación intermedia en `build/trabajos/`). Falla si:
+
+- alguna fórmula no compila o incumple el estilo (sección 2.4, puntos 1 y 2);
+- falta algún metadato, conserva el texto de ejemplo del esqueleto o incumple los límites de palabras y términos;
+- faltan capítulos obligatorios, están desordenados o algún título lleva numeración manual;
+- alguna referencia carece de un campo obligatorio, o Pandoc avisa de una cita sin referencia;
+- LaTeX da cualquier error o advertencia.
+
+Excepción: se tolera la advertencia ``You have requested package `estilo_unir-1', but the package provides `unir'``, que produce el propio `estilo_unir-1.sty` y no se puede eliminar sin modificar el modelo.
+
+`trabajos/_plantilla/unir.latex` reproduce `plantilla.tex` y carga `estilo_unir-1.sty` sin modificarlo. Solo añade lo que necesita el LaTeX de Pandoc y tres ajustes técnicos que eliminan advertencias sin cambiar el diseño:
+
+- codificación T1: el modelo usa OT1, sin versalita en negrita;
+- `\headheight` de 27,2 pt, la altura que fancyhdr aplicaría de todos modos a la cabecera de dos líneas;
+- `hypertexnames=false`, porque la portada y el cuerpo empiezan ambos en la página 1.
+
+Como en el resto del proyecto, el `.tex` es un derivado: si se edita a mano, hay que portar el cambio al Markdown. El script se niega a sobrescribir un `.tex` más reciente que su Markdown, salvo con `-Force`.
+
+`trabajos/ejemplo/` es un trabajo de ejemplo completo que pasa todas las comprobaciones.

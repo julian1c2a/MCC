@@ -15,6 +15,7 @@ Apuntes de autoestudio para el Máster en Computación Cuántica, empezando por 
 - `cuadernos/` — cuadernos de Python con SymPy (`.py` con celdas `# %%`).
 - `scripts/` — sincronización, validación y publicación.
 - `build/` — compilaciones intermedias (ignorado por git).
+- `material/` y `trabajos/` — modelo de la universidad y trabajos del curso (privados, no están en el repositorio).
 
 ## Reglas y comandos
 
@@ -35,6 +36,8 @@ Las reglas de trabajo, la guía de estilo y los comandos están en [REGLAS.md](R
 | `EJERCICIOS` | Añade ejercicios con solución completa a un tema. |
 | `PUBLICA_WEB` | Publica la web en GitHub Pages (<https://julian1c2a.github.io/MCC/>). |
 | `EJEMPLO_SYMPY` | Ejemplo simbólico con SymPy en `cuadernos/`: aplica la maquinaria general a funciones concretas. |
+| `NUEVO_TRABAJO` | Crea un trabajo del curso con el modelo de la universidad y APA 7 (privado). |
+| `SINCRONIZA_TRABAJO` | Genera y valida el PDF de un trabajo del curso. |
 
 Uso directo de los scripts:
 
@@ -50,6 +53,8 @@ pwsh scripts/publica-web.ps1 -Mensaje "<mensaje>"
 node scripts/busca-implicitos.mjs markdown/<tema>.md
 pwsh scripts/prepara-python.ps1
 pwsh scripts/comprueba-cuadernos.ps1 [-Cuaderno <ruta>]
+pwsh scripts/nuevo-trabajo.ps1 -Nombre <nombre> -Titulo "<título>" [-Profesor "<profesor>"]
+pwsh scripts/sincroniza-trabajo.ps1 [-Name <nombre>] [-TeX TeXLive|MiKTeX|Both]
 ```
 
 ## Entorno LaTeX
