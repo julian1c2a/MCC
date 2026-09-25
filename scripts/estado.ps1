@@ -38,8 +38,8 @@ if ($LASTEXITCODE -eq 0 -and $rama -ne 'edicion-actual') {
 }
 
 # Repositorios privados
-Titulo 'Repositorios privados (material/, trabajos/)'
-foreach ($d in 'material', 'trabajos') {
+Titulo 'Repositorios privados (material/, trabajos/, comunicaciones/)'
+foreach ($d in 'material', 'trabajos', 'comunicaciones') {
     if (-not (Test-Path "$d/.git")) { Write-Host "${d}: sin repositorio privado"; continue }
     Push-Location $d
     $n = @(git status --porcelain).Count

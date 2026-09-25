@@ -20,9 +20,10 @@ build/
 # Borrador personal (REPASA_BORRADOR)
 BORRADOR.md
 
-# Material de la universidad y trabajos del curso: privados, no se publican
+# Material de la universidad, trabajos y comunicaciones del grupo: privados, no se publican
 material/
 trabajos/
+comunicaciones/
 
 # Claude Code: configuración local
 .claude/settings.local.json

@@ -27,6 +27,7 @@ Es un documento vivo: cada nueva regla que se acuerde se añade aquí, en la sec
 | `requirements.txt`, `.venv/` | Dependencias de Python y su entorno (`.venv` ignorado por git). | `requirements.txt`: sí |
 | `material/` | Modelo de la universidad (`Plantilla_LATEX_FCC_MUCC_UNIR/`), normativa, guías y enunciados. Privado (ignorado por git). | No (el modelo no se modifica) |
 | `trabajos/<nombre>/` | Trabajos del curso (sección 8): `<nombre>.md`, `referencias.bib` y las salidas `<nombre>.tex` y `<nombre>.pdf`. Privado. | El `.md` y el `.bib` |
+| `comunicaciones/` | Documentos informales para el grupo de trabajo (4 alumnos): propuestas, respuestas y notas. Privado (ignorado por git). | Sí |
 | `trabajos/_plantilla/` | Plantilla de Pandoc del modelo UNIR (`unir.latex`), estilo APA (`apa-es.csl`) y esqueleto de trabajo. Privado. | Sí |
 
 ## 2. Sincronización y compilación
@@ -169,7 +170,7 @@ No son multiplicaciones y, por tanto, no llevan `\cdot`:
 - Índices y subíndices: `A_{mn}`, `\omega_{mnp}`, `q_i`.
 - El signo menos: `-k^2`.
 
-Producto escalar de vectores (en negrita): también `\cdot`, `\mathbf{k} \cdot \mathbf{r}`. Producto vectorial: `\times`.
+Vectores: se admiten las dos notaciones habituales, con flecha (`\vec{F}`, la notación clásica de la física) o en negrita (`\mathbf{F}`), pero cada documento usa solo una. Para símbolos de varias letras, la flecha se escribe con `\overrightarrow{AB}`. Producto escalar de vectores: también `\cdot`, `\vec{k} \cdot \vec{r}`. Producto vectorial: `\times`.
 
 La regla de `⋅` se comprueba automáticamente. La de la multiplicación implícita no admite una comprobación automática fiable y se revisa a mano en cada fórmula nueva o modificada.
 
@@ -398,9 +399,10 @@ Los trabajos que pide el máster se escriben en Markdown en `trabajos/<nombre>/`
 ### 8.1. Privacidad
 
 - `material/` (modelo y documentación de la universidad) y `trabajos/` (los trabajos) son **privados**: están en `.gitignore` y no se suben al repositorio público ni a la web.
-- Cada una es un repositorio git propio, privado en GitHub: `material/` → `github.com/julian1c2a/MCC-material` y `trabajos/` → `github.com/julian1c2a/MCC-trabajos`, ambos en la rama `main`.
-- GUARDA_y_SUBE hace además la copia de seguridad de ambos: commit de todo lo cambiado y push, sin validación previa, para que un trabajo a medio escribir también quede guardado. ESTADO muestra si tienen cambios sin guardar.
-- En otra máquina se recuperan clonándolos dentro del repositorio público: `git clone https://github.com/julian1c2a/MCC-material material` y `git clone https://github.com/julian1c2a/MCC-trabajos trabajos`.
+- Lo mismo vale para `comunicaciones/`, con los documentos informales para el grupo de trabajo.
+- Cada una es un repositorio git propio, privado en GitHub, en la rama `main`: `material/` → `github.com/julian1c2a/MCC-material`, `trabajos/` → `github.com/julian1c2a/MCC-trabajos` y `comunicaciones/` → `github.com/julian1c2a/MCC-comunicaciones`.
+- GUARDA_y_SUBE hace además la copia de seguridad de los tres: commit de todo lo cambiado y push, sin validación previa, para que un trabajo a medio escribir también quede guardado. ESTADO muestra si tienen cambios sin guardar.
+- En otra máquina se recuperan clonándolos dentro del repositorio público: `git clone https://github.com/julian1c2a/MCC-material material`, `git clone https://github.com/julian1c2a/MCC-trabajos trabajos` y `git clone https://github.com/julian1c2a/MCC-comunicaciones comunicaciones`.
 - Los scripts y estas reglas sí son públicos; no contienen nada del modelo.
 
 ### 8.2. Prioridad de las normas

@@ -14,7 +14,7 @@
        - commit "WIP" en edicion-actual y push de esa rama a origin.
      main no se toca: siempre apunta al último estado completamente correcto.
 
-  Antes, guarda y sube los repositorios privados material/ y trabajos/ (si existen y
+  Antes, guarda y sube los repositorios privados material/, trabajos/ y comunicaciones/ (si existen y
   tienen cambios), sin validación previa: son copias de seguridad.
 
 .PARAMETER Mensaje
@@ -49,11 +49,11 @@ function Invoke-Git {
 
 function Test-HayCambios { return [bool](git status --porcelain) }
 
-# Copia de seguridad de los repositorios privados (material/ y trabajos/; REGLAS.md 8.1):
+# Copia de seguridad de los repositorios privados (material/, trabajos/ y comunicaciones/; REGLAS.md 8.1):
 # commit de todo lo cambiado y push a su origin. No depende de la validación de los
 # apuntes: un trabajo a medio escribir también se guarda.
 function Save-Privados {
-    foreach ($d in 'material', 'trabajos') {
+    foreach ($d in 'material', 'trabajos', 'comunicaciones') {
         if (-not (Test-Path "$d/.git")) { continue }
         Push-Location $d
         try {
