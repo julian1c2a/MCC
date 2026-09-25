@@ -435,6 +435,7 @@ Diferencias con los apuntes que impone el modelo:
 
 - **Metadatos YAML**, que rellenan la portada y el comienzo del modelo:
   - `title`, `author`, `date` (fecha de la portada), `profesor`;
+  - en un trabajo de grupo, `author` es una lista (un autor por línea en la portada) y `autor-cabecera` es un texto breve para la cabecera de las páginas (por ejemplo, los primeros apellidos), porque la cabecera del modelo solo admite una línea. Un título que se corta mal en la portada se parte con `\newline`;
   - `resumen` (español) y `abstract` (inglés): **150 palabras como máximo** cada uno;
   - `palabras-clave` y `keywords`: **de 3 a 5** términos cada uno;
   - `lang: es-ES` (citas y referencias en español) y `bibliography: referencias.bib`;
@@ -473,6 +474,8 @@ Excepción: se tolera la advertencia ``You have requested package `estilo_unir-1
 - `\headheight` de 27,2 pt, la altura que fancyhdr aplicaría de todos modos a la cabecera de dos líneas;
 - `hypertexnames=false`, porque la portada y el cuerpo empiezan ambos en la página 1;
 - `\raggedbottom`: la clase book iguala el final de todas las páginas y, con interlineado 1,5 y párrafos largos, no siempre puede estirarlas (`Underfull \vbox`); así cada página termina en su última línea.
+
+Para los trabajos de grupo (con `autor-cabecera`), la plantilla escribe los autores de la portada uno por línea, porque `\and` no funciona tras «presentada por:», y pone `autor-cabecera` en la cabecera en lugar de `\theauthor`, con el mismo formato. Los trabajos individuales no cambian. SINCRONIZA_TRABAJO falla si hay varios autores y falta `autor-cabecera`.
 
 Como en el resto del proyecto, el `.tex` es un derivado: si se edita a mano, hay que portar el cambio al Markdown. El script se niega a sobrescribir un `.tex` más reciente que su Markdown, salvo con `-Force`.
 

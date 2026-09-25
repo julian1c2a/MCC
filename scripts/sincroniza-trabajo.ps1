@@ -100,8 +100,11 @@ foreach ($n in $nombres) {
         if (-not $valor) { Add-Problem "${mdFile}: falta el metadato '$campo'" }
         elseif ($ejemplo[$campo] -and $valor -like "*$($ejemplo[$campo])*") { Add-Problem "${mdFile}: '$campo' conserva el texto de ejemplo" }
     }
+    if (@($meta['author']).Count -gt 1 -and -not "$($meta['autor-cabecera'])".Trim()) {
+        Add-Problem "${mdFile}: con varios autores hace falta 'autor-cabecera' (texto breve para la cabecera de las páginas)"
+    }
     foreach ($campo in 'resumen', 'abstract') {
-        $np = Get-Palabras "$($meta[$campo])"
+        $np =Get-Palabras "$($meta[$campo])"
         if ($np -gt 150) { Add-Problem "${mdFile}: '$campo' tiene $np palabras (máximo 150)" }
     }
     foreach ($campo in 'palabras-clave', 'keywords') {
