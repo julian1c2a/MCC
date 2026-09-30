@@ -19,6 +19,9 @@ $SageDistro = 'Ubuntu'
 $SageEnv = '$HOME/miniforge3/envs/sage'
 $MathJax = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
 $Css = 'tema-1.css'
+# Macros LaTeX del proyecto (REGLAS.md 4.2): se pasan a Pandoc como primera entrada y las expande en
+# todas las salidas; scripts/check-md.mjs las carga para KaTeX.
+$Macros = 'latex/macros.tex'
 $PandocCommon = @('--from=markdown+tex_math_dollars', '--standalone', '--metadata=lang:es')
 $PandocTex = $PandocCommon + @('--to=latex', '--include-in-header=latex/pandoc-pdf-header.tex')
 $BasePath = $env:PATH

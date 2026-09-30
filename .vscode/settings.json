@@ -10,5 +10,24 @@
     // La ventana interactiva arranca en cuadernos/, así "from mcc_sym import *" funciona desde cualquier cuaderno.
     "jupyter.notebookFileRoot": "${workspaceFolder}/cuadernos",
     "jupyter.interactiveWindow.creationMode": "perFile",
+
+    // Vista previa de fórmulas: la matemática integrada de VS Code (KaTeX), que es la que usa su editor y
+    // su vista previa de Markdown, con las macros de "markdown.math.macros". goessner.mdmath sigue
+    // instalado porque scripts/check-md.mjs usa su KaTeX, y tiene las mismas macros por si se activa.
+    "markdown.math.enabled": true,
+    // Markdown All in One también dibuja fórmulas con su propio KaTeX, sin nuestras macros.
+    "markdown.extension.math.enabled": false,
+    // Macros del proyecto para la vista previa de Markdown (KaTeX). Deben coincidir con
+    // latex/macros.tex, que es la fuente para Pandoc y scripts/check-md.mjs (REGLAS.md 4.2).
+    "mdmath.macros": {
+        "\\bsS": "\\boldsymbol{S}",
+        "\\bsL": "\\boldsymbol{L}",
+        "\\bsdelta": "\\boldsymbol{\\delta}"
+    },
+    "markdown.math.macros": {
+        "\\bsS": "\\boldsymbol{S}",
+        "\\bsL": "\\boldsymbol{L}",
+        "\\bsdelta": "\\boldsymbol{\\delta}"
+    },
     "chat.sessionSync.enabled": true
 }

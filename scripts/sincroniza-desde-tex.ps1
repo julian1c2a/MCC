@@ -66,7 +66,7 @@ foreach ($n in $Name) {
 
         Use-TeX
         $base = "$syncDir/$n.base.tex"
-        $out = Invoke-Tool 'pandoc (tex)' 'pandoc' ($PandocTex + @("--output=$base", $mdFile))
+        $out = Invoke-Tool 'pandoc (tex)' 'pandoc' ($PandocTex + @("--output=$base", $Macros, $mdFile))
         Test-PandocWarnings 'pandoc (tex)' $out
 
         $diff = & git diff --no-index --word-diff=plain --ignore-all-space -- $base $manual 2>$null

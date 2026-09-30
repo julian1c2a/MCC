@@ -1,6 +1,7 @@
 <#
 .SYNOPSIS
-  ESTADO: resumen del estado del proyecto (git, sincronización, notas para la IA, borrador).
+  ESTADO: resumen del estado del proyecto (git, sincronización, siguientes pasos del trabajo de
+  grupo, notas para la IA, borrador).
   Solo lee; no modifica nada.
 
 .PARAMETER Fetch
@@ -68,6 +69,11 @@ foreach ($md in Get-ChildItem markdown -Filter *.md) {
     $color = if ($estado) { 'Yellow' } else { 'Green' }
     Write-Host ("{0,-40} {1}" -f $n, $texto) -ForegroundColor $color
 }
+
+# Planes de trabajo del grupo (comunicaciones/planificacion/NEXT-STEPS-*.md)
+Titulo 'Siguientes pasos'
+if (Test-Path comunicaciones/planificacion) { & "$PSScriptRoot/siguientes-pasos.ps1" -Resumen }
+else { Write-Host 'No hay planes de trabajo (comunicaciones/planificacion/).' }
 
 # Notas para la IA
 Titulo 'Notas para la IA pendientes'

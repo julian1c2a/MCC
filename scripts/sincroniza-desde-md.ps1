@@ -87,7 +87,7 @@ foreach ($n in (Get-DocNames $Name)) {
     # 4. Markdown -> LaTeX.
     Use-TeX
     Write-Host "-- Pandoc: $mdFile -> $texFile"
-    $out = Invoke-Tool 'pandoc (tex)' 'pandoc' ($PandocTex + @("--output=$texFile", $mdFile))
+    $out = Invoke-Tool 'pandoc (tex)' 'pandoc' ($PandocTex + @("--output=$texFile", $Macros, $mdFile))
     Test-PandocWarnings 'pandoc (tex)' $out
 
     New-Item -ItemType Directory -Force 'doc_out/latex', 'doc_out/markdown' | Out-Null
@@ -104,7 +104,7 @@ foreach ($n in (Get-DocNames $Name)) {
         $salida = if ($principal) { "doc_out/markdown/$n.pdf" } else { "build/pandoc/$d/$n.pdf" }
         New-Item -ItemType Directory -Force (Split-Path $salida) | Out-Null
         Write-Host "-- Pandoc ($d): $mdFile -> $salida"
-        $out = Invoke-Tool "pandoc (pdf, $d)" 'pandoc' ($PandocCommon + @('--include-in-header=latex/pandoc-pdf-header.tex', '--pdf-engine=pdflatex', "--output=$salida", $mdFile))
+        $out = Invoke-Tool "pandoc (pdf, $d)" 'pandoc' ($PandocCommon + @('--include-in-header=latex/pandoc-pdf-header.tex', '--pdf-engine=pdflatex', "--output=$salida", $Macros, $mdFile))
         Test-PandocWarnings "pandoc (pdf, $d)" $out
     }
 
@@ -112,7 +112,7 @@ foreach ($n in (Get-DocNames $Name)) {
     Use-TeX
     $title = (Select-String -Path $mdFile -Pattern '^# (.+)$' | Select-Object -First 1).Matches[0].Groups[1].Value
     Write-Host "-- Pandoc: $mdFile -> $htmlFile"
-    $out = Invoke-Tool 'pandoc (html)' 'pandoc' ($PandocCommon + @('--to=html5', '--toc', '--toc-depth=3', "--metadata=pagetitle:$title", "--mathjax=$MathJax", "--css=$Css", "--output=$htmlFile", $mdFile))
+    $out = Invoke-Tool 'pandoc (html)' 'pandoc' ($PandocCommon + @('--to=html5', '--toc', '--toc-depth=3', "--metadata=pagetitle:$title", "--mathjax=$MathJax", "--css=$Css", "--output=$htmlFile", $Macros, $mdFile))
     Test-PandocWarnings 'pandoc (html)' $out
 
     # Los derivados quedan con la fecha del .md (ver la descripción).

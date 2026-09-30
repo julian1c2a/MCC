@@ -42,6 +42,17 @@ if (!katexPath) {
 }
 const katex = require(katexPath);
 
+// Macros del proyecto (latex/macros.tex, una \newcommand por línea): Pandoc las expande en todas
+// las salidas, y KaTeX tiene que conocerlas para validar las fórmulas que las usan.
+const macros = {};
+const macrosFile = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..", "latex", "macros.tex");
+if (fs.existsSync(macrosFile)) {
+  for (const line of fs.readFileSync(macrosFile, "utf8").split(/\r?\n/)) {
+    const m = line.match(/^\s*\\newcommand\{(\\[A-Za-z]+)\}\{(.*)\}\s*$/);
+    if (m) macros[m[1]] = m[2];
+  }
+}
+
 const files = process.argv.slice(2);
 if (files.length === 0) {
   console.error("Uso: node scripts/check-md.mjs <archivo.md> ...");
@@ -59,7 +70,7 @@ for (const file of files) {
   const check = (math, offset, display) => {
     checked++;
     try {
-      katex.renderToString(math, { throwOnError: true, displayMode: display });
+      katex.renderToString(math, { throwOnError: true, displayMode: display, macros: { ...macros } });
     } catch (error) {
       errors.push(`línea ${lineAt(offset)}: KaTeX: ${error.message}`);
     }

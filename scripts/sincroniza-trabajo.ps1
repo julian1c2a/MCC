@@ -158,7 +158,7 @@ foreach ($n in $nombres) {
     # 5. Markdown -> LaTeX con el modelo y APA.
     Write-Host "-- Pandoc: $mdFile -> $texFile"
     Push-Location $dir
-    $out = Invoke-Tool 'pandoc (tex)' 'pandoc' @("$n.md", '--from=markdown+tex_math_dollars', '--to=latex',
+    $out = Invoke-Tool 'pandoc (tex)' 'pandoc' @((Join-Path $Root $Macros), "$n.md", '--from=markdown+tex_math_dollars', '--to=latex',
         "--template=$plantilla/unir.latex", '--top-level-division=chapter',
         '--citeproc', "--csl=$plantilla/apa-es.csl", "--output=$n.tex")
     Pop-Location

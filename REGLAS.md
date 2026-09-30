@@ -11,6 +11,7 @@ Es un documento vivo: cada nueva regla que se acuerde se añade aquí, en la sec
 | `markdown/<nombre>.md` | **Fuente única** de cada documento. | Sí |
 | `latex/<nombre>.tex` | LaTeX generado desde el Markdown con Pandoc. | No (ver regla 2.3) |
 | `latex/pandoc-pdf-header.tex` | Cabecera que Pandoc inserta en el preámbulo LaTeX. | Sí |
+| `latex/macros.tex` | Macros LaTeX del proyecto (`\bsS`, `\bsL`, `\bsdelta`), para apuntes y trabajos (sección 4.2). | Sí |
 | `html/<nombre>.html` | Página web generada desde el Markdown con Pandoc. | No |
 | `html/tema-1.css` | Hoja de estilo de las páginas HTML. | Sí |
 | `html/index.html` | Portada de la web con todos los documentos (se regenera en cada SINCRONIZA_desde_MD). | No |
@@ -29,6 +30,7 @@ Es un documento vivo: cada nueva regla que se acuerde se añade aquí, en la sec
 | `material/` | Modelo de la universidad (`Plantilla_LATEX_FCC_MUCC_UNIR/`), normativa, guías y enunciados. Privado (ignorado por git). | No (el modelo no se modifica) |
 | `trabajos/<nombre>/` | Trabajos del curso (sección 8): `<nombre>.md`, `referencias.bib` y las salidas `<nombre>.tex` y `<nombre>.pdf`. Privado. | El `.md` y el `.bib` |
 | `comunicaciones/` | Documentos informales para el grupo de trabajo (4 alumnos): propuestas, respuestas y notas. Privado (ignorado por git). | Sí |
+| `comunicaciones/planificacion/` | Planes de trabajo coordinados: `NEXT-STEPS-grupo.md`, de pareja y personal (sección 8.6). | Sí |
 | `trabajos/_plantilla/` | Plantilla de Pandoc del modelo UNIR (`unir.latex`), estilo APA (`apa-es.csl`) y esqueleto de trabajo. Privado. | Sí |
 
 ## 2. Sincronización y compilación
@@ -146,6 +148,7 @@ Notas:
 
   Dentro de una lista, la fórmula lleva la sangría del elemento de la lista.
 - Fracciones: siempre `\dfrac`, nunca `\frac`.
+- Macros del proyecto: se definen en `latex/macros.tex`, una por línea (`\newcommand{\bsS}{\boldsymbol{S}}`) y sin comentarios `%`, porque Pandoc lee ese archivo como primera entrada de Markdown. Pandoc las expande en todas las salidas (`.tex`, PDF y HTML), `scripts/check-md.mjs` las carga para KaTeX y `.vscode/settings.json` las repite para la vista previa (`markdown.math.macros` y `mdmath.macros`). Una macro nueva se añade en los dos sitios. La vista previa dibuja las fórmulas con la matemática integrada de VS Code (`markdown.math.enabled: true`), que es la que usan su editor y su vista previa de Markdown. `goessner.mdmath` sigue instalado porque `scripts/check-md.mjs` usa su KaTeX, pero en las versiones actuales de VS Code no se activa por sí solo. La matemática de Markdown All in One (`markdown.extension.math.enabled`) está desactivada, y no debe haber otras extensiones que dibujen fórmulas (por ejemplo, `koehlma.markdown-math`, que usa KaTeX 0.6 y no admite macros). Tras cambiar estos ajustes o las macros, hay que recargar la ventana de VS Code. Macros actuales: `\bsS` ($\boldsymbol{S}$), `\bsL` ($\boldsymbol{L}$) y `\bsdelta` ($\boldsymbol{\delta}$).
 - Una fórmula que invade el margen del PDF se parte en varias líneas con `&` y `\\` dentro de `aligned`.
 
 ### 4.3. Multiplicación: siempre `\cdot`
@@ -264,6 +267,7 @@ Resumen del proyecto, sin modificar nada.
    - los cambios sin guardar;
    - si existe `edicion-actual`;
    - el estado de sincronización de cada documento;
+   - los siguientes pasos del trabajo de grupo: tareas vencidas y de los próximos 7 días (sección 8.6);
    - las notas para la IA pendientes;
    - si `BORRADOR.md` tiene contenido.
 2. La IA lo resume y propone el siguiente comando útil (por ejemplo, SINCRONIZA si hay documentos sin sincronizar, o GUARDA_y_SUBE si hay cambios correctos sin subir).
@@ -480,3 +484,21 @@ Para los trabajos de grupo (con `autor-cabecera`), la plantilla escribe los auto
 Como en el resto del proyecto, el `.tex` es un derivado: si se edita a mano, hay que portar el cambio al Markdown. El script se niega a sobrescribir un `.tex` más reciente que su Markdown, salvo con `-Force`.
 
 `trabajos/ejemplo/` es un trabajo de ejemplo completo que pasa todas las comprobaciones.
+
+### 8.6. Planificación del trabajo de grupo
+
+Los trabajos en grupo se coordinan con planes en `comunicaciones/planificacion/`, en tres niveles:
+
+- `NEXT-STEPS-grupo.md`: decisiones, hitos y fechas del grupo. Es el que manda: si una fecha cambia, se cambia aquí primero. Se comparte con todo el grupo.
+- `NEXT-STEPS-pareja<n>.md`: el plan de cada pareja. Cada tarea cuelga de un hito del grupo.
+- `NEXT-STEPS-<nombre>.md`: el plan personal, que no se envía. Cada tarea cuelga de una tarea de la pareja o del grupo.
+
+Cada tarea es una línea con el formato `- [ ] G-04 | 11-10 | Parejas | Texto. ↑G-01`:
+
+- estado: `[ ]` pendiente, `[~]` en curso, `[x]` hecha, `[!]` bloqueada;
+- identificador: `G-nn` (grupo), `P<n>-nn` (pareja) o `J-nn` (personal). No se reutiliza ni se renumera;
+- fecha límite `dd-mm`, o `—` si no tiene;
+- responsable: un nombre, una pareja o `Todos`;
+- al final, opcionalmente, `↑ID` con la tarea de la que depende. Una tarea no debe terminar después que ella.
+
+`pwsh scripts/siguientes-pasos.ps1` comprueba que los planes cuadran: falla si hay identificadores repetidos, dependencias que no existen o líneas mal formadas, y avisa de las tareas que terminan después que su dependencia, de las dependencias hechas con tareas pendientes y de las tareas vencidas. `-Quien <nombre>` filtra las tareas de una persona (incluidas las de su pareja y las de `Todos`). ESTADO muestra un resumen.
