@@ -22,11 +22,15 @@
     "mdmath.macros": {
         "\\bsS": "\\boldsymbol{S}",
         "\\bsL": "\\boldsymbol{L}",
+        "\\bsH": "\\boldsymbol{H}",
+        "\\bsT": "\\boldsymbol{T}",
         "\\bsdelta": "\\boldsymbol{\\delta}"
     },
     "markdown.math.macros": {
         "\\bsS": "\\boldsymbol{S}",
         "\\bsL": "\\boldsymbol{L}",
+        "\\bsH": "\\boldsymbol{H}",
+        "\\bsT": "\\boldsymbol{T}",
         "\\bsdelta": "\\boldsymbol{\\delta}"
     },
     "chat.sessionSync.enabled": true
