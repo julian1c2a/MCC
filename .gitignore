@@ -1,18 +1,30 @@
-# LaTeX
+# LaTeX: auxiliares de compilación (el PDF sí se guarda)
 build/
 *.aux
 *.bbl
 *.bcf
 *.blg
+*.dvi
 *.fdb_latexmk
 *.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.lof
 *.log
+*.lot
+*.nav
 *.out
 *.run.xml
-*.synctex.gz
-*.toc
-*.nav
 *.snm
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.synctex.gz(busy)
+*.toc
 *.vrb
 *.xdv
 *.pdf.bak

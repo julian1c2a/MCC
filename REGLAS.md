@@ -86,6 +86,7 @@ Notas:
 - `main` apunta siempre al último estado **completamente correcto** (todo sincronizado, sin errores ni advertencias). Solo avanza mediante GUARDA_y_SUBE.
 - `edicion-actual` guarda el trabajo en curso que aún no pasa la validación. GUARDA_y_SUBE la crea cuando hace falta y la integra en `main` (un único commit) y la borra cuando todo es correcto.
 - Un commit incluye el Markdown junto con sus derivados ya regenerados (`.tex`, `.html`, PDFs de `doc_out/`), nunca el contenido de `build/` ni `BORRADOR.md`.
+- Los auxiliares que deja una compilación de LaTeX (`.aux`, `.log`, `.synctex.gz`, `.fls`, `.fdb_latexmk`, `.toc`...) están en el `.gitignore` del repositorio público y de los tres privados, con la misma lista; los PDF sí se guardan.
 - Mensajes de commit en español, descriptivos.
 - La IA no hace commit ni push salvo con GUARDA_y_SUBE o cuando se le pida expresamente.
 
